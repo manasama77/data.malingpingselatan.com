@@ -1,0 +1,18 @@
+RUMUS GROUP PENDIDIKAN TERAKHIR
+=IF(R2 = "Tidak/Belum Sekolah", "Tidak Sekolah",
+    IF(R2 = "Tidak Tamat SD/Sederajat", "Tidak Tamat SD", 
+        IF(R2 = "Tamat SD/Sederajat", "SD", 
+            IF(R2 = "SLTP/Sederajat", "SMP", 
+                IF(R2 = "SLTA/Sederajat", "SMA", 
+                    IF(R2 = "Diploma I/II", "D1", 
+                        IF(R2 = "Akademi/Diploma III/S. Muda", "D3", 
+                            IF(R2 = "Diploma IV/Strata I", "S1", 
+                                IF(R2 = "Strata II", "S2", FALSE)
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+)
