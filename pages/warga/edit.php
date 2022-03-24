@@ -35,7 +35,7 @@
             <span class="input-group-addon">
               <span class="fa fa-table"></span>
             </span>
-            <input type="text" class="form-control datepicker input-md" name="tanggal_lahir_warga" size="20" readonly="readonly" value="<?php echo $data_warga[0]['tanggal_lahir_warga'] ?>" />
+            <input type="text" class="form-control datepicker input-md" name="tanggal_lahir_warga" size="20" value="<?php echo ($data_warga[0]['tanggal_lahir_warga'] == "0000-00-00") ? null : $data_warga[0]['tanggal_lahir_warga'] ?>" />
           </div>
           <span class="help-block">
             <?php # echo form_error('tgl_kelahiran', '<p class="field_error">','</p>')
@@ -51,9 +51,7 @@
       <th>Jenis Kelamin</th>
       <td>:</td>
       <td>
-        <?php
-        if ($data_warga[0]['jenis_kelamin_warga'] == 'L') {
-        ?>
+        <?php if ($data_warga[0]['jenis_kelamin_warga'] == 'L') { ?>
 
           <div class="radio">
             <label class="radio"><input type="radio" name="jenis_kelamin_warga" value="L" checked="checked"> Laki - laki</label>
@@ -61,16 +59,14 @@
           <div class="radio">
             <label class="radio"><input type="radio" name="jenis_kelamin_warga" value="P"> Perempuan</label>
           </div>
-        <?php } else {
-        ?>
+        <?php } else { ?>
           <div class="radio">
             <label class="radio"><input type="radio" name="jenis_kelamin_warga" value="L"> Laki - laki</label>
           </div>
           <div class="radio">
             <label class="radio"><input type="radio" name="jenis_kelamin_warga" value="P" checked="checked"> Perempuan</label>
           </div>
-        <?php
-        } ?>
+        <?php } ?>
         </div>
         </div>
       </td>
@@ -89,17 +85,31 @@
       <td>:</td>
       <td><textarea class="form-control" name="alamat_warga"><?php echo $data_warga[0]['alamat_warga'] ?></textarea></td>
     </tr>
+    <!-- <tr>
+      <th>Dusun</th>
+      <td>:</td>
+      <td>
+        <select class="form-control selectpicker" name="dusun_warga" required>
+          <option value="<?php echo $data_warga[0]['dusun_warga'] ?>" selected><?php echo $data_warga[0]['dusun_warga'] ?></option>
+          <option value="Dukuh">Dukuh</option>
+          <option value="Tarikolot">Tarikolot</option>
+        </select>
+      </td>
+    </tr> -->
+
     <tr>
       <th>RT</th>
       <td>:</td>
       <td>
-        <!-- UPDATE BY ADAM 2022-03-16 -->
         <input type="number" class="form-control" name="rt_warga" required />
         <!-- <select class="form-control selectpicker" name="rt_warga" required>
-          <option value=""></option>
-          <?php foreach ($arr_rt as $key) { ?>
-            <option value="<?= $key; ?>" <?= ($data_warga[0]['rt_warga'] == $key) ? "selected" : null; ?>><?= $key; ?></option>
-          <?php } ?>
+          <option value="<?php echo $data_warga[0]['rt_warga'] ?>" selected><?php echo $data_warga[0]['rt_warga'] ?></option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+          <option value="06">06</option>
         </select> -->
       </td>
     </tr>
@@ -107,13 +117,10 @@
       <th>RW</th>
       <td>:</td>
       <td>
-        <!-- UPDATE BY ADAM 2022-03-16 -->
         <input type="number" class="form-control" name="rw_warga" required />
         <!-- <select class="form-control selectpicker" name="rw_warga" required>
-          <option value=""></option>
-          <?php foreach ($arr_rw as $key) { ?>
-            <option value="<?= $key; ?>" <?= ($data_warga[0]['rw_warga'] == $key) ? "selected" : null; ?>><?= $key; ?></option>
-          <?php } ?>
+          <option value="<?php echo $data_warga[0]['rw_warga'] ?>" selected><?php echo $data_warga[0]['rw_warga'] ?></option>
+          <option value="01">01</option>
         </select> -->
 
         <!--
