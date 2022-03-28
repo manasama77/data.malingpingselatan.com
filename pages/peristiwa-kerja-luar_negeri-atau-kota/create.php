@@ -73,7 +73,7 @@
                 <input type="hidden" id="pelapor_id_hidden" name="pelapor_id_hidden" />
                 <button type="submit" class="btn btn-success btn-block" id="btn_simpan">Simpan</button>
                 <button type="button" class="btn btn-warning btn-block" id="btn_print" disabled>Print</button>
-                <a href="index.php" class="btn btn-info">Kembali</a>
+                <a href="index.php" class="btn btn-info btn-block">Kembali</a>
             </div>
         </form>
     </div>

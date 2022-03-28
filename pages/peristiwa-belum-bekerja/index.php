@@ -5,15 +5,11 @@ include('../../config/koneksi.php');
 
 $sql   = "
 SELECT  
-    bekerja_luar_negeri_kota.id,
-    warga.nama_warga,
-    bekerja_luar_negeri_kota.tujuan,
-    bekerja_luar_negeri_kota.sejak,
-    bekerja_luar_negeri_kota.sampai,
-    bekerja_luar_negeri_kota.pekerjaan
-FROM bekerja_luar_negeri_kota 
-LEFT JOIN warga ON warga.id_warga = bekerja_luar_negeri_kota.warga_id 
-ORDER BY id DESC
+    belum_bekerja.id,
+    warga.nama_warga
+FROM belum_bekerja 
+LEFT JOIN warga ON warga.id_warga = belum_bekerja.warga_id 
+ORDER BY belum_bekerja.id DESC
 ";
 $query = mysqli_query($db, $sql);
 ?>
@@ -21,7 +17,7 @@ $query = mysqli_query($db, $sql);
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Peristiwa - Bekerja di Luar Negeri / Kota
+            Peristiwa - Belum Bekerja
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
@@ -34,14 +30,10 @@ $query = mysqli_query($db, $sql);
     <div class="col-12">
         <div class="table-responsive">
             <table id="table_data" class="table table-bordered" style="width: 100%;">
-                <caption>Daftar Warga Bekerja di Luar Negeri / Kota</caption>
+                <caption>Daftar Warga Belum Bekerja</caption>
                 <thead class="bg-primary">
                     <tr>
                         <th>Nama Warga</th>
-                        <th>Negara / Kota Bekerja</th>
-                        <th>Sejak</th>
-                        <th>Sampai</th>
-                        <th>Bidang Pekerjaan</th>
                         <td class="text-center">
                             <i class="fa fa-cog"></i>
                         </td>
@@ -52,24 +44,6 @@ $query = mysqli_query($db, $sql);
                         <?php while ($row = mysqli_fetch_assoc($query)) { ?>
                             <tr>
                                 <td><?= $row['nama_warga']; ?></td>
-                                <td><?= $row['tujuan']; ?></td>
-                                <td>
-                                    <?php
-                                    $tgl_obj = new DateTime($row['sejak']);
-                                    echo $tgl_obj->format('d-m-Y');
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    if ($row['sampai'] != '0000-00-00') {
-                                        $tgl_obj = new DateTime($row['sampai']);
-                                        echo $tgl_obj->format('d-m-Y');
-                                    } else {
-                                        echo "Sekarang";
-                                    }
-                                    ?>
-                                </td>
-                                <td><?= $row['pekerjaan']; ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <!-- <a href="edit.php" class="btn btn-info" title="Edit Data">

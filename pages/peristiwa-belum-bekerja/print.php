@@ -5,42 +5,21 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-	bekerja_luar_negeri_kota.nomor_surat,
-	bekerja_luar_negeri_kota.tanggal_pembuatan,
+	belum_bekerja.nomor_surat,
+	belum_bekerja.tanggal_pembuatan,
 	warga.nama_warga,
 	warga.nik_warga,
-	(
-	IF
-		(
-			( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = bekerja_luar_negeri_kota.warga_id ) = 1,
-			( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = bekerja_luar_negeri_kota.warga_id ),
-			( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = bekerja_luar_negeri_kota.warga_id ) 
-		) 
-	) AS nomor_keluarga,
 	warga.tempat_lahir_warga,
 	warga.tanggal_lahir_warga,
 	warga.jenis_kelamin_warga,
 	warga.agama_warga,
 	warga.pekerjaan_warga,
-	warga.alamat_ktp_warga,
-    bekerja_luar_negeri_kota.tujuan,
-	bekerja_luar_negeri_kota.sejak,
-	bekerja_luar_negeri_kota.sampai,
-	bekerja_luar_negeri_kota.pekerjaan,
-    pelapor.nama_warga as nama_pelapor,
-	pelapor.nik_warga as nik_pelapor,
-	pelapor.tempat_lahir_warga as tempat_lahir_pelapor,
-	pelapor.tanggal_lahir_warga as tanggal_lahir_pelapor,
-	pelapor.jenis_kelamin_warga as jenis_kelamin_pelapor,
-	pelapor.pekerjaan_warga as pekerjaan_pelapor,
-	pelapor.alamat_warga as alamat_pelapor,
-	bekerja_luar_negeri_kota.hubungan_pelapor
+	warga.alamat_ktp_warga
 FROM
-	bekerja_luar_negeri_kota
-	LEFT JOIN warga ON warga.id_warga = bekerja_luar_negeri_kota.warga_id 
-    LEFT JOIN warga as pelapor ON pelapor.id_warga = bekerja_luar_negeri_kota.pelapor_id
+	belum_bekerja
+	LEFT JOIN warga ON warga.id_warga = belum_bekerja.warga_id 
 WHERE
-	bekerja_luar_negeri_kota.id = " . $id . "
+	belum_bekerja.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -86,7 +65,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN BEKERJA DILUAR NEGERI/KOTA</th>
+                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN BELUM BEKERJA</th>
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
@@ -105,11 +84,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>NIK</td>
                             <td>:</td>
                             <td><?= $row_warga['nik_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>No. Kartu Keluarga</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nomor_keluarga']; ?></td>
                         </tr>
                         <tr>
                             <td>Tempat, Tanggal Lahir</td>
@@ -155,99 +129,12 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <th colspan="3">
-                                Adalah benar nama yang tercantum diatas sedang bekerja di :
+                                Nama tersebut yang tercantum diatas sepanjang sepengetahuan kami dan berdasarkan surat pengantar dari Ketua RT/RW serta pengakuan dari Pemohon, adalah benar pada saat surat ini diterbitkan nama tersebut/Pemohon belum mempunyai pekerjaan.
                             </th>
                         </tr>
                         <tr>
-                            <td>Negeri / Kota</td>
-                            <td>:</td>
-                            <td><?= $row_warga['tujuan']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Sejak</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                $tgl_obj = new DateTime($row_warga['sejak']);
-                                echo $tgl_obj->format('d-m-Y');
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sampai dengan</td>
-                            <td>:</td>
-                            <td>
-                                <?php
-                                if ($row_warga['sampai'] == "") {
-                                    echo "Sekarang";
-                                } else {
-                                    $tgl_obj = new DateTime($row_warga['sampai']);
-                                    echo $tgl_obj->format('d-m-Y');
-                                }
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Bidang / Jenis Pekerjaan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['pekerjaan']; ?></td>
-                        </tr>
-                        <tr>
                             <th colspan="3">
-                                Keterangan ini dibuat berdasarkan laporan dari :
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>Nama</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nama_pelapor']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>NIK</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nik_pelapor']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tempat, Tanggal Lahir</td>
-                            <td>:</td>
-                            <td>
-                                <?= $row_warga['tempat_lahir_pelapor']; ?>,
-                                <?php
-                                $tgl_obj = new DateTime($row_warga['tanggal_lahir_pelapor']);
-                                echo $tgl_obj->format('d-m-Y');
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>:</td>
-                            <td><?= ($row_warga['jenis_kelamin_pelapor'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
-                        </tr>
-                        <!-- <tr>
-                            <td>Status</td>
-                            <td>:</td>
-                            <td>Kawin</td>
-                        </tr> -->
-                        <tr>
-                            <td>Pekerjaan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['pekerjaan_pelapor']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>:</td>
-                            <td>
-                                <?= $row_warga['alamat_pelapor']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Hubungan</td>
-                            <td>:</td>
-                            <td><?= ($row_warga['hubungan_pelapor'] != "") ? $row_warga['hubungan_pelapor'] : "Diri Sendiri"; ?></td>
-                        </tr>
-                        <tr>
-                            <th colspan="3">
-                                Demikian keterangan ini dibuat dengan sebenarnya dan kepada yang berkepentingan untuk dipergunakan seperlunya.
+                                Demikian keterangan ini dibuat dan diberikan atas dasar yang sebenarnya agar dipergunakan seperlunya. Dan apabila terjadi permasalahan/keberatan/komplain dikemudian hari, Pemohon bersedia bertanggung jawab menanggung segala akibatnya sesuai peraturan-peraturan yang berlaku di Indonesia dengan tidak/tanpa melibatkan aparatur pemerintah yang menangani surat keterangan ini.
                             </th>
                         </tr>
                         <tr class="text-center">
@@ -267,7 +154,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6 font-weight-bold">
-                                        <?= $row_warga['nama_pelapor']; ?>
+                                        <?= $row_warga['nama_warga']; ?>
                                     </div>
                                     <div class="col-6 font-weight-bold">
                                         M. AGUNG TAMARA R.<br />

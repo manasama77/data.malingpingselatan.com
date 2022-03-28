@@ -19,18 +19,22 @@
         <li><a href="../dasbor"><i class="fa fa-home"></i> Dashboard</a></li>
         <li><a href="../warga"><i class="fa fa-user"></i> Data Penduduk</a></li>
         <li><a href="../kartu-keluarga"><i class="fa fa-users"></i> Data Kartu Keluarga</a></li>
-        <li class="dropdown">
+        <!-- <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-exchange fa-fw"></i> Mutasi <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="../mutasi-datang"><i class="fa fa-long-arrow-right fa-fw"></i> Pindah Datang</a></li>
             <li><a href="../mutasi-keluar"><i class="fa fa-long-arrow-left fa-fw"></i> Pindah Keluar</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-newspaper-o fa-fw"></i> Peristiwa <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="../kelahiran"><i class="fa fa-venus-mars fa-fw"></i> Kelahiran</a></li>
-            <li><a href="../meninggal"><i class="fa fa-ambulance fa-fw"></i> Kematian</a></li>
+            <li>
+              <a href="../peristiwa-kerja-luar_negeri-atau-kota" class="list-group-item">Bekerja Luar Negeri / Kota</a>
+            </li>
+            <li>
+              <a href="../peristiwa-belum-bekerja" class="list-group-item">Belum Bekerja</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>
