@@ -1,8 +1,12 @@
 <?php
+$uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri_segments = explode('/', $uri_path);
 function is_active($page)
 {
   $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   $uri_segments = explode('/', $uri_path);
+
+  echo $uri_segments[3];
 
   if ($uri_segments[3] == $page) {
     echo 'active';
@@ -39,9 +43,9 @@ function is_active($page)
           <a href="../mutasi-keluar" class="list-group-item"><i class="fa fa-long-arrow-left fa-fw"></i> Pindah Keluar</a>
         </div>
       </div>
-
     </ul>
   </div>
+
   <div class="dropdown">
     <ul class="nav nav-sidebar">
       <li class="<?php is_active('peristiwa'); ?>">
@@ -50,8 +54,9 @@ function is_active($page)
       </li>
       <div id="peristiwa" class="collapse">
         <div class="list-group">
-          <a href="../kelahiran" class="list-group-item"><i class="fa fa-venus-mars fa-fw"></i> Kelahiran</a>
-          <a href="../meninggal" class="list-group-item"><i class="fa fa-ambulance fa-fw"></i> Kematian</a>
+          <a href="../peristiwa-kerja-luar_negeri-atau-kota" class="list-group-item">Bekerja Luar Negeri / Kota</a>
+          <!-- <a href="../kelahiran" class="list-group-item"><i class="fa fa-venus-mars fa-fw"></i> Kelahiran</a>
+          <a href="../meninggal" class="list-group-item"><i class="fa fa-ambulance fa-fw"></i> Kematian</a> -->
         </div>
       </div>
 

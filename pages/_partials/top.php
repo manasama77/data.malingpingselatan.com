@@ -34,7 +34,7 @@ if (!isset($_SESSION['user'])) {
   <link href="../../assets/css/dashboard.css" rel="stylesheet">
 
   <!-- Custom styles for this sb-admin -->
-  <link href="../../assets/sb-admin/css/sb-admin.min.css" rel="stylesheet">
+  <!-- <link href="../../assets/sb-admin/css/sb-admin.min.css" rel="stylesheet"> -->
 
   <!-- Date Range Picker style -->
   <link href="../../assets/css/daterangepicker.css" rel="stylesheet">
@@ -43,19 +43,19 @@ if (!isset($_SESSION['user'])) {
   <link href="../../assets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
   <!-- Bootstrap Select style-->
+  <!-- <link rel="stylesheet" href="../../assets/css/bootstrap-select.min.css"> -->
   <link rel="stylesheet" href="../../assets/css/bootstrap-select.min.css">
 
 </head>
 
 <body>
 
-  <?php include('../_partials/navbar.php') ?>
+  <?php include(dirname(__FILE__) . '/navbar.php') ?>
 
   <div class="container-fluid">
     <div class="row">
       <div class="sidebar col-sm-3 col-md-2 sidebar">
-
-        <?php include('../_partials/sidebar.php') ?>
+        <?php include(dirname(__FILE__) . '/sidebar.php') ?>
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" style="margin-top: -13px">
         <marquee width="100%" direction="left" loop="-1" class="bg-info" style="color: #428BCA; font-size: 18px;">
