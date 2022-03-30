@@ -71,9 +71,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <div class="col-12" style="height: 120px;">
                             <img src="../../assets/img/logo.png" class="float-left" style="height: 130px;" />
                             <h4 style="top: 0; position: absolute; width:100%;" class="text-center">
-                                Pemerintah Kabupaten Lebak<br />
-                                Kecamatan Malingping<br />
-                                Desa Malingping Selatan<br />
+                                PEMERINTAH KABUPATEN LEBAK<br />
+                                KECAMATAN MALINGPING<br />
+                                DESA MALINGPING SELATAN<br />
                                 <p style="line-height: 14pt; font-size: 14px; margin-top: 10px;">
                                     Alamat : Jalan Lebak Lame Desa Malingping Selatan Kecamatan Malingping 42391<br />
                                     e-mail : malingpingselatan2018@gmail.com
@@ -92,9 +92,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Yang bertanda tangan dibawah ini Kepala Desa Malingping Selatan menerangkan bahwa :
-                            </th>
+                            </td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -154,9 +154,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Adalah benar nama yang tercantum diatas sedang bekerja di :
-                            </th>
+                            </td>
                         </tr>
                         <tr>
                             <td>Negeri / Kota</td>
@@ -193,9 +193,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td><?= $row_warga['pekerjaan']; ?></td>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Keterangan ini dibuat berdasarkan laporan dari :
-                            </th>
+                            </td>
                         </tr>
                         <tr>
                             <td>Nama</td>
@@ -246,9 +246,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td><?= ($row_warga['hubungan_pelapor'] != "") ? $row_warga['hubungan_pelapor'] : "Diri Sendiri"; ?></td>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Demikian keterangan ini dibuat dengan sebenarnya dan kepada yang berkepentingan untuk dipergunakan seperlunya.
-                            </th>
+                            </td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="3">

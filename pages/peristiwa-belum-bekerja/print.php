@@ -50,9 +50,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <div class="col-12" style="height: 120px;">
                             <img src="../../assets/img/logo.png" class="float-left" style="height: 130px;" />
                             <h4 style="top: 0; position: absolute; width:100%;" class="text-center">
-                                Pemerintah Kabupaten Lebak<br />
-                                Kecamatan Malingping<br />
-                                Desa Malingping Selatan<br />
+                                PEMERINTAH KABUPATEN LEBAK<br />
+                                KECAMATAN MALINGPING<br />
+                                DESA MALINGPING SELATAN<br />
                                 <p style="line-height: 14pt; font-size: 14px; margin-top: 10px;">
                                     Alamat : Jalan Lebak Lame Desa Malingping Selatan Kecamatan Malingping 42391<br />
                                     e-mail : malingpingselatan2018@gmail.com
@@ -71,9 +71,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Yang bertanda tangan dibawah ini Kepala Desa Malingping Selatan menerangkan bahwa :
-                            </th>
+                            </td>
                         </tr>
                         <tr>
                             <td>Nama Lengkap</td>
@@ -128,14 +128,14 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Nama tersebut yang tercantum diatas sepanjang sepengetahuan kami dan berdasarkan surat pengantar dari Ketua RT/RW serta pengakuan dari Pemohon, adalah benar pada saat surat ini diterbitkan nama tersebut/Pemohon belum mempunyai pekerjaan.
-                            </th>
+                            </td>
                         </tr>
                         <tr>
-                            <th colspan="3">
+                            <td colspan="3">
                                 Demikian keterangan ini dibuat dan diberikan atas dasar yang sebenarnya agar dipergunakan seperlunya. Dan apabila terjadi permasalahan/keberatan/komplain dikemudian hari, Pemohon bersedia bertanggung jawab menanggung segala akibatnya sesuai peraturan-peraturan yang berlaku di Indonesia dengan tidak/tanpa melibatkan aparatur pemerintah yang menangani surat keterangan ini.
-                            </th>
+                            </td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="3">
