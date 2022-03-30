@@ -35,6 +35,9 @@
             <li>
               <a href="../peristiwa-belum-bekerja" class="list-group-item">Belum Bekerja</a>
             </li>
+            <li>
+              <a href="../peristiwa-kematian" class="list-group-item">Kematian</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>
