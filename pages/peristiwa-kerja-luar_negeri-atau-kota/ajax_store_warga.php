@@ -10,7 +10,7 @@ $pekerjaan         = $_POST['pekerjaan'];
 $pelapor_id        = $_POST['pelapor_id_hidden'];
 $hubungan_pelapor  = ($_POST['hubungan_pelapor']) ?? null;
 
-$sql   = "SELECT `bekerja_luar_negeri_kota`.`sequence` FROM `bekerja_luar_negeri_kota` WHERE tanggal_pembuatan = '" . date('Y-m-d') . "' ORDER BY sequence DESC";
+$sql   = "SELECT `bekerja_luar_negeri_kota`.`sequence` FROM `bekerja_luar_negeri_kota` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
 
 $sequence = 1;

@@ -7,8 +7,8 @@
                 KECAMATAN MALINGPING<br />
                 DESA MALINGPING SELATAN<br />
                 <p style="line-height: 14pt; font-size: 14px; margin-top: 10px;">
-                    Alamat : Jalan Lebak Lame Desa Malingping Selatan Kecamatan Malingping 42391<br />
-                    e-mail : malingpingselatan2018@gmail.com
+                    Alamat : <?= ALAMAT; ?><br />
+                    e-mail : <?= EMAIL; ?>
                 </p>
             </h4>
         </div>

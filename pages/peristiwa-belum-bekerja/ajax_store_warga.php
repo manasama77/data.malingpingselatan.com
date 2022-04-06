@@ -4,7 +4,7 @@ include('../../config/koneksi.php');
 $warga_id          = $_POST['warga_id_hidden'];
 $tanggal_pembuatan = date('Y-m-d');
 
-$sql   = "SELECT `belum_bekerja`.`sequence` FROM `belum_bekerja` WHERE tanggal_pembuatan = '" . date('Y-m-d') . "' ORDER BY sequence DESC";
+$sql   = "SELECT `belum_bekerja`.`sequence` FROM `belum_bekerja` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
 
 $sequence = 1;

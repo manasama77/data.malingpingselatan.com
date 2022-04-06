@@ -11,7 +11,7 @@ $pelapor_id        = $_POST['pelapor_id_hidden'];
 $hubungan_pelapor  = $_POST['hubungan_pelapor'];
 $hari              = day_name_indo($_POST['tanggal_kematian']);
 
-$sql   = "SELECT `kematian`.`sequence` FROM `kematian` WHERE tanggal_pembuatan = '" . date('Y-m-d') . "' ORDER BY sequence DESC";
+$sql   = "SELECT `kematian`.`sequence` FROM `kematian` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
 
 $sequence = 1;

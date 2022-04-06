@@ -1,6 +1,8 @@
 <?php
 include('../../config/koneksi.php');
 require '../helper_tanggal_indo.php';
+require '../constant.php';
+
 $id = $_GET['id'];
 
 $sql = "
@@ -57,7 +59,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Yang bertanda tangan dibawah ini Kepala Desa Malingping Selatan menerangkan bahwa :
+                                Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> menerangkan bahwa :
                             </td>
                         </tr>
                         <tr>
@@ -133,8 +135,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         Pelapor,
                                     </div>
                                     <div class="col-6">
-                                        a.n. Kepala Desa <br />
-                                        Kepala Urusan Umum,
+                                        <?= TTD_TITLE; ?>
                                     </div>
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6" style="height: 100px;"></div>
@@ -142,8 +143,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         <?= $row_warga['nama_warga']; ?>
                                     </div>
                                     <div class="col-6 font-weight-bold">
-                                        M. AGUNG TAMARA R.<br />
-                                        NRPDes.198610202001062046
+                                        <?= TTD_NAME; ?>
                                     </div>
                                 </div>
                             </td>
