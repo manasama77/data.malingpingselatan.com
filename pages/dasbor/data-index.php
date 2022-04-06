@@ -1,6 +1,5 @@
 <?php
 include('../../config/koneksi.php');
-
 // hitung warga
 $query_warga = "SELECT COUNT(*) AS total FROM warga";
 $hasil_warga = mysqli_query($db, $query_warga);
@@ -59,7 +58,7 @@ $hasil_mutasi_kd_17 = mysqli_query($db, $query_mutasi_kd_17);
 $jumlah_mutasi_kd_17 = mysqli_fetch_assoc($hasil_mutasi_kd_17);
 
 */
-                              //MUTASI MASUK
+//MUTASI MASUK
 //hitung total mutasi
 $query_mutasi = "SELECT COUNT(*) AS total FROM mutasi_masuk";
 $hasil_mutasi = mysqli_query($db, $query_mutasi);
@@ -87,7 +86,7 @@ $hasil_mutasi_kd_17 = mysqli_query($db, $query_mutasi_kd_17);
 $jumlah_mutasi_masuk_kd_17 = mysqli_fetch_assoc($hasil_mutasi_kd_17);
 
 
-                              //MUTASI keluar
+//MUTASI keluar
 //hitung total mutasi
 $query_mutasi = "SELECT COUNT(*) AS total FROM mutasi_keluar";
 $hasil_mutasi = mysqli_query($db, $query_mutasi);

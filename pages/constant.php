@@ -1,5 +1,8 @@
 <?php
 define("DESA",  "Malingping Selatan");
+define("KECAMATAN",  "Malingping");
+define("KOKAB",  "Kabupaten Lebak");
+define("PROVINSI",  "Banten");
 define("ALAMAT",  "Jalan Lebak Lame Desa Malingping Selatan Kecamatan Malingping 42391");
 define("EMAIL",  "malingpingselatan2018@gmail.com");
 define("KODE_DESA_SURAT",  "Pemdes.Mlp.Sel");
