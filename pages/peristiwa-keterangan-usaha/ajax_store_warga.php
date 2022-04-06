@@ -15,7 +15,7 @@ $query = mysqli_query($db, $sql);
 $sequence = 1;
 $no_urut = "001";
 if (mysqli_num_rows($query) > 0) {
-    $row      = mysqli_fetch_row($query);
+    $row      = mysqli_fetch_assoc($query);
     $sequence = $row['sequence'] + 1;
     if ($sequence == 100) {
         $no_urut = 100;

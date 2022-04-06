@@ -34,7 +34,7 @@ if (!isset($_SESSION['user'])) {
   <link href="../../assets/css/dashboard.css" rel="stylesheet">
 
   <!-- Custom styles for this sb-admin -->
-  <!-- <link href="../../assets/sb-admin/css/sb-admin.min.css" rel="stylesheet"> -->
+  <!-- <link href="../../assets/sb-admin/css/sb-admin-2.min.css" rel="stylesheet"> -->
 
   <!-- Date Range Picker style -->
   <link href="../../assets/css/daterangepicker.css" rel="stylesheet">
