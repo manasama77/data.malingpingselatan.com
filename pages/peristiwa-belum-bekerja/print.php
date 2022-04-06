@@ -129,7 +129,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 <div class="row">
                                     <div class="col-6 text-center"></div>
                                     <div class="col-6 text-center font-weight-bold">
-                                        Malingping Selatan, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?>
+                                        <?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?>
                                     </div>
                                     <div class="col-6">
                                         Pelapor,

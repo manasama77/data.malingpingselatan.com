@@ -1,5 +1,6 @@
 <?php
 include('../../config/koneksi.php');
+require '../constant.php';
 
 $warga_id          = $_POST['warga_id_hidden'];
 $alamat_usaha      = $_POST['alamat_usaha'];
@@ -25,7 +26,7 @@ if (mysqli_num_rows($query) > 0) {
     }
 }
 
-$nomor_surat = '140/' . $no_urut . '- Pemdes.Mlp.Sel/' . date('Y');
+$nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `keterangan_usaha` 
