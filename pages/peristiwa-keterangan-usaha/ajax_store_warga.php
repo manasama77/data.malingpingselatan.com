@@ -2,12 +2,15 @@
 include('../../config/koneksi.php');
 require '../constant.php';
 
+$tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
 $alamat_usaha      = $_POST['alamat_usaha'];
 $bidang_usaha      = $_POST['bidang_usaha'];
 $jenis_usaha       = $_POST['jenis_usaha'];
 $lama_usaha        = $_POST['lama_usaha'];
-$tanggal_pembuatan = date('Y-m-d');
+$nama_ttd          = $_POST['nama_ttd'];
+$jabatan_ttd       = $_POST['jabatan_ttd'];
+$nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
 
 $sql   = "SELECT `keterangan_usaha`.`sequence` FROM `keterangan_usaha` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
@@ -30,9 +33,9 @@ $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `keterangan_usaha` 
-(warga_id, tanggal_pembuatan, nomor_surat, sequence, alamat_usaha, bidang_usaha, jenis_usaha, lama_usaha)
+(warga_id, tanggal_pembuatan, nomor_surat, sequence, alamat_usaha, bidang_usaha, jenis_usaha, lama_usaha, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
-($warga_id, '$tanggal_pembuatan', '$nomor_surat', $sequence, '$alamat_usaha', '$bidang_usaha', '$jenis_usaha', '$lama_usaha')
+($warga_id, '$tanggal_pembuatan', '$nomor_surat', $sequence, '$alamat_usaha', '$bidang_usaha', '$jenis_usaha', '$lama_usaha', '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
 $query = mysqli_query($db, $sql);
 

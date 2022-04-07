@@ -20,7 +20,10 @@ SELECT
 	warga.jenis_kelamin_warga,
 	warga.agama_warga,
 	warga.pekerjaan_warga,
-	warga.alamat_ktp_warga
+	warga.alamat_ktp_warga,
+    keterangan_usaha.nama_ttd,
+	keterangan_usaha.jabatan_ttd,
+	keterangan_usaha.nomor_induk_ttd
 FROM
 	keterangan_usaha
 	LEFT JOIN warga ON warga.id_warga = keterangan_usaha.warga_id 
@@ -168,7 +171,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 <div class="row">
                                     <div class="col-6"></div>
                                     <div class="col-6">
-                                        <?= TTD_TITLE; ?>
+                                        <?= $row_warga['jabatan_ttd']; ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -178,7 +181,8 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 <div class="row">
                                     <div class="col-6"></div>
                                     <div class="col-6 font-weight-bold">
-                                        <?= TTD_NAME; ?>
+                                        <?= $row_warga['nama_ttd']; ?><br />
+                                        <?= $row_warga['nomor_induk_ttd']; ?>
                                     </div>
                                 </div>
                             </td>

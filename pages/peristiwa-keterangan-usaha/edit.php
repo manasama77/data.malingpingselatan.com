@@ -1,11 +1,31 @@
 <?php include __DIR__ . '../../_partials/top.php' ?>
 
-<?php include('../../config/koneksi.php'); ?>
+<?php
+include('../../config/koneksi.php');
+
+$sql = "
+SELECT
+	keterangan_usaha.*,
+    warga.nama_warga
+FROM
+	keterangan_usaha
+LEFT JOIN warga ON warga.id_warga = keterangan_usaha.warga_id
+WHERE 
+    keterangan_usaha.id = " . $_GET['id'] . "
+";
+
+$query = mysqli_query($db, $sql);
+$row = mysqli_fetch_assoc($query);
+
+if (mysqli_num_rows($query) == 0) {
+    die("ID tidak ditemukan");
+}
+?>
 
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Tambah Data Warga Keterangan Usaha
+            Edit Data Warga Keterangan Usaha
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
@@ -19,12 +39,12 @@
         <form id="form">
             <div class="form-group">
                 <label for="tanggal_pembuatan">Tanggal Pelaporan <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= date('Y-m-d'); ?>" required />
+                <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= $row['tanggal_pembuatan']; ?>" required />
             </div>
             <div class="form-group">
                 <label for="warga_id">Warga <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="warga_id" name="warga_id" required disabled />
+                    <input type="text" class="form-control" id="warga_id" name="warga_id" value="<?= $row['nama_warga']; ?>" required disabled />
                     <div class="input-group-addon" style="background-color: #d9534f; color: white;" role="button" id="btn_modal_warga">
                         <i class="fa fa-search"></i>
                     </div>
@@ -32,37 +52,38 @@
             </div>
             <div class="form-group">
                 <label for="alamat_usaha">Alamat Usaha <span class="text-danger">*</span></label>
-                <textarea class="form-control" id="alamat_usaha" name="alamat_usaha" placeholde="Alamat Usaha" required></textarea>
+                <textarea class="form-control" id="alamat_usaha" name="alamat_usaha" placeholde="Alamat Usaha" required><?= $row['alamat_usaha']; ?></textarea>
             </div>
             <div class="form-group">
                 <label for="bidang_usaha">Bidang Usaha <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="bidang_usaha" name="bidang_usaha" required />
+                <input type="text" class="form-control" id="bidang_usaha" name="bidang_usaha" value="<?= $row['bidang_usaha']; ?>" required />
             </div>
             <div class="form-group">
                 <label for="jenis_usaha">Jenis Usaha <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="jenis_usaha" name="jenis_usaha" required />
+                <input type="text" class="form-control" id="jenis_usaha" name="jenis_usaha" value="<?= $row['jenis_usaha']; ?>" required />
             </div>
             <div class="form-group">
                 <label for="lama_usaha">Lama Usaha <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="lama_usaha" name="lama_usaha" required />
+                <input type="text" class="form-control" id="lama_usaha" name="lama_usaha" value="<?= $row['lama_usaha']; ?>" required />
             </div>
             <hr />
             <h2 class="text-center">Tanda Tangan</h2>
             <div class="form-group">
                 <label for="nama_ttd">Nama Penandatangan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nama_ttd" name="nama_ttd" placeholder="Nama Penandatangan" required />
+                <input type="text" class="form-control" id="nama_ttd" name="nama_ttd" value="<?= $row['nama_ttd']; ?>" placeholder="Nama Penandatangan" required />
             </div>
             <div class="form-group">
                 <label for="jabatan_ttd">Jabatan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="jabatan_ttd" name="jabatan_ttd" placeholder="Jabatan" required />
+                <input type="text" class="form-control" id="jabatan_ttd" name="jabatan_ttd" value="<?= $row['jabatan_ttd']; ?>" placeholder="Jabatan" required />
             </div>
             <div class="form-group">
                 <label for="nomor_induk_ttd">Nomor Induk</label>
-                <input type="text" class="form-control" id="nomor_induk_ttd" name="nomor_induk_ttd" placeholder="Nomor Induk" />
+                <input type="text" class="form-control" id="nomor_induk_ttd" name="nomor_induk_ttd" value="<?= $row['nomor_induk_ttd']; ?>" placeholder="Nomor Induk" />
             </div>
             <div class="form-group">
                 <hr />
-                <input type="hidden" id="warga_id_hidden" name="warga_id_hidden" />
+                <input type="hidden" id="id_edit" name="id_edit" value="<?= $row['id']; ?>" />
+                <input type="hidden" id="warga_id_hidden" name="warga_id_hidden" value="<?= $row['warga_id']; ?>" />
                 <button type="submit" class="btn btn-success btn-block" id="btn_simpan">Simpan</button>
                 <button type="button" class="btn btn-warning btn-block" id="btn_print" disabled>Print</button>
                 <a href="index.php" class="btn btn-info btn-block">Kembali</a>
@@ -112,4 +133,4 @@
 
 <?php include __DIR__ . '../../_partials/bottom.php' ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="create_vitamin.js"></script>
+<script src="edit_vitamin.js"></script>
