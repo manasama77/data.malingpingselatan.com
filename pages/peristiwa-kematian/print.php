@@ -38,7 +38,10 @@ SELECT
 	pelapor.jenis_kelamin_warga AS jenis_kelamin_pelapor,
 	pelapor.pekerjaan_warga AS pekerjaan_pelapor,
 	pelapor.alamat_warga AS alamat_pelapor,
-	kematian.hubungan_pelapor 
+	kematian.hubungan_pelapor,
+	kematian.nama_ttd,
+	kematian.jabatan_ttd,
+	kematian.nomor_induk_ttd
 FROM
 	kematian
 	LEFT JOIN warga ON warga.id_warga = kematian.warga_id
@@ -247,7 +250,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         Pelapor,
                                     </div>
                                     <div class="col-6">
-                                        <?= TTD_TITLE; ?>
+                                        <?= $row_warga['jabatan_ttd']; ?>
                                     </div>
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6" style="height: 100px;"></div>
@@ -255,7 +258,8 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         <?= $row_warga['nama_pelapor']; ?>
                                     </div>
                                     <div class="col-6 font-weight-bold">
-                                        <?= TTD_NAME; ?>
+                                        <?= $row_warga['nama_ttd']; ?><br />
+                                        <?= $row_warga['nomor_induk_ttd']; ?>
                                     </div>
                                 </div>
                             </td>
