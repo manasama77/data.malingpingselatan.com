@@ -36,7 +36,7 @@ $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `kematian` 
-(warga_id, hari, tanggal_kematian, jam_kematian, penyebab_kematian, tempat_kematian, pelapor_id, hubungan_pelapor, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk)
+(warga_id, hari, tanggal_kematian, jam_kematian, penyebab_kematian, tempat_kematian, pelapor_id, hubungan_pelapor, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
 ($warga_id, '$hari', '$tanggal_kematian', '$jam_kematian', '$penyebab_kematian', '$tempat_kematian', $pelapor_id, '$hubungan_pelapor', '$tanggal_pembuatan', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";

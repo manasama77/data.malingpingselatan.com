@@ -46,9 +46,9 @@ $query = mysqli_query($db, $sql);
                                 <td><?= $row['nama_warga']; ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <!-- <a href="edit.php" class="btn btn-info" title="Edit Data">
-                                            <i class="fa fa-edit fa-fw"></i>
-                                        </a> -->
+                                        <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
+                                            <i class="fa fa-pencil fa-fw"></i>
+                                        </a>
                                         <a href="print.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-success" title="Print Data">
                                             <i class="fa fa-print fa-fw"></i>
                                         </a>

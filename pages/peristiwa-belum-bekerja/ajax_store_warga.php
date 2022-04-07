@@ -2,8 +2,11 @@
 include('../../config/koneksi.php');
 require '../constant.php';
 
+$tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
-$tanggal_pembuatan = date('Y-m-d');
+$nama_ttd          = $_POST['nama_ttd'];
+$jabatan_ttd       = $_POST['jabatan_ttd'];
+$nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
 
 $sql   = "SELECT `belum_bekerja`.`sequence` FROM `belum_bekerja` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
@@ -26,10 +29,11 @@ $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `belum_bekerja` 
-(warga_id, tanggal_pembuatan, nomor_surat, sequence)
+(warga_id, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
-($warga_id, '$tanggal_pembuatan', '$nomor_surat', $sequence)
+('$warga_id', '$tanggal_pembuatan', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
+
 $query = mysqli_query($db, $sql);
 
 $code = 500;
