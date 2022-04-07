@@ -1,11 +1,35 @@
 <?php include __DIR__ . '../../_partials/top.php' ?>
 
-<?php include('../../config/koneksi.php'); ?>
+<?php
+include('../../config/koneksi.php');
+
+$sql = "
+SELECT
+	bekerja_luar_negeri_kota.*,
+    warga.nama_warga,
+    pelapor.nama_warga as nama_pelapor
+FROM
+	bekerja_luar_negeri_kota
+LEFT JOIN warga ON warga.id_warga = bekerja_luar_negeri_kota.warga_id
+LEFT JOIN warga as pelapor ON pelapor.id_warga = bekerja_luar_negeri_kota.pelapor_id
+WHERE 
+    bekerja_luar_negeri_kota.id = " . $_GET['id'] . "
+";
+
+$query = mysqli_query($db, $sql);
+$row = mysqli_fetch_assoc($query);
+
+echo '<pre>' . print_r($row, 1) . '</pre>';
+
+if (mysqli_num_rows($query) == 0) {
+    die("ID tidak ditemukan");
+}
+?>
 
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Tambah Data Warga Bekerja di Luar Negeri / Kota
+            Edit Data Warga Bekerja di Luar Negeri / Kota
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
@@ -19,12 +43,12 @@
         <form id="form">
             <div class="form-group">
                 <label for="tanggal_pembuatan">Tanggal Pelaporan <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= date('Y-m-d'); ?>" required />
+                <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= $row['tanggal_pembuatan']; ?>" required />
             </div>
             <div class="form-group">
                 <label for="warga_id">Warga yang Bekerja <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="warga_id" name="warga_id" required disabled />
+                    <input type="text" class="form-control" id="warga_id" name="warga_id" value="<?= $row['nama_warga']; ?>" required disabled />
                     <div class="input-group-addon" style="background-color: #d9534f; color: white;" role="button" id="btn_modal_warga">
                         <i class="fa fa-search"></i>
                     </div>
@@ -32,31 +56,31 @@
             </div>
             <div class="form-group">
                 <label for="tujuan">Negara / Kota Tujuan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="tujuan" name="tujuan" placeholder="Negara / Kota Tujuan" required />
+                <input type="text" class="form-control" id="tujuan" name="tujuan" value="<?= $row['tujuan']; ?>" placeholder="Negara / Kota Tujuan" required />
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
                         <label for="sejak">Sejak <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="sejak" name="sejak" required />
+                        <input type="date" class="form-control" id="sejak" name="sejak" value="<?= $row['sejak']; ?>" required />
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="form-group">
                         <label for="sampai">Sampai</label>
-                        <input type="date" class="form-control" id="sampai" name="sampai" />
+                        <input type="date" class="form-control" id="sampai" name="sampai" value="<?= $row['sampai']; ?>" />
                         <span class="text-muted">Kosongkan jika lama bekerja tidak diketahui</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label for="pekerjaan">Pekerjaan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Pekerjaan" required />
+                <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" value="<?= $row['pekerjaan']; ?>" placeholder="Pekerjaan" required />
             </div>
             <div class="form-group">
                 <label for="pelapor_id">Warga yang Melaporkan <span class="text-danger">*</span></label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="pelapor_id" name="pelapor_id" required readonly />
+                    <input type="text" class="form-control" id="pelapor_id" name="pelapor_id" value="<?= $row['nama_pelapor']; ?>" required readonly />
                     <div class="input-group-addon" style="background-color: #d9534f; color: white;" role="button" id="btn_modal_pelapor">
                         <i class="fa fa-search"></i>
                     </div>
@@ -64,27 +88,28 @@
             </div>
             <div class="form-group">
                 <label for="hubungan_pelapor">Hubungan Pelapor dengan yang Bekerja</label>
-                <input type="text" class="form-control" id="hubungan_pelapor" name="hubungan_pelapor" placeholder="Hubungan Pelapor dengan yang Bekerja" />
+                <input type="text" class="form-control" id="hubungan_pelapor" name="hubungan_pelapor" value="<?= $row['hubungan_pelapor']; ?>" placeholder="Hubungan Pelapor dengan yang Bekerja" />
                 <span class="text-muted">Kosongkan jika pelapor adalah warga yang bekerja</span>
             </div>
             <hr />
             <h2 class="text-center">Tanda Tangan</h2>
             <div class="form-group">
                 <label for="nama_ttd">Nama Penandatangan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nama_ttd" name="nama_ttd" placeholder="Nama Penandatangan" required />
+                <input type="text" class="form-control" id="nama_ttd" name="nama_ttd" value="<?= $row['nama_ttd']; ?>" placeholder="Nama Penandatangan" required />
             </div>
             <div class="form-group">
                 <label for="jabatan_ttd">Jabatan <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="jabatan_ttd" name="jabatan_ttd" placeholder="Jabatan" required />
+                <input type="text" class="form-control" id="jabatan_ttd" name="jabatan_ttd" value="<?= $row['jabatan_ttd']; ?>" placeholder="Jabatan" required />
             </div>
             <div class="form-group">
                 <label for="nomor_induk_ttd">Nomor Induk</label>
-                <input type="text" class="form-control" id="nomor_induk_ttd" name="nomor_induk_ttd" placeholder="Nomor Induk" />
+                <input type="text" class="form-control" id="nomor_induk_ttd" name="nomor_induk_ttd" value="<?= $row['nomor_induk_ttd']; ?>" placeholder="Nomor Induk" />
             </div>
             <div class="form-group">
                 <hr />
-                <input type="hidden" id="warga_id_hidden" name="warga_id_hidden" />
-                <input type="hidden" id="pelapor_id_hidden" name="pelapor_id_hidden" />
+                <input type="hidden" id="id_edit" name="id_edit" value="<?= $row['id']; ?>" />
+                <input type="hidden" id="warga_id_hidden" name="warga_id_hidden" value="<?= $row['warga_id']; ?>" />
+                <input type="hidden" id="pelapor_id_hidden" name="pelapor_id_hidden" value="<?= $row['pelapor_id']; ?>" />
                 <button type="submit" class="btn btn-success btn-block" id="btn_simpan">Simpan</button>
                 <button type="button" class="btn btn-warning btn-block" id="btn_print" disabled>Print</button>
                 <a href="index.php" class="btn btn-info btn-block">Kembali</a>
@@ -172,4 +197,4 @@
 
 <?php include __DIR__ . '../../_partials/bottom.php' ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="create_vitamin.js"></script>
+<script src="edit_vitamin.js"></script>

@@ -10,6 +10,9 @@ $sampai            = ($_POST['sampai']) ?? null;
 $pekerjaan         = $_POST['pekerjaan'];
 $pelapor_id        = $_POST['pelapor_id_hidden'];
 $hubungan_pelapor  = ($_POST['hubungan_pelapor']) ?? null;
+$nama_ttd          = $_POST['nama_ttd'];
+$jabatan_ttd       = $_POST['jabatan_ttd'];
+$nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
 
 $sql   = "SELECT `bekerja_luar_negeri_kota`.`sequence` FROM `bekerja_luar_negeri_kota` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
@@ -32,9 +35,9 @@ $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `bekerja_luar_negeri_kota` 
-(warga_id, tujuan, sejak, sampai, pekerjaan, pelapor_id, hubungan_pelapor, tanggal_pembuatan, nomor_surat, sequence)
+(warga_id, tujuan, sejak, sampai, pekerjaan, pelapor_id, hubungan_pelapor, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk)
 VALUES
-($warga_id, '$tujuan', '$sejak', '$sampai', '$pekerjaan', $pelapor_id, '$hubungan_pelapor', '$tanggal_pembuatan', '$nomor_surat', $sequence)
+($warga_id, '$tujuan', '$sejak', '$sampai', '$pekerjaan', $pelapor_id, '$hubungan_pelapor', '$tanggal_pembuatan', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
 $query = mysqli_query($db, $sql);
 
