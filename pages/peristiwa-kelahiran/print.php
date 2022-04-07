@@ -16,6 +16,7 @@ SELECT
 	warga.jenis_kelamin_warga,
 	warga.nama_warga,
 	warga.agama_warga,
+	warga.alamat_warga,
 	kelahiran.anak_ke,
 	kartu_keluarga.nomor_keluarga,
 	ibu.nama_warga AS nama_ibu,
@@ -47,7 +48,10 @@ SELECT
 	) AS nomor_keluarga_pelapor,
     kelahiran.hubungan_pelapor,
     kelahiran.tanggal_pembuatan,
-    kelahiran.nomor_surat
+    kelahiran.nomor_surat,
+    kelahiran.nama_ttd,
+    kelahiran.jabatan_ttd,
+    kelahiran.nomor_induk_ttd
 FROM
 	kelahiran
 	LEFT JOIN warga ON warga.id_warga = kelahiran.warga_id
@@ -303,7 +307,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         Pelapor,
                                     </div>
                                     <div class="col-6">
-                                        <?= TTD_TITLE; ?>
+                                        <?= $row_warga['jabatan_ttd']; ?>
                                     </div>
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6" style="height: 100px;"></div>
@@ -311,7 +315,8 @@ if (mysqli_num_rows($query_warga) == 0) {
                                         <?= $row_warga['nama_pelapor']; ?>
                                     </div>
                                     <div class="col-6 font-weight-bold">
-                                        <?= TTD_NAME; ?>
+                                        <?= $row_warga['nama_ttd']; ?><br />
+                                        <?= $row_warga['nomor_induk_ttd']; ?>
                                     </div>
                                 </div>
                             </td>

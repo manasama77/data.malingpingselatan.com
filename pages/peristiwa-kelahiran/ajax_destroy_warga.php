@@ -23,7 +23,30 @@ if ($total == 0) {
     exit;
 }
 
+$row = mysqli_fetch_assoc($query);
+$warga_id = $row['warga_id'];
+
 $sql = "DELETE FROM `kelahiran` WHERE id = " . $id . "";
+$query = mysqli_query($db, $sql);
+
+$code = 500;
+$msg  = "Proses Delete Gagal";
+if ($query) {
+    $code = 200;
+    $msg  = "Proses Delete Berhasil";
+}
+
+$sql = "DELETE FROM `warga` WHERE id_warga = " . $warga_id . "";
+$query = mysqli_query($db, $sql);
+
+$code = 500;
+$msg  = "Proses Delete Gagal";
+if ($query) {
+    $code = 200;
+    $msg  = "Proses Delete Berhasil";
+}
+
+$sql = "DELETE FROM `warga_has_kartu_keluarga` WHERE id_warga = " . $warga_id . "";
 $query = mysqli_query($db, $sql);
 
 $code = 500;

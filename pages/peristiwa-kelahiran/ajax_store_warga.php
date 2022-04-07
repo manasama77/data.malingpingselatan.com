@@ -27,6 +27,9 @@ $ayah_id_hidden      = $_POST['ayah_id_hidden'];
 $keluarga_id_hidden  = $_POST['keluarga_id_hidden'];
 $ibu_id_hidden       = $_POST['ibu_id_hidden'];
 $pelapor_id_hidden   = $_POST['pelapor_id_hidden'];
+$nama_ttd            = $_POST['nama_ttd'];
+$jabatan_ttd         = $_POST['jabatan_ttd'];
+$nomor_induk_ttd     = $_POST['nomor_induk_ttd'];
 $hari                = day_name_indo($_POST['tanggal_lahir']);
 
 $sql   = "SELECT `kelahiran`.`sequence` FROM `kelahiran` ORDER BY sequence DESC";
@@ -133,7 +136,10 @@ INSERT INTO `kelahiran`
         hubungan_pelapor, 
         tanggal_pembuatan, 
         nomor_surat, 
-        sequence
+        sequence, 
+        nama_ttd, 
+        jabatan_ttd, 
+        nomor_induk_ttd
     )
 VALUES
     (
@@ -149,7 +155,10 @@ VALUES
         '$hubungan_pelapor', 
         '$tanggal_pembuatan', 
         '$nomor_surat', 
-        $sequence
+        $sequence,
+        '$nama_ttd', 
+        '$jabatan_ttd', 
+        '$nomor_induk_ttd'
     )
 ";
 $query = mysqli_query($db, $sql);
