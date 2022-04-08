@@ -5,16 +5,12 @@ require '../constant.php';
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
 $tujuan            = $_POST['tujuan'];
-$sejak             = $_POST['sejak'];
-$sampai            = ($_POST['sampai']) ?? null;
-$pekerjaan         = $_POST['pekerjaan'];
 $pelapor_id        = $_POST['pelapor_id_hidden'];
-$hubungan_pelapor  = ($_POST['hubungan_pelapor']) ?? null;
 $nama_ttd          = $_POST['nama_ttd'];
 $jabatan_ttd       = $_POST['jabatan_ttd'];
 $nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
 
-$sql   = "SELECT `bekerja_luar_negeri_kota`.`sequence` FROM `bekerja_luar_negeri_kota` ORDER BY sequence DESC";
+$sql   = "SELECT `tidak_mampu_sekolah`.`sequence` FROM `tidak_mampu_sekolah` ORDER BY sequence DESC";
 $query = mysqli_query($db, $sql);
 
 $sequence = 1;
@@ -34,10 +30,10 @@ if (mysqli_num_rows($query) > 0) {
 $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
-INSERT INTO `bekerja_luar_negeri_kota` 
-(warga_id, tujuan, sejak, sampai, pekerjaan, pelapor_id, hubungan_pelapor, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
+INSERT INTO `tidak_mampu_sekolah` 
+(warga_id, tujuan, pelapor_id, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
-($warga_id, '$tujuan', '$sejak', '$sampai', '$pekerjaan', $pelapor_id, '$hubungan_pelapor', '$tanggal_pembuatan', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
+($warga_id, '$tujuan', $pelapor_id, '$tanggal_pembuatan', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
 $query = mysqli_query($db, $sql);
 
