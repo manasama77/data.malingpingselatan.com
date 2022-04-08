@@ -47,6 +47,9 @@
             <li>
               <a href="../peristiwa-tidak-mampu-kesehatan-puskesmas" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (PUSKESMAS)</a>
             </li>
+            <li>
+              <a href="../peristiwa-tidak-mampu-kesehatan-rsud" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (RSUD)</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>

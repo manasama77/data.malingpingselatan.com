@@ -60,6 +60,7 @@ function is_active($page)
           <a href="../peristiwa-belum-bekerja" class="list-group-item">Belum Bekerja</a>
           <a href="../peristiwa-keterangan-usaha" class="list-group-item">Keterangan Usaha</a>
           <a href="../peristiwa-tidak-mampu-kesehatan-puskesmas" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (PUSKESMAS)</a>
+          <a href="../peristiwa-tidak-mampu-kesehatan-rsud" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (RSUD)</a>
         </div>
       </div>
 

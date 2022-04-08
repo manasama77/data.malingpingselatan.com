@@ -7,17 +7,17 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-	tidak_mampu_kesehatan_puskesmas.warga_id,
-	tidak_mampu_kesehatan_puskesmas.tanggal_pembuatan,
-	tidak_mampu_kesehatan_puskesmas.nomor_surat,
+	tidak_mampu_kesehatan_rsud.warga_id,
+	tidak_mampu_kesehatan_rsud.tanggal_pembuatan,
+	tidak_mampu_kesehatan_rsud.nomor_surat,
 	warga.nama_warga,
 	warga.nik_warga,
     (
         IF
         (
-            ( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_kesehatan_puskesmas.warga_id ) = 1,
-            ( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_kesehatan_puskesmas.warga_id ),
-            ( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = tidak_mampu_kesehatan_puskesmas.warga_id ) 
+            ( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_kesehatan_rsud.warga_id ) = 1,
+            ( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_kesehatan_rsud.warga_id ),
+            ( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = tidak_mampu_kesehatan_rsud.warga_id ) 
         ) 
     ) AS nomor_keluarga,
 	warga.tempat_lahir_warga,
@@ -26,22 +26,17 @@ SELECT
 	warga.agama_warga,
 	warga.pekerjaan_warga,
 	warga.alamat_ktp_warga,
-    tidak_mampu_kesehatan_puskesmas.no_rt_ttd,
-    tidak_mampu_kesehatan_puskesmas.nama_rt_ttd,
-    tidak_mampu_kesehatan_puskesmas.no_rw_ttd,
-    tidak_mampu_kesehatan_puskesmas.nama_rw_ttd,
-    tidak_mampu_kesehatan_puskesmas.nama_tksk_ttd,
-	tidak_mampu_kesehatan_puskesmas.jabatan_ttd,
-    tidak_mampu_kesehatan_puskesmas.nama_ttd,
-	tidak_mampu_kesehatan_puskesmas.nomor_induk_ttd,
-	tidak_mampu_kesehatan_puskesmas.no_register_camat,
-	tidak_mampu_kesehatan_puskesmas.nama_camat,
-	tidak_mampu_kesehatan_puskesmas.nip_camat
+	tidak_mampu_kesehatan_rsud.jabatan_ttd,
+    tidak_mampu_kesehatan_rsud.nama_ttd,
+	tidak_mampu_kesehatan_rsud.nomor_induk_ttd,
+	tidak_mampu_kesehatan_rsud.no_register_camat,
+	tidak_mampu_kesehatan_rsud.nama_camat,
+	tidak_mampu_kesehatan_rsud.nip_camat
 FROM
-	tidak_mampu_kesehatan_puskesmas
-	LEFT JOIN warga ON warga.id_warga = tidak_mampu_kesehatan_puskesmas.warga_id 
+	tidak_mampu_kesehatan_rsud
+	LEFT JOIN warga ON warga.id_warga = tidak_mampu_kesehatan_rsud.warga_id 
 WHERE
-	tidak_mampu_kesehatan_puskesmas.id = " . $id . "
+	tidak_mampu_kesehatan_rsud.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -153,24 +148,12 @@ if (mysqli_num_rows($query_warga) == 0) {
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6 text-center font-weight-bold">
-                                        Ketua RT. <?= $row_warga['no_rt_ttd']; ?>
-                                    </div>
-                                    <div class="col-6 text-center font-weight-bold">
-                                        Ketua RW. <?= $row_warga['no_rw_ttd']; ?>
-                                    </div>
-                                    <div class="col-6" style="height: 100px;"></div>
-                                    <div class="col-6" style="height: 100px;"></div>
-                                    <div class="col-6 font-weight-bold">
-                                        <?= $row_warga['nama_rt_ttd']; ?>
-                                    </div>
-                                    <div class="col-6 font-weight-bold">
-                                        <?= $row_warga['nama_rw_ttd']; ?>
-                                    </div>
+                                    <div class="col-6 text-center">Mengetahui :</div>
+                                    <div class="col-6 text-center font-weight-bold"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        TKSK <?= KECAMATAN; ?>
+                                        Camat <?= KECAMATAN; ?>
                                     </div>
                                     <div class="col-6">
                                         <?= $row_warga['jabatan_ttd']; ?>
@@ -178,27 +161,12 @@ if (mysqli_num_rows($query_warga) == 0) {
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6" style="height: 100px;"></div>
                                     <div class="col-6 font-weight-bold">
-                                        <?= $row_warga['nama_tksk_ttd']; ?>
+                                        <?= $row_warga['nama_camat']; ?><br />
+                                        <?= $row_warga['nip_camat']; ?>
                                     </div>
                                     <div class="col-6 font-weight-bold">
                                         <?= $row_warga['nama_ttd']; ?><br />
                                         <?= $row_warga['nomor_induk_ttd']; ?>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 text-center">
-                                        Mengetahui :
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        No. Register : <?= $row_warga['no_register_camat']; ?>
-                                    </div>
-                                    <div class="col-12 text-center font-weight-bold">
-                                        Camat <?= KECAMATAN; ?>
-                                    </div>
-                                    <div class="col-12" style="height: 100px;"></div>
-                                    <div class="col-12 text-center font-weight-bold">
-                                        <?= $row_warga['nama_camat']; ?><br />
-                                        <?= $row_warga['nip_camat']; ?>
                                     </div>
                                 </div>
                             </td>
