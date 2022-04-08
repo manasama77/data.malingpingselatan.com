@@ -59,6 +59,9 @@
             <li>
               <a href="../peristiwa-domisili" class="list-group-item">Domisili</a>
             </li>
+            <li>
+              <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>

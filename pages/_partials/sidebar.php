@@ -64,6 +64,7 @@ function is_active($page)
           <a href="../peristiwa-tidak-mampu-sekolah" class="list-group-item">Keterangan Tidak Mampu Untuk Sekolah</a>
           <a href="../peristiwa-tidak-mampu-umum" class="list-group-item">Keterangan Tidak Mampu Umum</a>
           <a href="../peristiwa-domisili" class="list-group-item">Domisili</a>
+          <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
         </div>
       </div>
 
