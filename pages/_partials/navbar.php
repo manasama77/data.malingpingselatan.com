@@ -56,6 +56,9 @@
             <li>
               <a href="../peristiwa-tidak-mampu-umum" class="list-group-item">Keterangan Tidak Mampu Umum</a>
             </li>
+            <li>
+              <a href="../peristiwa-domisili" class="list-group-item">Domisili</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>

@@ -7,16 +7,18 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-	tidak_mampu_umum.nomor_surat,
-	tidak_mampu_umum.tanggal_pembuatan,
+	domisili.nomor_surat,
+	domisili.tanggal_pembuatan,
+	domisili.lama_domisili,
+	domisili.sampai,
 	warga.nama_warga,
 	warga.nik_warga,
 	(
 	IF
 		(
-			( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_umum.warga_id ) = 1,
-			( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = tidak_mampu_umum.warga_id ),
-			( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = tidak_mampu_umum.warga_id ) 
+			( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = domisili.warga_id ) = 1,
+			( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = domisili.warga_id ),
+			( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = domisili.warga_id ) 
 		) 
 	) AS nomor_keluarga,
 	warga.tempat_lahir_warga,
@@ -26,14 +28,14 @@ SELECT
 	warga.pekerjaan_warga,
 	warga.alamat_warga,
 	warga.alamat_ktp_warga,
-    tidak_mampu_umum.nama_ttd,
-	tidak_mampu_umum.jabatan_ttd,
-	tidak_mampu_umum.nomor_induk_ttd
+    domisili.nama_ttd,
+	domisili.jabatan_ttd,
+	domisili.nomor_induk_ttd
 FROM
-	tidak_mampu_umum
-	LEFT JOIN warga ON warga.id_warga = tidak_mampu_umum.warga_id 
+	domisili
+	LEFT JOIN warga ON warga.id_warga = domisili.warga_id 
 WHERE
-	tidak_mampu_umum.id = " . $id . "
+	domisili.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -41,6 +43,8 @@ if (mysqli_num_rows($query_warga) == 0) {
 } else {
     $row_warga = mysqli_fetch_assoc($query_warga);
 }
+
+$sampai = tanggal_indo_no_dash($row_warga['sampai']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +68,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN TIDAK MAMPU</th>
+                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN DOMISILI</th>
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
@@ -75,7 +79,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <td>Nama</td>
+                            <td>Nama Lengkap</td>
                             <td>:</td>
                             <td><?= $row_warga['nama_warga']; ?></td>
                         </tr>
@@ -83,11 +87,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>NIK</td>
                             <td>:</td>
                             <td><?= $row_warga['nik_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>No. Kartu Keluarga</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nomor_keluarga']; ?></td>
                         </tr>
                         <tr>
                             <td>Tempat, Tanggal Lahir</td>
@@ -101,24 +100,24 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>:</td>
-                            <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Pekerjaan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['pekerjaan_warga']; ?></td>
-                        </tr>
-                        <tr>
                             <td>Warga Negara</td>
                             <td>:</td>
                             <td>INDONESIA</td>
                         </tr>
                         <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>:</td>
+                            <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
+                        </tr>
+                        <tr>
                             <td>Agama</td>
                             <td>:</td>
                             <td><?= $row_warga['agama_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td>:</td>
+                            <td><?= $row_warga['pekerjaan_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>Alamat KTP</td>
@@ -128,13 +127,27 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                Berdasarkan Surat Pengantar dari RT dan RW, nama tersebut benar warga Desa <?= DESA; ?> dan berdomisili di alamat tersebut diatas. Menurut laporan dari Ketua RT dan RW serta data yang ada di Desa bahwa nama tersebut termasuk dalam Keluarga Tidak Mampu.
+                            <td>Alamat Domisili</td>
+                            <td>:</td>
+                            <td>
+                                <?= $row_warga['alamat_warga']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lama Domisili</td>
+                            <td>:</td>
+                            <td>
+                                <?= $row_warga['lama_domisili']; ?> Tahun
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Demikian keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.
+                                Berdasarkan Surat Pengantar dari Ketua RT dan RW, nama tersebut benar warga Desa <?= DESA; ?> dan Bertempat Tinggal (Berdomisili) di alamat tersebut diatas.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Demikian keterangan ini dibuat atas dasar yang sebenarnya dan kepada yang berkepentingan agar dipergunakan sebagaimana mestinya. Keterangan ini berlaku sampai dengan : <?= $sampai; ?>.
                             </td>
                         </tr>
                         <tr class="text-center">

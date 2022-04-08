@@ -14,7 +14,7 @@ function bulan_indo($bulan)
     if ($bulan == "01") {
         return "Januari";
     } elseif ($bulan == "02") {
-        return "Febuari";
+        return "Februari";
     } elseif ($bulan == "03") {
         return "Maret";
     } elseif ($bulan == "04") {
