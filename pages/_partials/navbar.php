@@ -62,6 +62,9 @@
             <li>
               <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
             </li>
+            <li>
+              <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>
