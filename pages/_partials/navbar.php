@@ -65,6 +65,9 @@
             <li>
               <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
             </li>
+            <li>
+              <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item">Belum Mempunyai Rumah</a>
+            </li>
           </ul>
         </li>
         <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>
