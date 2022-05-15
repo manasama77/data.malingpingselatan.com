@@ -207,6 +207,7 @@
           <option value="Meninggal">Meninggal</option>
           <option value="Pindah Datang">Pindah Datang</option>
           <option value="Pindah Keluar">Pindah Keluar</option>
+          <option value="Kontrak">Kontrak</option>
         </select>
       </td>
     </tr>
