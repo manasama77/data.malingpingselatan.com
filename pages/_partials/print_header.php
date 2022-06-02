@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-12">
-        <div class="col-12" style="height: 120px;">
+        <div class="col-12" style="height: 140px;">
             <img src="../../assets/img/logo.png" class="float-left" style="height: 130px;" />
-            <h4 style="top: 0; position: absolute; width:100%;" class="text-center">
+            <h3 style="top: 0; position: absolute; width:100%;" class="text-center">
                 PEMERINTAH KABUPATEN LEBAK<br />
                 KECAMATAN MALINGPING<br />
                 DESA MALINGPING SELATAN<br />
@@ -10,7 +10,7 @@
                     Alamat : <?= ALAMAT; ?><br />
                     e-mail : <?= EMAIL; ?>
                 </p>
-            </h4>
+            </h3>
         </div>
     </div>
 </div>

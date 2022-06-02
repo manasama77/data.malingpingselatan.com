@@ -68,6 +68,15 @@ if (mysqli_num_rows($query_warga) == 0) {
 } else {
     $row_warga = mysqli_fetch_assoc($query_warga);
 }
+$now                       = new DateTime();
+$tanggal_lahir_anak_obj    = new DateTime($row_warga['tanggal_kelahiran']);
+$tanggal_lahir_ibu_obj     = new DateTime($row_warga['tanggal_lahir_ibu']);
+$tanggal_lahir_ayah_obj    = new DateTime($row_warga['tanggal_lahir_ayah']);
+$tanggal_lahir_pelapor_obj = new DateTime($row_warga['tanggal_lahir_pelapor']);
+
+$interval_ibu     = $now->diff($tanggal_lahir_ibu_obj);
+$interval_ayah    = $now->diff($tanggal_lahir_ayah_obj);
+$interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +88,17 @@ if (mysqli_num_rows($query_warga) == 0) {
     <title>Print</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link href="https://www.dafontfree.net/embed/Ym9va21hbi1vbGQtc3R5bGUtcmVndWxhciZkYXRhLzQ2L2IvNTk0NjEvYm9va21hbiBvbGQgc3R5bGUudHRm" rel="stylesheet" type="text/css" />
+    <style>
+        @font-face {
+            font-family: bookman;
+            src: url(../BOOKOS.TTF)
+        }
+
+        * {
+            font-family: bookman, sans-serif;
+        }
+    </style>
 </head>
 
 <body onload="window.print();">
@@ -98,7 +118,10 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <th colspan="4" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
                         </tr>
                         <tr>
-                            <td colspan="4">
+                            <td colspan="4"><br /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="text-justify">
                                 Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> menerangkan bahwa :
                             </td>
                         </tr>
@@ -110,7 +133,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <tr>
                             <td colspan="2">Tempat, Tanggal Lahir</td>
                             <td>:</td>
-                            <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= $row_warga['tanggal_kelahiran']; ?></td>
+                            <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= $tanggal_lahir_anak_obj->format('d-m-Y'); ?></td>
                         </tr>
                         <tr>
                             <td colspan="2">Pukul</td>
@@ -170,13 +193,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Tempat, Tgl. Lahir / Umur</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['tempat_lahir_ibu']; ?>, <?= $row_warga['tanggal_lahir_ibu']; ?> /
-                                <?php
-                                $now = new DateTime();
-                                $tgl_obj = new DateTime($row_warga['tanggal_lahir_ibu']);
-                                $interval = $now->diff($tgl_obj);
-                                echo $interval->y;
-                                ?>
+                                <?= $row_warga['tempat_lahir_ibu']; ?>, <?= $tanggal_lahir_ibu_obj->format('d-m-Y'); ?> / <?= $interval_ibu->y; ?>
                             </td>
                         </tr>
                         <tr>
@@ -214,13 +231,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Tempat, Tgl. Lahir / Umur</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['tempat_lahir_ayah']; ?>, <?= $row_warga['tanggal_lahir_ayah']; ?> /
-                                <?php
-                                $now = new DateTime();
-                                $tgl_obj = new DateTime($row_warga['tanggal_lahir_ayah']);
-                                $interval = $now->diff($tgl_obj);
-                                echo $interval->y;
-                                ?>
+                                <?= $row_warga['tempat_lahir_ayah']; ?>, <?= $tanggal_lahir_ayah_obj->format('d-m-Y'); ?> / <?= $interval_ayah->y; ?>
                             </td>
                         </tr>
                         <tr>
@@ -264,13 +275,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Tempat, Tgl. Lahir / Umur</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['tempat_lahir_pelapor']; ?>, <?= $row_warga['tanggal_lahir_pelapor']; ?> /
-                                <?php
-                                $now = new DateTime();
-                                $tgl_obj = new DateTime($row_warga['tanggal_lahir_pelapor']);
-                                $interval = $now->diff($tgl_obj);
-                                echo $interval->y;
-                                ?>
+                                <?= $row_warga['tempat_lahir_pelapor']; ?>, <?= $tanggal_lahir_pelapor_obj->format('d-m-Y'); ?> / <?= $interval_pelapor->y; ?>
                             </td>
                         </tr>
                         <tr>
@@ -292,6 +297,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td><?= $row_warga['hubungan_pelapor']; ?></td>
                         </tr>
                         <tr>
+                            <td colspan="4"><br /></td>
+                        </tr>
+                        <tr>
                             <td colspan="4">
                                 Demikian keterangan ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.
                             </td>
@@ -300,7 +308,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td colspan="4">
                                 <div class="row">
                                     <div class="col-6 text-center"></div>
-                                    <div class="col-6 text-center font-weight-bold">
+                                    <div class="col-6 text-center">
                                         <?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?>
                                     </div>
                                     <div class="col-6">
@@ -309,8 +317,8 @@ if (mysqli_num_rows($query_warga) == 0) {
                                     <div class="col-6">
                                         <?= $row_warga['jabatan_ttd']; ?>
                                     </div>
-                                    <div class="col-6" style="height: 100px;"></div>
-                                    <div class="col-6" style="height: 100px;"></div>
+                                    <div class="col-6" style="height: 80px;"></div>
+                                    <div class="col-6" style="height: 80px;"></div>
                                     <div class="col-6 font-weight-bold">
                                         <?= $row_warga['nama_pelapor']; ?>
                                     </div>

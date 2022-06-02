@@ -64,9 +64,21 @@ if (mysqli_num_rows($query_warga) == 0) {
     <title>Print</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link href="https://www.dafontfree.net/embed/Ym9va21hbi1vbGQtc3R5bGUtcmVndWxhciZkYXRhLzQ2L2IvNTk0NjEvYm9va21hbiBvbGQgc3R5bGUudHRm" rel="stylesheet" type="text/css" />
+    <style>
+        @font-face {
+            font-family: bookman;
+            src: url(../BOOKOS.TTF)
+        }
+
+        * {
+            font-family: bookman, sans-serif;
+        }
+    </style>
 </head>
 
 <body onload="window.print();">
+
     <!-- <body> -->
     <div class="container">
         <div class="row">
@@ -80,6 +92,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br /></td>
                         </tr>
                         <tr>
                             <td colspan="3">
@@ -144,6 +159,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="3"><br /></td>
+                        </tr>
+                        <tr>
                             <td colspan="3">
                                 Adalah benar nama yang tercantum diatas sedang bekerja di :
                             </td>
@@ -181,6 +199,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Bidang / Jenis Pekerjaan</td>
                             <td>:</td>
                             <td><?= $row_warga['pekerjaan']; ?></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br /></td>
                         </tr>
                         <tr>
                             <td colspan="3">
@@ -236,15 +257,21 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td><?= ($row_warga['hubungan_pelapor'] != "") ? $row_warga['hubungan_pelapor'] : "Diri Sendiri"; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="3"><br /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-justify">
                                 Demikian keterangan ini dibuat dengan sebenarnya dan kepada yang berkepentingan untuk dipergunakan seperlunya.
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br /></td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="3">
                                 <div class="row">
                                     <div class="col-6 text-center"></div>
-                                    <div class="col-6 text-center font-weight-bold">
+                                    <div class="col-6 text-center">
                                         <?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?>
                                     </div>
                                     <div class="col-6">

@@ -43,6 +43,17 @@ if (mysqli_num_rows($query_warga) == 0) {
     <title>Print</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link href="https://www.dafontfree.net/embed/Ym9va21hbi1vbGQtc3R5bGUtcmVndWxhciZkYXRhLzQ2L2IvNTk0NjEvYm9va21hbiBvbGQgc3R5bGUudHRm" rel="stylesheet" type="text/css" />
+    <style>
+        @font-face {
+            font-family: bookman;
+            src: url(../BOOKOS.TTF)
+        }
+
+        * {
+            font-family: bookman, sans-serif;
+        }
+    </style>
 </head>
 
 <body onload="window.print();">
@@ -59,6 +70,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br /></td>
                         </tr>
                         <tr>
                             <td colspan="3">
@@ -113,20 +127,29 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="3"><br /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-justify">
                                 Nama tersebut yang tercantum diatas sepanjang sepengetahuan kami dan berdasarkan surat pengantar dari Ketua RT/RW serta pengakuan dari Pemohon, adalah benar pada saat surat ini diterbitkan nama tersebut/Pemohon belum mempunyai/memiliki hak atas kepemilikan rumah.
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="3"><br /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-justify">
                                 Demikian keterangan ini dibuat dan diberikan atas dasar yang sebenarnya agar dipergunakan seperlunya. Dan apabila terjadi permasalahan/keberatan/komplain dikemudian hari, Pemohon bersedia bertanggung jawab menanggung segala akibatnya sesuai peraturan-peraturan yang berlaku di Indonesia dengan tidak/tanpa melibatkan aparatur pemerintah yang menangani surat keterangan ini.
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br /></td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="3">
                                 <div class="row">
                                     <div class="col-6 text-center"></div>
-                                    <div class="col-6 text-center font-weight-bold">
+                                    <div class="col-6 text-center">
                                         <?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?>
                                     </div>
                                     <div class="col-6">
