@@ -5,6 +5,7 @@ require '../constant.php';
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
 $lama_domisili     = $_POST['lama_domisili'];
+$alamat_domisili   = trim($_POST['alamat_domisili']);
 $nama_ttd          = $_POST['nama_ttd'];
 $jabatan_ttd       = $_POST['jabatan_ttd'];
 $nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
@@ -34,9 +35,9 @@ $nomor_surat = '140/' . $no_urut . '- ' . KODE_DESA_SURAT . '/' . date('Y');
 
 $sql = "
 INSERT INTO `domisili` 
-(warga_id, tanggal_pembuatan, lama_domisili, sampai, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
+(warga_id, tanggal_pembuatan, lama_domisili, alamat_domisili, sampai, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
-($warga_id, '$tanggal_pembuatan', '$lama_domisili', '$sampai', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
+($warga_id, '$tanggal_pembuatan', '$lama_domisili', '$alamat_domisili', '$sampai', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
 $query = mysqli_query($db, $sql);
 

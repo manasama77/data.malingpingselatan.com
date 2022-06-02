@@ -6,6 +6,7 @@ $id_edit           = $_POST['id_edit'];
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
 $lama_domisili     = $_POST['lama_domisili'];
+$alamat_domisili   = trim($_POST['alamat_domisili']);
 $nama_ttd          = $_POST['nama_ttd'];
 $jabatan_ttd       = $_POST['jabatan_ttd'];
 $nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
@@ -21,6 +22,7 @@ UPDATE
         warga_id        = '$warga_id',
         nama_ttd        = '$nama_ttd',
         lama_domisili   = '$lama_domisili',
+        alamat_domisili = '$alamat_domisili',
         sampai          = '$sampai',
         jabatan_ttd     = '$jabatan_ttd',
         nomor_induk_ttd = '$nomor_induk_ttd'

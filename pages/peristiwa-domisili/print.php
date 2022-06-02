@@ -10,6 +10,7 @@ SELECT
 	domisili.nomor_surat,
 	domisili.tanggal_pembuatan,
 	domisili.lama_domisili,
+	domisili.alamat_domisili,
 	domisili.sampai,
 	warga.nama_warga,
 	warga.nik_warga,
@@ -144,7 +145,7 @@ $sampai = tanggal_indo_no_dash($row_warga['sampai']);
                             <td>Alamat Domisili</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['alamat_warga']; ?>
+                                <?= $row_warga['alamat_domisili']; ?>
                             </td>
                         </tr>
                         <tr>

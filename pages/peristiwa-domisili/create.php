@@ -37,6 +37,10 @@
                     <div class="input-group-addon">Tahun</div>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="alamat_domisili">Alamat Domisili <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="alamat_domisili" name="alamat_domisili" placeholder="Alamat Domisili" required />
+            </div>
             <hr />
             <h2 class="text-center">Tanda Tangan</h2>
             <div class="form-group">
