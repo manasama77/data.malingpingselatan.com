@@ -2,27 +2,26 @@
 include('../../config/koneksi.php');
 
 // ambil dari url
-$get_id_mutasi = $_GET['id_mutasi'];
+$id_mutasi_keluar = $_GET['id_mutasi_keluar'];
 
 // ambil dari database
-$query = "SELECT * FROM mutasi_keluar JOIN warga ON mutasi_keluar.id_warga = warga.id_warga WHERE id_mutasi = $get_id_mutasi";
+$sql     = "SELECT * FROM mutasi_keluar LEFT JOIN warga ON warga.id_warga = mutasi_keluar.id_warga WHERE id_mutasi_keluar = '" . $id_mutasi_keluar . "'";
+$query   = mysqli_query($db, $sql);
+$num_row = mysqli_num_rows($query);
+$row     = mysqli_fetch_assoc($query);
 
-
-$hasil = mysqli_query($db, $query);
-
-$data_mutasi = array();
-
-while ($row = mysqli_fetch_assoc($hasil)) {
- $data_mutasi[] = $row;
+if ($num_row == 0) {
+  echo json_encode([
+    'code'    => 404,
+    'message' => 'Data Not Found',
+    'data'    => []
+  ]);
+  exit();
 }
 
-//ambil dari warga
-$query_warga = "SELECT * FROM warga JOIN mutasi_keluar ON warga.id_warga = mutasi_keluar.id_warga WHERE mutasi_keluar.id_mutasi = $get_id_mutasi";
-
-$hasil_warga = mysqli_query($db, $query_warga);
-
-$data_warga = array();
-
-while ($row_warga = mysqli_fetch_assoc($hasil_warga)) {
-  $data_warga[] = $row_warga;
-}
+echo json_encode([
+  'code'    => 200,
+  'message' => 'Data Found',
+  'data'    => $row
+]);
+exit();

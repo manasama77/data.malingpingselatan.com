@@ -9,16 +9,19 @@ if (!isset($_SESSION['user'])) {
 include('../../config/koneksi.php');
 
 // ambil data dari form
-$id_mutasi = htmlspecialchars($_GET['id_mutasi']);
+$id_mutasi_keluar = htmlspecialchars($_GET['id_mutasi_keluar']);
 
 // delete database
-$query = "DELETE FROM mutasi_keluar WHERE id_mutasi = $id_mutasi";
-
-$hasil = mysqli_query($db, $query);
+$sql   = "DELETE FROM mutasi_keluar WHERE id_mutasi_keluar = $id_mutasi_keluar";
+$query = mysqli_query($db, $sql);
 
 // cek keberhasilan pendambahan data
-if ($hasil == true) {
-  echo "<script>window.location.href='../mutasi-keluar'</script>";
+if ($query == true) {
+  $_SESSION['success'] = "Delete Mutasi Keluar Warga Berhasil!";
+  header("Location: index.php");
+  exit();
 } else {
-  echo "<script>window.alert('Data mutasi gagal dihapus!'); window.location.href='../mutasi-keluar'</script>";
+  $_SESSION['warning'] = "Delete Mutasi Keluar Warga Gagal!";
+  header("Location: index.php");
+  exit();
 }

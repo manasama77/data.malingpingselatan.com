@@ -9,43 +9,52 @@ if (!isset($_SESSION['user'])) {
 include('../../config/koneksi.php');
 
 // ambil data dari form
-#$id_keluarga = htmlspecialchars($_POST['id_keluarga']);
-$id_warga = htmlspecialchars($_POST['id_warga']);
-
-$alamat_mutasi = htmlspecialchars($_POST['alamat_mutasi']);
+$id_warga              = htmlspecialchars($_POST['id_warga']);
+$tanggal_pindah        = htmlspecialchars($_POST['tanggal_pindah']);
+$alasan_pindah         = htmlspecialchars($_POST['alasan_pindah']);
+$alamat_mutasi         = htmlspecialchars($_POST['alamat_mutasi']);
+$rt_mutasi             = htmlspecialchars($_POST['rt_mutasi']);
+$rw_mutasi             = htmlspecialchars($_POST['rw_mutasi']);
 $desa_kelurahan_mutasi = htmlspecialchars($_POST['desa_kelurahan_mutasi']);
-$kecamatan_mutasi = htmlspecialchars($_POST['kecamatan_mutasi']);
+$kecamatan_mutasi      = htmlspecialchars($_POST['kecamatan_mutasi']);
 $kabupaten_kota_mutasi = htmlspecialchars($_POST['kabupaten_kota_mutasi']);
-$provinsi_mutasi = htmlspecialchars($_POST['provinsi_mutasi']);
-$negara_mutasi = htmlspecialchars($_POST['negara_mutasi']);
-$dusun_mutasi = htmlspecialchars($_POST['dusun_mutasi']);
-$rt_mutasi = htmlspecialchars($_POST['rt_mutasi']);
-$rw_mutasi = htmlspecialchars($_POST['rw_mutasi']);
-$kode_pos_mutasi = htmlspecialchars($_POST['kode_pos_mutasi']);
+$provinsi_mutasi       = htmlspecialchars($_POST['provinsi_mutasi']);
+$negara_mutasi         = htmlspecialchars($_POST['negara_mutasi']);
+$id_user               = $_SESSION['user']['id_user'];
 
-$tanggal_pindah = htmlspecialchars($_POST['tanggal_pindah']);
-$alasan_pindah = htmlspecialchars($_POST['alasan_pindah']);
-$jenis_pindah = htmlspecialchars($_POST['jenis_pindah']);
+$sql_has_kk     = "SELECT * FROM warga_has_kartu_keluarga WHERE id_warga = '" . $id_warga . "' LIMIT 1";
+$query_has_kk   = mysqli_query($db, $sql_has_kk);
+$num_row_has_kk = mysqli_num_rows($query_has_kk);
+if ($num_row_has_kk > 0) {
+  $sql_has_kk   = "DELETE FROM warga_has_kartu_keluarga WHERE id_warga = '" . $id_warga . "'";
+  $query_has_kk = mysqli_query($db, $sql_has_kk);
+}
 
-$id_user = $_SESSION['user']['id_user'];
+$sql_kk     = "SELECT * FROM kartu_keluarga WHERE id_kepala_keluarga = '" . $id_warga . "'";
+$query_kk   = mysqli_query($db, $sql_kk);
+$num_row_kk = mysqli_num_rows($query_kk);
+
+if ($num_row_kk > 0) {
+  $sql_kk   = "DELETE FROM kartu_keluarga WHERE id_kepala_keluarga = '" . $id_warga . "'";
+  $query_kk = mysqli_query($db, $sql_kk);
+}
 
 // masukkan ke database
+$query = "INSERT INTO mutasi_keluar (id_warga, tanggal_pindah, alasan_pindah, alamat_tujuan, rt_tujuan, rw_tujuan, desa_kelurahan_tujuan, kecamatan_tujuan, kabupaten_kota_tujuan, provinsi_tujuan, negara_tujuan, created_at, updated_at) VALUES ('$id_warga', '$tanggal_pindah', '$alasan_pindah', '$alamat_mutasi', '$rt_mutasi', '$rw_mutasi', '$desa_kelurahan_mutasi', '$kecamatan_mutasi', '$kabupaten_kota_mutasi', '$provinsi_mutasi', '$negara_mutasi', CURRENT_TIMESTAMP, null);";
 
-$query = "INSERT INTO mutasi_keluar (id_mutasi, id_warga, alamat_mutasi, desa_kelurahan_mutasi, kecamatan_mutasi, kabupaten_kota_mutasi, provinsi_mutasi, negara_mutasi, dusun_mutasi, rt_mutasi, rw_mutasi, kode_pos_mutasi, tanggal_pindah, alasan_pindah, jenis_pindah, created_at, updated_at) VALUES (NULL,'$id_warga','$alamat_mutasi','$desa_kelurahan_mutasi', '$kecamatan_mutasi', '$kabupaten_kota_mutasi', '$provinsi_mutasi', '$negara_mutasi','$dusun_mutasi', '$rt_mutasi', '$rw_mutasi', '$kode_pos_mutasi','$tanggal_pindah','$alasan_pindah','$jenis_pindah',CURRENT_TIMESTAMP, '0000-00-00 00:00:00.000000');";
+$query_update = "UPDATE warga SET status_warga ='Pindah keluar' where id_warga = $id_warga";
 
-	$query_update = "UPDATE warga SET status_warga ='Pindah keluar' where id_warga= $id_warga";
-  
 
-  $hasil = mysqli_query($db, $query);
-	$hasil_update =mysqli_query($db, $query_update);
+$hasil = mysqli_query($db, $query);
+$hasil_update = mysqli_query($db, $query_update);
 
 // cek keberhasilan pendambahan data
 if ($hasil_update == true) {
-  # echo "sukses";
-   echo "<script>window.alert('Mutasi warga berhasil'); window.location.href='../mutasi-keluar/'</script>";
+  $_SESSION['success'] = "Tambah Mutasi Keluar Warga Berhasil!";
+  header("Location: index.php");
+  exit();
 } else {
-   echo "<script>window.alert('Mutasi warga gagal!'); window.location.href='../mutasi-keluar/pindah_keluar.php?id_warga=".$id_warga."'</script>";
-  # echo "Gagal";
-  echo mysqli_error($db);
-
+  $_SESSION['warning'] = "Tambah Mutasi Keluar Warga Gagal!";
+  header("Location: index.php");
+  exit();
 }

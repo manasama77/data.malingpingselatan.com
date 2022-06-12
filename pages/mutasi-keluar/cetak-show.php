@@ -1,195 +1,122 @@
 <?php
-require_once("../../assets/lib/fpdf/fpdf.php");
+define('FPDF_FONTPATH', '../../assets/lib/fpdf1.84/font/');
+require_once("../../assets/lib/fpdf1.84/fpdf.php");
+require '../helper_tanggal_indo.php';
 require_once("../../config/koneksi.php");
 
 class PDF extends FPDF
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     // Page header
     function Header()
     {
-      // Logo
-      $this->Image('../../assets/img/kng.jpg',20,10);
+        // Logo
+        $this->Image('../../assets/img/kng.jpg', 20, 10);
 
-        // Arial bold 15
-        $this->SetFont('Times','B',15);
-        // Move to the right
-        // $this->Cell(60);
-        // Title
-        $this->Cell(200,8,'PEMERINTAH KABUPATEN KUNINGAN',0,1,'C');
-        $this->Cell(200,8,'KECAMATAN CIAWIGEBANG',0,1,'C');
-        $this->Cell(200,8,'DESA DUKUHDALEM',0,1,'C');
-        $this->SetFont('Times','',13);
-        $this->Cell(200,8,'Jl.Desa Dukuh Dalem No.1 Ciawigebang kuningan',0,1,'C');
-        // Line break
+        $this->AddFont('BOOKOS', '', 'BOOKOS.php');
+        $this->AddFont('BOOKOS', 'B', 'BOOKOSB.php');
+        $this->AddFont('BOOKOS', 'I', 'BOOKOSI.php');
 
-        $this->SetFont('Times','BU',12);
-        for ($i=0; $i < 10; $i++) {
-            $this->Cell(190,0,'',1,1,'C');
-        }
+        $this->SetFont('BOOKOS', 'B', 16);
+        $this->Cell(200, 8, 'PEMERINTAH KOTA TANGERANG', 0, 1, 'C');
+        $this->Cell(200, 10, 'KECAMATAN GEBANG RAYA', 0, 1, 'C');
+        $this->Cell(200, 10, 'KELURAHAN PERIUK', 0, 1, 'C');
 
-        $this->Ln(10);
+        $this->SetLineWidth(0.5);
+        $this->Line(12, 40, 210 - 12, 40);
+        $this->SetFont('BOOKOS', 'BU', 12);
+        $this->Ln(3);
+        $this->Cell(200, 8, 'DATA MUTASI KELUAR', 0, 1, 'C');
+        $this->Ln(3);
     }
 
-    //Page footer
+    // Page footer
     function Footer()
     {
-        //atur posisi 1.5 cm dari bawah
+        // Position at 1.5 cm from bottom
         $this->SetY(-15);
-        //Arial italic 9
-        $this->SetFont('Arial','I',9);
-        //nomor halaman
-    
+        // Arial italic 8
+        $this->SetFont('BOOKOS', 'I', 8);
+        // Page number
+        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
 
 // ambil dari url
-$get_id_mutasi = $_GET['id_mutasi'];
+$id_mutasi_keluar = $_GET['id_mutasi_keluar'];
 // ambil dari database
-include "data-show.php";
-            
-
-            $nomor_surat ="01/SKet/I/2018";
-            $NIP = "0000000";
-            $provinsi = "Jawa Barat";
-            $kabupaten = "Kunigan";
-            $kecamatan = "Ciawigebang";
-            $desa = "Dukuhdalem";
-            
-            $jabatan="Kepala Desa";
-            $nama_pamong="nama pamong";
-
-        function TanggalIndo($date){
-        $BulanIndo = array("Januari","","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","Nopember","Desember");
-
-        $tahun = substr($date,0,4);
-        $bulan = substr($date,5,2);
-        $tgl = substr($date, 8,2);
-
-        $result = $tgl." ". $BulanIndo[(int)$bulan-1]." ".$tahun;
-        return($result);
-    }
-
+$sql   = "SELECT * FROM mutasi_keluar LEFT JOIN warga ON warga.id_warga = mutasi_keluar.id_warga WHERE id_mutasi_keluar = '" . $id_mutasi_keluar . "'";
+$query = mysqli_query($db, $sql);
 
 $pdf = new PDF('P', 'mm', [210, 330]);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-// set font
-$pdf->SetFont('Times','',12);
+$pdf->SetFont('BOOKOS', '', 10);
 
+while ($row = mysqli_fetch_assoc($query)) {
 
-            //Jenis Surat
-        $pdf->SetFont('Times','U',15);
-        $pdf->Cell(0,0,'SURAT PENGANTAR MUTASI ',0,1,'C');
-            
-            //Nomor Surat
-            $pdf->SetFont('Times','',13);
-            $pdf->Cell(0,10,'Nomor: '.$nomor_surat,0,1,'C');
-            
-            //Isi Surat
-            $jenis = '         Yang bertanda tangan dibawah ini Kepala Desa '.$desa.', Kecamatan '.$kecamatan.', Kabupaten '.$kabupaten.', Provinsi '.$provinsi.' menerangkan permohonan pindah penduduk WNI dengan data sebagai berikut:';
-            $pdf->SetFont('Times','',11);
-            $pdf->Ln(3);
-            $pdf->MultiCell(0,5,$jenis,'',"L");
-            
-            //Pindah Baris Isi Surat
-            $pdf->Ln(6);
-            $pdf->Cell(0,5,'Nama',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['nama_warga']),0,1,'L');
-            
-            $pdf->Cell(0,5,'NIK',0,0,'L');     
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['nik_warga']),0,1,'L');
-            
-            $pdf->Cell(0,5,'Tempat Lahir',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['tempat_lahir_warga']),0,1,'L');
-            
-            $pdf->Cell(0,5,'Tanggal Lahir',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['tanggal_lahir_warga']),0,1,'L');
-            
-            $pdf->Cell(0,5,'Jenis Kelamin',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['jenis_kelamin_warga']),0,1,'L');
-            
-            $pdf->Cell(0,5,'Pekerjaan ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,':  '.strtoupper($data_warga[0]['pekerjaan_warga']),0,1,'L');
+    $pdf->Ln(4);
+    $pdf->SetFont('BOOKOS', 'B', 12);
+    $pdf->cell(45, 7, strtoupper('Data Kepindahan'), 0, 0, 'L');
+    $pdf->Ln(8);
+    $pdf->SetFont('BOOKOS', '', 10);
 
-            $pdf->Ln(5);
+    $pdf->cell(45, 7, 'NIK / Nama Pemohon', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['nik_warga'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'Alamat Sekarang ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,'',0,1,'L');
-            $pdf->Ln(2);
+    $pdf->cell(45, 7, 'Tanggal Pindah', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, tanggal_indo_no_dash($row['tanggal_pindah']), 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       Desa ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['desa_kelurahan_warga']),0,1,'L');
+    $pdf->cell(45, 7, 'alasan_pindah', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(20, 7, $row['alasan_pindah'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       Dusun ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['dusun_warga']),0,1,'L');
+    $pdf->Ln(4);
+    $pdf->SetFont('BOOKOS', 'B', 12);
+    $pdf->cell(45, 7, strtoupper('Data Daerah Tujuan'), 0, 0, 'L');
+    $pdf->Ln(8);
+    $pdf->SetFont('BOOKOS', '', 10);
 
-            $pdf->Cell(0,5,'       RT ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['rt_warga']),0,1,'L');
+    $pdf->cell(45, 7, 'Alamat Tujuan', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['alamat_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       RW ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['rw_warga']),0,1,'L');
-            $pdf->Ln(5);
+    $pdf->cell(45, 7, 'RT', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(7, 7, $row['rt_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'Alamat Tujuan ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,'',0,1,'L');
-            $pdf->Ln(2);
+    $pdf->cell(45, 7, 'RW', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(7, 7, $row['rw_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       Desa ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_mutasi[0]['desa_kelurahan_mutasi']),0,1,'L');
+    $pdf->cell(45, 7, 'Desa/Kelurahan', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['desa_kelurahan_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       Dusun ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['dusun_mutasi']),0,1,'L');
+    $pdf->cell(45, 7, 'Kecamatan', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['kecamatan_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       RT ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['rt_mutasi']),0,1,'L');
+    $pdf->cell(45, 7, 'Kabupaten/Kota', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['kabupaten_kota_tujuan'], 0, 1, 'L');
 
-            $pdf->Cell(0,5,'       RW ',0,0,'L');
-            $pdf->Cell(-155);
-            $pdf->Cell(0,5,': '.strtoupper($data_warga[0]['rw_mutasi']),0,1,'L');
-            //Akhir Surat
-            $jenis = '         Demikian surat ini dibuat agar dapat digunakan sebagaimana mestinya. Atas perhatiannya kami ucapkan terima kasih.';
-            $pdf->SetFont('Times','',11);
-            $pdf->Ln(3);
-            $pdf->MultiCell(0,5,$jenis,'',"L");
-            
-            $pdf->Ln(30);
-            $pdf->Cell(134);
-            $pdf->Cell(0,5,$kabupaten.', '.TanggalIndo($data_mutasi[0]['tanggal_pindah']),0,0,'C');
-            
-            $pdf->Ln(8);
-            $pdf->Cell(134);
-            $pdf->Cell(0,5,$jabatan.' '.$desa,0,0,'C');
-            
-            $pdf->Ln(5);
-            
-            $pdf->SetFont('Times','BU',11);
-            $pdf->Ln(30);
-            $pdf->Cell(134);
-            $pdf->Cell(0,5,$nama_pamong,0,0,'C');
-            
-            $pdf->SetFont('Times','',11);
-            $pdf->Ln(5);
-            $pdf->Cell(134);
-            $pdf->Cell(0,5,'NIP. '.$NIP,0,0,'C');
+    $pdf->cell(45, 7, 'Provinsi', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['provinsi_tujuan'], 0, 1, 'L');
 
+    $pdf->cell(45, 7, 'Negara', 0, 0, 'L');
+    $pdf->cell(2, 7, ':', 0, 0, 'L');
+    $pdf->cell(80, 7, $row['negara_tujuan'], 0, 1, 'L');
+}
 
-    $pdf->Ln(10);
+$pdf->Ln(10);
 
 $pdf->Output();
-?>

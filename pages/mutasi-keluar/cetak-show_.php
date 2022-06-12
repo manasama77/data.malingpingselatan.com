@@ -1,148 +1,69 @@
 <?php
-require_once("../../assets/lib/fpdf/fpdf.php");
+define('FPDF_FONTPATH', '../../assets/lib/fpdf1.84/font/');
+require_once("../../assets/lib/fpdf1.84/fpdf.php");
+require '../helper_tanggal_indo.php';
 require_once("../../config/koneksi.php");
+echo "a";
+exit;
 
 class PDF extends FPDF
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     // Page header
     function Header()
     {
-      // Logo
-      $this->Image('../../assets/img/logo-jakbar.jpg',20,10);
+        // Logo
+        $this->Image('../../assets/img/kng.jpg', 20, 10);
 
-    	// Arial bold 15
-    	$this->SetFont('Times','B',15);
-    	// Move to the right
-    	// $this->Cell(60);
-    	// Title
-        $this->Cell(200,8,'PENGURUS RT. 003 RW 016',0,1,'C');
-        $this->Cell(200,8,'KEL. TOMANG, KEC. GROGOL PETAMBURAN',0,1,'C');
-    	$this->Cell(200,8,'JAKARTA BARAT',0,1,'C');
-    	// Line break
-    	$this->Ln(5);
+        $this->AddFont('BOOKOS', '', 'BOOKOS.php');
+        $this->AddFont('BOOKOS', 'B', 'BOOKOSB.php');
+        $this->AddFont('BOOKOS', 'I', 'BOOKOSI.php');
 
-        $this->SetFont('Times','BU',12);
-        for ($i=0; $i < 10; $i++) {
-            $this->Cell(308,0,'',1,1,'C');
-        }
+        $this->SetFont('BOOKOS', 'B', 16);
+        $this->Cell(200, 8, 'PEMERINTAH KOTA TANGERANG', 0, 1, 'C');
+        $this->Cell(200, 10, 'KECAMATAN GEBANG RAYA', 0, 1, 'C');
+        $this->Cell(200, 10, 'KELURAHAN PERIUK', 0, 1, 'C');
 
-        $this->Ln(1);
-
-        $this->Cell(200,8,'DATA WARGA MUTASI',0,1,'C');
-        $this->Ln(2);
-
-        $this->SetFont('Times','B',9.5);
+        $this->SetLineWidth(0.5);
+        $this->Line(12, 40, 210 - 12, 40);
+        $this->SetFont('BOOKOS', 'BU', 12);
+        $this->Ln(3);
+        $this->Cell(200, 8, 'DATA MUTASI KELUAR', 0, 1, 'C');
+        $this->Ln(3);
     }
 
     // Page footer
     function Footer()
     {
-    	// Position at 1.5 cm from bottom
-    	$this->SetY(-15);
-    	// Arial italic 8
-    	$this->SetFont('Arial','I',8);
-    	// Page number
-    	$this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+        // Position at 1.5 cm from bottom
+        $this->SetY(-15);
+        // Arial italic 8
+        $this->SetFont('BOOKOS', 'I', 8);
+        // Page number
+        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
 
 // ambil dari url
-$get_id_mutasi = $_GET['id_mutasi'];
+$id_mutasi_keluar = $_GET['id_mutasi_keluar'];
 // ambil dari database
-$query = "SELECT * FROM mutasi WHERE id_mutasi = $get_id_mutasi";
-$hasil = mysqli_query($db, $query);
-$data_mutasi = array();
-while ($row = mysqli_fetch_assoc($hasil)) {
-  $data_mutasi[] = $row;
-}
-
+$sql   = "SELECT * FROM mutasi_keluar LEFT JOIN warga ON warga.id_warga = mutasi_keluar.id_warga WHERE id_mutasi_keluar = '" . $id_mutasi_keluar . "'";
+echo $sql;
+exit;
+$query = mysqli_query($db, $sql);
 
 $pdf = new PDF('P', 'mm', [210, 330]);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-// set font
-$pdf->SetFont('Times','',12);
+$pdf->SetFont('BOOKOS', '', 10);
 
-// set penomoran
-$nomor = 1;
-    $pdf->cell(45,7,'NIK',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, strtoupper($data_mutasi[0]['nik_mutasi']), 0, 1, 'L');
 
-    $pdf->cell(45,7,'Nama',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['nama_mutasi']),0 , 17), 0, 1, 'L');
 
-    $pdf->cell(45,7,'Tempat Lahir',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, strtoupper($data_mutasi[0]['tempat_lahir_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Tanggal Lahir',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, ($data_mutasi[0]['tanggal_lahir_mutasi'] != '0000-00-00') ? date('d-m-Y', strtotime($data_mutasi[0]['tanggal_lahir_mutasi'])) : '', 0, 1, 'L');
-
-    $pdf->cell(45,7,'Jenis Kelamin',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['jenis_kelamin_mutasi']), 0, 1), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Alamat KTP',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['alamat_ktp_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Alamat',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['alamat_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Desa/Kelurahan',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['desa_kelurahan_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Kecamatan',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['kecamatan_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Kabupaten/Kota',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['kabupaten_kota_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Provinsi',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['provinsi_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Negara',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(80, 7, substr(strtoupper($data_mutasi[0]['negara_mutasi']), 0, 20), 0, 1, 'L');
-
-    $pdf->cell(45,7,'RT',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(7, 7, strtoupper($data_mutasi[0]['rt_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'RW',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(7, 7, strtoupper($data_mutasi[0]['rw_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Agama',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(20, 7, strtoupper($data_mutasi[0]['agama_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Pendidikan',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(16, 7, strtoupper($data_mutasi[0]['pendidikan_terakhir_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Pekerjaan',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(20, 7, strtoupper($data_mutasi[0]['pekerjaan_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Kawin/Tidak Kawin',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(26, 7, strtoupper($data_mutasi[0]['status_perkawinan_mutasi']), 0, 1, 'L');
-
-    $pdf->cell(45,7,'Status Kependudukan',0,0,'L');
-    $pdf->cell(2,7,':',0,0,'L');
-    $pdf->cell(24, 7, strtoupper($data_mutasi[0]['status_mutasi']), 0, 1, 'L');
-
-	$pdf->Ln(10);
+$pdf->Ln(10);
 
 $pdf->Output();
-?>

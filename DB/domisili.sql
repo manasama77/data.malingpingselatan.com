@@ -11,7 +11,7 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 08/04/2022 23:48:09
+ Date: 02/06/2022 23:17:38
 */
 
 SET NAMES utf8mb4;
@@ -26,6 +26,7 @@ CREATE TABLE `domisili`  (
   `warga_id` int NULL DEFAULT NULL,
   `tanggal_pembuatan` date NULL DEFAULT NULL,
   `lama_domisili` int UNSIGNED NULL DEFAULT NULL,
+  `alamat_domisili` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `sampai` date NULL DEFAULT NULL,
   `nomor_surat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `sequence` int UNSIGNED NULL DEFAULT NULL,
