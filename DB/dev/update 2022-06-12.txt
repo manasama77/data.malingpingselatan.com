@@ -1,0 +1,16 @@
+🌐 https://data.malingpingselatan.com/
+Update 2022-06-12
+🎯 Perubahan Module Data Mutasi -> Pindah Datang
+    ✔ Module Create & Edit
+    ✔ Jenis Kepindahan Ada 3
+        ⭕ Perorangan (berlaku seperti menambah warga baru)
+        ⭕ Kepala Keluarga (berlaku seperti menambah warga baru + menjadikannya kepala keluarga seperti dimodul Data Kartu Keluarga)
+        ⭕ Anggota Keluarga (berlaku seperti menambah warga baru + menjadikannya anggota dari kartu keluarga seperti dimodul Data Kartu Keluarga)
+    ✔ Module Show Detail Pop UP
+    ✔ Module Hapus data sesuai dengan jenis kepindahannya
+    ✔ Modul Print
+🎯 Perubahan Module Data Mutasi -> Pindah Keluar
+    ✔ Module Create & Edit
+    ✔ Module Show Detail Pop UP
+    ✔ Module Hapus 
+    ✔ Modul Print

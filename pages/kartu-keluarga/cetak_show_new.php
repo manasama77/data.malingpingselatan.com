@@ -26,13 +26,13 @@ $header = '
 <table width="100%" style="border-bottom: 1px solid #000000; vertical-align: top; font-family: Helvetica; font-size: 18pt;">
     <tr>
         <td width="33%">
-            <img src="../../assets/img/logo.png" style="position: fixed; left: 10;" />
+            <img src="../../assets/img/kng.jpg" style="position: fixed; left: 10;" />
         </td>
         <td width="33%" align="center">
         <p style="line-height: 28pt;">
-            Pemerintah Kabupaten Lebak<br />
-            Kecamatan Malingping<br />
-            Desa Malingping Selatan
+            PEMERINTAH KOTA TANGERANG<br />
+            KECAMATAN PERIUK<br />
+            KELURAHAN GEBANG RAYA
         </p>
         </td>
         <td width="33%" style="text-align: right;"></td>

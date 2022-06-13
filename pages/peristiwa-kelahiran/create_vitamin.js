@@ -40,6 +40,10 @@ function vListAyahDefault() {
     $('#v_list_ayah').html(defaultListWarga)
 }
 
+function vListIbuDefault() {
+    $('#v_list_ibu').html(defaultListWarga)
+}
+
 // AYAH START
 $('#btn_modal_ayah').on('click', e => {
     e.preventDefault()
@@ -127,7 +131,7 @@ $('#form_ibu').on('submit', e => {
 
 function findIbu(ibuKeyword) {
     $.ajax({
-        url: `ajax_list_warga.php`,
+        url: `ajax_list_ibu.php`,
         type: 'get',
         dataType: 'json',
         data: {

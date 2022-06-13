@@ -1,5 +1,5 @@
 <?php
-require_once("../../assets/lib/fpdf184/fpdf.php");
+require_once("../../assets/lib/fpdf/fpdf.php");
 require_once("../../config/koneksi.php");
 
 class PDF extends FPDF
@@ -8,16 +8,16 @@ class PDF extends FPDF
   function Header()
   {
     // Logo
-    $this->Image('../../assets/img/logo.png', 20, 10);
+    $this->Image('../../assets/img/kng.jpg', 20, 10);
 
     // Arial bold 15
     $this->SetFont('Times', 'B', 15);
     // Move to the right
     // $this->Cell(60);
     // Title
-    $this->Cell(308, 8, 'Pemerintah Kabupaten Lebak', 0, 1, 'C');
-    $this->Cell(308, 8, 'Kecamatan Malingping', 0, 1, 'C');
-    $this->Cell(308, 8, 'Kelurahan Malingping Selatan', 0, 1, 'C');
+    $this->Cell(308, 8, 'PEMERINTAH KOTA TANGERANG', 0, 1, 'C');
+    $this->Cell(308, 8, 'KECAMATAN PERIUK', 0, 1, 'C');
+    $this->Cell(308, 8, 'KELURAHAN GEBANG RAYA', 0, 1, 'C');
     // Line break
     $this->Ln(5);
 
@@ -43,52 +43,6 @@ class PDF extends FPDF
     $this->SetFont('Arial', 'I', 8);
     // Page number
     $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
-  }
-
-  //wordwrap
-  function WordWrap(&$text, $maxwidth)
-  {
-    $text = trim($text);
-    if ($text === '')
-      return 0;
-    $space = $this->GetStringWidth(' ');
-    $lines = explode("\n", $text);
-    $text = '';
-    $count = 0;
-
-    foreach ($lines as $line) {
-      $words = preg_split('/ +/', $line);
-      $width = 0;
-
-      foreach ($words as $word) {
-        $wordwidth = $this->GetStringWidth($word);
-        if ($wordwidth > $maxwidth) {
-          // Word is too long, we cut it
-          for ($i = 0; $i < strlen($word); $i++) {
-            $wordwidth = $this->GetStringWidth(substr($word, $i, 1));
-            if ($width + $wordwidth <= $maxwidth) {
-              $width += $wordwidth;
-              $text .= substr($word, $i, 1);
-            } else {
-              $width = $wordwidth;
-              $text = rtrim($text) . "\n" . substr($word, $i, 1);
-              $count++;
-            }
-          }
-        } elseif ($width + $wordwidth <= $maxwidth) {
-          $width += $wordwidth + $space;
-          $text .= $word . ' ';
-        } else {
-          $width = $wordwidth + $space;
-          $text = rtrim($text) . "\n" . $word . ' ';
-          $count++;
-        }
-      }
-      $text = rtrim($text) . "\n";
-      $count++;
-    }
-    $text = rtrim($text);
-    return $count;
   }
 }
 
@@ -137,7 +91,6 @@ $pdf->AddPage();
 
 // set font
 $pdf->SetFont('Times', '', 12);
-
 
 // set penomoran
 $nomor = 1;
@@ -194,18 +147,18 @@ $pdf->SetFont('Times', 'B', 9.5);
 
 // header tabel
 $pdf->cell(8, 7, 'NO.', 1, 0, 'C');
-$pdf->cell(27, 7, 'NIK', 1, 0, 'C');
-$pdf->cell(44, 7, 'NAMA', 1, 0, 'C');
-$pdf->cell(30, 7, 'TEMPAT LHR', 1, 0, 'C');
+$pdf->cell(23, 7, 'NIK', 1, 0, 'C');
+$pdf->cell(40, 7, 'NAMA', 1, 0, 'C');
+$pdf->cell(35, 7, 'TEMPAT LHR', 1, 0, 'C');
 $pdf->cell(20, 7, 'TGL. LHR', 1, 0, 'C');
 $pdf->cell(8, 7, 'JK', 1, 0, 'C');
 $pdf->cell(50, 7, 'ALAMAT', 1, 0, 'C');
 $pdf->cell(7, 7, 'RT', 1, 0, 'C');
 $pdf->cell(7, 7, 'RW', 1, 0, 'C');
 $pdf->cell(20, 7, 'AGAMA', 1, 0, 'C');
-// $pdf->cell(26, 7, 'PERNIKAHAN', 1, 0, 'C');
-$pdf->cell(28, 7, 'PDDKN', 1, 0, 'C');
-$pdf->cell(28, 7, 'KERJA', 1, 0, 'C');
+$pdf->cell(26, 7, 'PERNIKAHAN', 1, 0, 'C');
+$pdf->cell(16, 7, 'PDDKN', 1, 0, 'C');
+$pdf->cell(20, 7, 'KERJA', 1, 0, 'C');
 $pdf->cell(24, 7, 'STATUS', 1, 1, 'C');
 
 // set font
@@ -215,22 +168,20 @@ $pdf->SetFont('Times', '', 9);
 $nomor = 1;
 
 foreach ($data_anggota_keluarga as $anggota_keluarga) {
-  $pdf->cell(8, 14, $nomor++ . '.', 1, 0, 'C');
-  $pdf->cell(27, 14, strtoupper($anggota_keluarga['nik_warga']), 1, 0, 'C');
-  $pdf->cell(44, 14, substr(strtoupper($anggota_keluarga['nama_warga']), 0, 17), 1, 0, 'L');
-  $pdf->cell(30, 14, strtoupper($anggota_keluarga['tempat_lahir_warga']), 1, 0, 'L');
-  $pdf->cell(20, 14, ($anggota_keluarga['tanggal_lahir_warga'] != '0000-00-00') ? date('d-m-Y', strtotime($anggota_keluarga['tanggal_lahir_warga'])) : '', 1, 0, 'C');
-  $pdf->cell(8, 14, substr(strtoupper($anggota_keluarga['jenis_kelamin_warga']), 0, 1), 1, 0, 'C');
-  $pdf->cell(50, 14, substr(strtoupper($anggota_keluarga['alamat_warga']), 0, 20), 1, 0, 'L');
-  $pdf->cell(7, 14, strtoupper($anggota_keluarga['rt_warga']), 1, 0, 'C');
-  $pdf->cell(7, 14, strtoupper($anggota_keluarga['rw_warga']), 1, 0, 'C');
-  $pdf->cell(20, 14, strtoupper($anggota_keluarga['agama_warga']), 1, 0, 'C');
-  // $pdf->cell(26, 7, strtoupper($anggota_keluarga['status_perkawinan_warga']), 1, 0, 'C');
-  $pdf->cell(28, 14, strtoupper($anggota_keluarga['pendidikan_terakhir_warga']), 1, 0, 'C');
-  $pdf->MultiCell(28, 7, strtoupper($anggota_keluarga['pekerjaan_warga']), 1, 'J', false);
-  // $pdf->cell(24, 7, strtoupper($anggota_keluarga['status_warga']), 1, 1, 'C');
-  // $pdf->cell(24, 7, strtoupper($anggota_keluarga['status_warga']), 1, 1, 'C');
-  $pdf->MultiCell(15, 7, strtoupper($anggota_keluarga['status_warga']), 1, 'J', false);
+  $pdf->cell(8, 7, $nomor++ . '.', 1, 0, 'C');
+  $pdf->cell(23, 7, strtoupper($anggota_keluarga['nik_warga']), 1, 0, 'C');
+  $pdf->cell(40, 7, substr(strtoupper($anggota_keluarga['nama_warga']), 0, 17), 1, 0, 'L');
+  $pdf->cell(35, 7, strtoupper($anggota_keluarga['tempat_lahir_warga']), 1, 0, 'L');
+  $pdf->cell(20, 7, ($anggota_keluarga['tanggal_lahir_warga'] != '0000-00-00') ? date('d-m-Y', strtotime($anggota_keluarga['tanggal_lahir_warga'])) : '', 1, 0, 'C');
+  $pdf->cell(8, 7, substr(strtoupper($anggota_keluarga['jenis_kelamin_warga']), 0, 1), 1, 0, 'C');
+  $pdf->cell(50, 7, substr(strtoupper($anggota_keluarga['alamat_warga']), 0, 20), 1, 0, 'L');
+  $pdf->cell(7, 7, strtoupper($anggota_keluarga['rt_warga']), 1, 0, 'C');
+  $pdf->cell(7, 7, strtoupper($anggota_keluarga['rw_warga']), 1, 0, 'C');
+  $pdf->cell(20, 7, strtoupper($anggota_keluarga['agama_warga']), 1, 0, 'C');
+  $pdf->cell(26, 7, strtoupper($anggota_keluarga['status_perkawinan_warga']), 1, 0, 'C');
+  $pdf->cell(16, 7, strtoupper($anggota_keluarga['pendidikan_terakhir_warga']), 1, 0, 'C');
+  $pdf->cell(20, 7, strtoupper($anggota_keluarga['pekerjaan_warga']), 1, 0, 'C');
+  $pdf->cell(24, 7, strtoupper($anggota_keluarga['status_warga']), 1, 1, 'C');
 }
 
 $pdf->Output();
