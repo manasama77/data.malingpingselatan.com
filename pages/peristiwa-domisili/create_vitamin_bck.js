@@ -2,7 +2,18 @@ let id_print = null;
 $(document).ready(() => {
     $('#form').on('submit', function (e) {
         e.preventDefault()
-        simpanData()
+        if ($('#warga_id').val().length == 0) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Pilih Warga yang Bekerja',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true
+            }).then(() => $('#btn_modal_warga').trigger('click'))
+        } else {
+            simpanData()
+        }
     })
 
     $('#btn_print').on('click', e => {
@@ -92,7 +103,6 @@ function simpanData() {
         }
     }).done(e => {
         id_print = e.id
-        console.log(e)
         if (e.code == 200) {
             $('#btn_print').attr('disabled', false)
             Swal.fire({

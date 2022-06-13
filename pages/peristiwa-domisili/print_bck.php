@@ -7,9 +7,34 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-	*
+	domisili.nomor_surat,
+	domisili.tanggal_pembuatan,
+	domisili.lama_domisili,
+	domisili.alamat_domisili,
+	domisili.sampai,
+	warga.nama_warga,
+	warga.nik_warga,
+	(
+	IF
+		(
+			( SELECT count( * ) FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = domisili.warga_id ) = 1,
+			( SELECT nomor_keluarga FROM kartu_keluarga WHERE kartu_keluarga.id_kepala_keluarga = domisili.warga_id ),
+			( SELECT kartu_keluarga.nomor_keluarga FROM warga_has_kartu_keluarga LEFT JOIN kartu_keluarga ON kartu_keluarga.id_keluarga = warga_has_kartu_keluarga.id_keluarga WHERE warga_has_kartu_keluarga.id_warga = domisili.warga_id ) 
+		) 
+	) AS nomor_keluarga,
+	warga.tempat_lahir_warga,
+	warga.tanggal_lahir_warga,
+	warga.jenis_kelamin_warga,
+	warga.agama_warga,
+	warga.pekerjaan_warga,
+	warga.alamat_warga,
+	warga.alamat_ktp_warga,
+    domisili.nama_ttd,
+	domisili.jabatan_ttd,
+	domisili.nomor_induk_ttd
 FROM
 	domisili
+	LEFT JOIN warga ON warga.id_warga = domisili.warga_id 
 WHERE
 	domisili.id = " . $id . "
 ";
@@ -19,6 +44,8 @@ if (mysqli_num_rows($query_warga) == 0) {
 } else {
     $row_warga = mysqli_fetch_assoc($query_warga);
 }
+
+$sampai = tanggal_indo_no_dash($row_warga['sampai']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +71,6 @@ if (mysqli_num_rows($query_warga) == 0) {
 </head>
 
 <body onload="window.print();">
-
     <!-- <body> -->
     <div class="container">
         <div class="row">
@@ -70,20 +96,20 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <tr>
                             <td>Nama Lengkap</td>
                             <td>:</td>
-                            <td><?= $row_warga['nama']; ?></td>
+                            <td><?= $row_warga['nama_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>NIK</td>
                             <td>:</td>
-                            <td><?= $row_warga['nik']; ?></td>
+                            <td><?= $row_warga['nik_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>Tempat, Tanggal Lahir</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['tempat_lahir']; ?>,
+                                <?= $row_warga['tempat_lahir_warga']; ?>,
                                 <?php
-                                $tgl_obj = new DateTime($row_warga['tanggal_lahir']);
+                                $tgl_obj = new DateTime($row_warga['tanggal_lahir_warga']);
                                 echo $tgl_obj->format('d-m-Y');
                                 ?>
                             </td>
@@ -96,23 +122,23 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <tr>
                             <td>Jenis Kelamin</td>
                             <td>:</td>
-                            <td><?= ($row_warga['jenis_kelamin'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
+                            <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
                         </tr>
                         <tr>
                             <td>Agama</td>
                             <td>:</td>
-                            <td><?= $row_warga['agama']; ?></td>
+                            <td><?= $row_warga['agama_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>Pekerjaan</td>
                             <td>:</td>
-                            <td><?= $row_warga['pekerjaan']; ?></td>
+                            <td><?= $row_warga['pekerjaan_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>Alamat KTP</td>
                             <td>:</td>
                             <td>
-                                <?= $row_warga['alamat_ktp']; ?>
+                                <?= $row_warga['alamat_ktp_warga']; ?>
                             </td>
                         </tr>
                         <tr>
@@ -126,12 +152,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Lama Domisili</td>
                             <td>:</td>
                             <td>
-                                <?php
-                                $tgl_obj_a = new DateTime($row_warga['tanggal_pembuatan']);
-                                $tgl_obj_b = new DateTime($row_warga['lama_domisili']);
-                                $inval = $tgl_obj_a->diff($tgl_obj_b);
-                                echo $inval->y . " Tahun";
-                                ?>
+                                <?= $row_warga['lama_domisili']; ?> Tahun
                             </td>
                         </tr>
                         <tr>
@@ -147,7 +168,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <td colspan="3" class="text-justify">
-                                Demikian keterangan ini dibuat atas dasar yang sebenarnya dan kepada yang berkepentingan agar dipergunakan sebagaimana mestinya. Keterangan ini berlaku sampai dengan : <?= tanggal_indo_no_dash($row_warga['lama_domisili']); ?>.
+                                Demikian keterangan ini dibuat atas dasar yang sebenarnya dan kepada yang berkepentingan agar dipergunakan sebagaimana mestinya. Keterangan ini berlaku sampai dengan : <?= $sampai; ?>.
                             </td>
                         </tr>
                         <tr>

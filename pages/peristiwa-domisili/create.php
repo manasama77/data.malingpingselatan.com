@@ -22,24 +22,83 @@
                 <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= date('Y-m-d'); ?>" required />
             </div>
             <div class="form-group">
-                <label for="warga_id">Warga <span class="text-danger">*</span></label>
-                <div class="input-group">
+                <label for="nik">NIK <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nik" placeholder="NIK" required />
+            </div>
+            <div class="form-group">
+                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="nama" placeholder="Nama" required />
+                <!-- <div class="input-group">
                     <input type="text" class="form-control" id="warga_id" name="warga_id" required disabled />
                     <div class="input-group-addon" style="background-color: #d9534f; color: white;" role="button" id="btn_modal_warga">
                         <i class="fa fa-search"></i>
                     </div>
+                </div> -->
+            </div>
+            <div class="form-group">
+                <label for="tempat_lahir">Tempat Lahir <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="tempat_lahir" required />
+            </div>
+            <div class="form-group">
+                <label for="tanggal_lahir">Tanggal Lahir <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" name="tanggal_lahir" required />
+            </div>
+            <div class="form-group">
+                <label>Jenis Kelamin <span class="text-danger">*</span></label>
+                <div class="radio">
+                    <label for="jenis_kelamin_laki">
+                        <input type="radio" id="jenis_kelamin_laki" name="jenis_kelamin" value="L" required checked />
+                        Laki-laki
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="jenis_kelamin_perempuan">
+                        <input type="radio" id="jenis_kelamin_perempuan" name="jenis_kelamin" value="P" required />
+                        Perempuan
+                    </label>
                 </div>
             </div>
             <div class="form-group">
+                <label for="agama">Agama <span class="text-danger">*</span></label>
+                <select class="form-control" id="agama" name="agama" required>
+                    <option value=""></option>
+                    <option value="Islam">Islam</option>
+                    <option value="Kristen">Kristen</option>
+                    <option value="Katholik">Katholik</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Budha">Budha</option>
+                    <option value="Konghucu">Konghucu</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status_perkawinan">Status Perkawinan<span class="text-danger">*</span></label>
+                <select class="form-control" id="status_perkawinan" name="status_perkawinan" required>
+                    <option value=""></option>
+                    <option value="Belum Kawin">Belum Kawin</option>
+                    <option value="Kawin">Kawin</option>
+                    <option value="Cerai Hidup">Cerai Hidup</option>
+                    <option value="Cerai Mati">Cerai Mati</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pekerjaan">Pekerjaan <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="pekerjaan" required />
+            </div>
+            <div class="form-group">
                 <label for="lama_domisili">Lama Domisili <span class="text-danger">*</span></label>
-                <div class="input-group">
+                <input type="date" class="form-control" name="lama_domisili" required />
+                <!-- <div class="input-group">
                     <input type="number" class="form-control" id="lama_domisili" name="lama_domisili" placeholder="Lama Domisili" required />
                     <div class="input-group-addon">Tahun</div>
-                </div>
+                </div> -->
             </div>
             <div class="form-group">
                 <label for="alamat_domisili">Alamat Domisili <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" id="alamat_domisili" name="alamat_domisili" placeholder="Alamat Domisili" required />
+            </div>
+            <div class="form-group">
+                <label for="alamat_ktp">Alamat KTP <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="alamat_ktp" name="alamat_ktp" placeholder="Alamat KTP" required />
             </div>
             <hr />
             <h2 class="text-center">Tanda Tangan</h2>

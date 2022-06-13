@@ -2,12 +2,15 @@
 
 <?php
 include('../../config/koneksi.php');
-require '../helper_tanggal_indo.php';
 
 $sql   = "
 SELECT  
-    *
+    domisili.id,
+    domisili.lama_domisili,
+    domisili.sampai,
+    warga.nama_warga
 FROM domisili 
+LEFT JOIN warga ON warga.id_warga = domisili.warga_id 
 ORDER BY id DESC
 ";
 $query = mysqli_query($db, $sql);
@@ -42,23 +45,21 @@ $query = mysqli_query($db, $sql);
                 </thead>
                 <tbody>
                     <?php if (mysqli_num_rows($query) > 0) { ?>
-                        <?php
-                        while ($row = mysqli_fetch_assoc($query)) {
-                            $tgl_obj_a = new DateTime($row['tanggal_pembuatan']);
-                            $tgl_obj_b = new DateTime($row['lama_domisili']);
-                            $inval = $tgl_obj_a->diff($tgl_obj_b);
-                        ?>
+                        <?php while ($row = mysqli_fetch_assoc($query)) { ?>
                             <tr>
-                                <td><?= $row['nama']; ?></td>
-                                <td><?= $inval->y; ?> Tahun</td>
+                                <td><?= $row['nama_warga']; ?></td>
+                                <td><?= $row['lama_domisili']; ?> Tahun</td>
                                 <td>
-                                    <?= tanggal_indo_no_dash($row['lama_domisili']); ?>
+                                    <?php
+                                    $tgl_obj = new DateTime($row['sampai']);
+                                    echo $tgl_obj->format('d-m-Y');
+                                    ?>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <!-- <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
+                                        <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
                                             <i class="fa fa-pencil fa-fw"></i>
-                                        </a> -->
+                                        </a>
                                         <a href="print.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-success" title="Print Data">
                                             <i class="fa fa-print fa-fw"></i>
                                         </a>

@@ -3,16 +3,20 @@ include('../../config/koneksi.php');
 require '../constant.php';
 
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
-$warga_id          = $_POST['warga_id_hidden'];
+$nik               = $_POST['nik'];
+$nama              = $_POST['nama'];
+$tempat_lahir      = $_POST['tempat_lahir'];
+$tanggal_lahir     = $_POST['tanggal_lahir'];
+$jenis_kelamin     = $_POST['jenis_kelamin'];
+$agama             = $_POST['agama'];
+$status_perkawinan = $_POST['status_perkawinan'];
+$pekerjaan         = $_POST['pekerjaan'];
 $lama_domisili     = $_POST['lama_domisili'];
 $alamat_domisili   = trim($_POST['alamat_domisili']);
+$alamat_ktp        = trim($_POST['alamat_ktp']);
 $nama_ttd          = $_POST['nama_ttd'];
 $jabatan_ttd       = $_POST['jabatan_ttd'];
 $nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
-
-$tgl_obj = new DateTime('now');
-$tgl_obj->modify('+' . $lama_domisili . ' year');
-$sampai = $tgl_obj->format('Y-m-d');
 
 // PART NOMOR SURAT
 $sql   = "SELECT `surat_sequences`.`sequence` FROM `surat_sequences` WHERE `surat_sequences`.`tanggal` = '" . date('Y-m-d') . "' ORDER BY `sequence` DESC LIMIT 1";
@@ -41,9 +45,9 @@ $nomor_surat = '140-' . KODE_DESA_SURAT . '/' . $no_urut . '/' . date('m') .  '/
 
 $sql = "
 INSERT INTO `domisili` 
-(warga_id, tanggal_pembuatan, lama_domisili, alamat_domisili, sampai, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd)
+(nomor_surat, sequence, tanggal_pembuatan, nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, status_perkawinan, pekerjaan, lama_domisili, alamat_domisili, alamat_ktp, nama_ttd, jabatan_ttd, nomor_induk_ttd)
 VALUES
-($warga_id, '$tanggal_pembuatan', '$lama_domisili', '$alamat_domisili', '$sampai', '$nomor_surat', $sequence, '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
+('$nomor_surat', '$sequence', '$tanggal_pembuatan', '$nik', '$nama', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$agama', '$status_perkawinan', '$pekerjaan', '$lama_domisili', '$alamat_domisili', '$alamat_ktp', '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd')
 ";
 $query = mysqli_query($db, $sql);
 
@@ -60,4 +64,5 @@ echo json_encode([
     'code' => $code,
     'msg'  => $msg,
     'id'   => $id,
+    'sql'   => $sql,
 ]);
