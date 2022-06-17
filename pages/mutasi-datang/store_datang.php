@@ -17,7 +17,7 @@ if ($_SESSION['jenis_kepindahan'] == "Kepala Keluarga") {
 	$query_cek_kk    = mysqli_query($db, $sql_cek_kk);
 	$num_rows_cek_kk = mysqli_num_rows($query_cek_kk);
 	if ($num_rows_cek_kk > 0) {
-		$_SESSION['warning']        = "Tambah warga gagal!, No. KK " . $_SESSION['nomor_keluarga'] . " sudah digunakan !";
+		$_SESSION['warning'] = "Tambah warga gagal!, No. KK " . $_SESSION['nomor_keluarga'] . " sudah digunakan !";
 		header('location: pindah_masuk.php');
 		exit();
 	}

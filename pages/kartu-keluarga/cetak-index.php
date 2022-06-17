@@ -1,6 +1,7 @@
 <?php
 require_once("../../assets/lib/fpdf/fpdf.php");
 require_once("../../config/koneksi.php");
+require_once("../constant.php");
 
 class PDF extends FPDF
 {
@@ -8,16 +9,16 @@ class PDF extends FPDF
     function Header()
     {
         // Logo
-        $this->Image('../../assets/img/kng.jpg', 20, 10);
+        $this->Image('../../assets/img/' . LOGO, 20, 10);
 
         // Arial bold 15
         $this->SetFont('Times', 'B', 15);
         // Move to the right
         // $this->Cell(60);
         // Title
-        $this->Cell(308, 8, 'PEMERINTAH KOTA TANGERANG', 0, 1, 'C');
-        $this->Cell(308, 8, 'KECAMATAN PERIUK', 0, 1, 'C');
-        $this->Cell(308, 8, 'KELURAHAN GEBANG RAYA', 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_KOKAB, 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_KECAMATAN, 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_DESA, 0, 1, 'C');
         // Line break
         $this->Ln(5);
 

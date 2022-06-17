@@ -5,6 +5,8 @@ if (!isset($_SESSION['user'])) {
   header('Location: ../login');
   exit();
 }
+require('../../config/koneksi.php');
+require('../constant.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

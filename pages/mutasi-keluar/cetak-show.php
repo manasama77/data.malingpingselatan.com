@@ -15,16 +15,16 @@ class PDF extends FPDF
     function Header()
     {
         // Logo
-        $this->Image('../../assets/img/kng.jpg', 20, 10);
+        $this->Image('../../assets/img/' . LOGO, 20, 10);
 
         $this->AddFont('BOOKOS', '', 'BOOKOS.php');
         $this->AddFont('BOOKOS', 'B', 'BOOKOSB.php');
         $this->AddFont('BOOKOS', 'I', 'BOOKOSI.php');
 
         $this->SetFont('BOOKOS', 'B', 16);
-        $this->Cell(200, 8, 'PEMERINTAH KOTA TANGERANG', 0, 1, 'C');
-        $this->Cell(200, 10, 'KECAMATAN GEBANG RAYA', 0, 1, 'C');
-        $this->Cell(200, 10, 'KELURAHAN PERIUK', 0, 1, 'C');
+        $this->Cell(200, 8, PRINT_KOKAB, 0, 1, 'C');
+        $this->Cell(200, 10, PRINT_KECAMATAN, 0, 1, 'C');
+        $this->Cell(200, 10, PRINT_DESA, 0, 1, 'C');
 
         $this->SetLineWidth(0.5);
         $this->Line(12, 40, 210 - 12, 40);

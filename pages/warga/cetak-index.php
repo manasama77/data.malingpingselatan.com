@@ -1,23 +1,24 @@
 <?php
+session_start();
 require_once("../../assets/lib/fpdf/fpdf.php");
 require_once("../../config/koneksi.php");
-
 class PDF extends FPDF
 {
+
     // Page header
     function Header()
     {
         // Logo
-        $this->Image('../../assets/img/logo.png', 20, 10);
+        $this->Image('../../assets/img/' . LOGO, 20, 10);
 
         // Arial bold 15
         $this->SetFont('Times', 'B', 15);
         // Move to the right
         // $this->Cell(60);
         // Title
-        $this->Cell(308, 8, 'Pemerintah Kabupaten Lebak', 0, 1, 'C');
-        $this->Cell(308, 8, 'Kecamatan Malingping', 0, 1, 'C');
-        $this->Cell(308, 8, 'Kelurahan Malingping Selatan', 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_KOKAB, 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_KECAMATAN, 0, 1, 'C');
+        $this->Cell(308, 8, PRINT_DESA, 0, 1, 'C');
         // Line break
         $this->Ln(5);
 
