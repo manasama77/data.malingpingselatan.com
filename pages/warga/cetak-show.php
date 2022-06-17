@@ -1,6 +1,7 @@
 <?php
 require_once("../../assets/lib/fpdf/fpdf.php");
 require_once("../../config/koneksi.php");
+require('../constant.php');
 
 class PDF extends FPDF
 {
