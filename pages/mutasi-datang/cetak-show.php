@@ -3,6 +3,7 @@ define('FPDF_FONTPATH', '../../assets/lib/fpdf1.84/font/');
 require_once("../../assets/lib/fpdf1.84/fpdf.php");
 require '../helper_tanggal_indo.php';
 require_once("../../config/koneksi.php");
+require_once("../constant.php");
 
 class PDF extends FPDF
 {
