@@ -61,7 +61,7 @@ require('../constant.php');
       </div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2" style="margin-top: -13px">
         <marquee width="100%" direction="left" loop="-1" class="bg-info" style="color: #428BCA; font-size: 18px;">
-          Aplikasi Kependudukan Malingping Selatan Banten - <small>Kp. Lebak Lame RT. 02 RW 02 Desa Malingping Selatan Kecamatan Malingping Kab. Lebak Prov. Banten</small>
+          Aplikasi Kependudukan <?= DESA; ?> <?= KECAMATAN; ?> <?= KOKAB; ?> <?= PROVINSI; ?> - <small><?= ALAMAT; ?></small>
         </marquee>
       </div>
 
