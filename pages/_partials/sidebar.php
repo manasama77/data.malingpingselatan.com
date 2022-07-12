@@ -67,6 +67,7 @@ function is_active($page)
           <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
           <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
           <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item">Belum Mempunyai Rumah</a>
+          <a href="../peristiwa-cerai" class="list-group-item">SK Cerai</a>
         </div>
       </div>
 

@@ -9,6 +9,17 @@ function tanggal_indo_no_dash($tanggal)
     return $hari . " " . $bulan . " " . $tahun;
 }
 
+function full_tanggal_indo_no_dash($tanggal)
+{
+    $tgl_obj = new DateTime($tanggal);
+    $nama_hari = hari_indo($tgl_obj->format('D'));
+    $hari      = $tgl_obj->format('d');
+    $bulan     = bulan_indo($tgl_obj->format('m'));
+    $tahun     = $tgl_obj->format('Y');
+
+    return $nama_hari . ", " . $hari . " " . $bulan . " " . $tahun;
+}
+
 function bulan_indo($bulan)
 {
     if ($bulan == "01") {
@@ -35,5 +46,24 @@ function bulan_indo($bulan)
         return "November";
     } elseif ($bulan == "12") {
         return "Desember";
+    }
+}
+
+function hari_indo($hari)
+{
+    if ($hari == "Mon") {
+        return "Senin";
+    } elseif ($hari == "Tue") {
+        return "Selasa";
+    } elseif ($hari == "Wed") {
+        return "Rabu";
+    } elseif ($hari == "Thu") {
+        return "Kamis";
+    } elseif ($hari == "Fri") {
+        return "Jumat";
+    } elseif ($hari == "Sat") {
+        return "Sabtu";
+    } elseif ($hari == "Sun") {
+        return "Minggu";
     }
 }
