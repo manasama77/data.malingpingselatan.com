@@ -2,18 +2,32 @@
 include('../../config/koneksi.php');
 require '../constant.php';
 
-$tanggal_pembuatan = $_POST['tanggal_pembuatan'];
-$pelapor_id        = $_POST['pelapor_id'];
-$warga_id          = $_POST['warga_id'];
-$status_pelapor    = $_POST['status_pelapor'];
-$tanggal_cerai     = $_POST['tanggal_cerai'];
-$alasan_cerai      = $_POST['alasan_cerai'];
-$nama_ttd          = $_POST['nama_ttd'];
-$jabatan_ttd       = $_POST['jabatan_ttd'];
-$nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
-$saksi_1           = $_POST['saksi_1'];
-$saksi_2           = $_POST['saksi_2'];
-$saksi_3           = $_POST['saksi_3'];
+$warga_id               = $_POST['warga_id'];
+$nama_from              = $_POST['nama_from'];
+$nik_from               = $_POST['nik_from'];
+$tempat_lahir_from      = $_POST['tempat_lahir_from'];
+$tanggal_lahir_from     = $_POST['tanggal_lahir_from'];
+$jenis_kelamin_from     = $_POST['jenis_kelamin_from'];
+$warganegara_from       = $_POST['warganegara_from'];
+$status_perkawinan_from = $_POST['status_perkawinan_from'];
+$agama_from             = $_POST['agama_from'];
+$pekerjaan_from         = $_POST['pekerjaan_from'];
+$alamat_from            = $_POST['alamat_from'];
+$nama_to                = $_POST['nama_to'];
+$nik_to                 = $_POST['nik_to'];
+$tempat_lahir_to        = $_POST['tempat_lahir_to'];
+$tanggal_lahir_to       = $_POST['tanggal_lahir_to'];
+$jenis_kelamin_to       = $_POST['jenis_kelamin_to'];
+$warganegara_to         = $_POST['warganegara_to'];
+$status_perkawinan_to   = $_POST['status_perkawinan_to'];
+$agama_to               = $_POST['agama_to'];
+$pekerjaan_to           = $_POST['pekerjaan_to'];
+$alamat_to              = $_POST['alamat_to'];
+$nama_ttd               = $_POST['nama_ttd'];
+$nrpdes                 = $_POST['nomor_induk_ttd'];
+$jabatan                = $_POST['jabatan_ttd'];
+$tanggal_pembuatan      = $_POST['tanggal_pembuatan'];
+$acuan                  = $_POST['acuan'];
 
 // PART NOMOR SURAT
 $sql   = "SELECT `surat_sequences`.`sequence` FROM `surat_sequences` WHERE `surat_sequences`.`tanggal` = '" . date('Y-m-d') . "' ORDER BY `sequence` DESC LIMIT 1";
@@ -41,10 +55,10 @@ if (mysqli_num_rows($query) > 0) {
 $nomor_surat = '140-' . KODE_DESA_SURAT . '/' . $no_urut . '/' . date('m') .  '/' . date('Y');
 
 $sql = "
-INSERT INTO `cerai` 
-(pelapor_id, warga_id, tanggal_cerai, alasan_cerai, status_pelapor, tanggal_pembuatan, nomor_surat, sequence, nama_ttd, jabatan_ttd, nomor_induk_ttd, saksi_1, saksi_2, saksi_3)
+INSERT INTO `permohonan_perubahan_data_penduduk` 
+(warga_id, nama_from, nik_from, tempat_lahir_from, tanggal_lahir_from, jenis_kelamin_from, warganegara_from, status_perkawinan_from, agama_from, pekerjaan_from, alamat_from, nama_to, nik_to, tempat_lahir_to, tanggal_lahir_to, jenis_kelamin_to, warganegara_to, status_perkawinan_to, agama_to, pekerjaan_to, alamat_to, nama_ttd, nrpdes, jabatan, nomor_surat, tanggal_pembuatan, acuan)
 VALUES
-('$pelapor_id', '$warga_id', '$tanggal_cerai', '$alasan_cerai', '$status_pelapor', '$tanggal_pembuatan', '$nomor_surat', '$sequence', '$nama_ttd', '$jabatan_ttd', '$nomor_induk_ttd', '$saksi_1', '$saksi_2', '$saksi_3')
+('$warga_id', '$nama_from', '$nik_from', '$tempat_lahir_from', '$tanggal_lahir_from', '$jenis_kelamin_from', '$warganegara_from', '$status_perkawinan_from', '$agama_from', '$pekerjaan_from', '$alamat_from', '$nama_to', '$nik_to', '$tempat_lahir_to', '$tanggal_lahir_to', '$jenis_kelamin_to', '$warganegara_to', '$status_perkawinan_to', '$agama_to', '$pekerjaan_to', '$alamat_to', '$nama_ttd', '$nrpdes', '$jabatan', '$nomor_surat', '$tanggal_pembuatan', '$acuan')
 ";
 $query = mysqli_query($db, $sql);
 

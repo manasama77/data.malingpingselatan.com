@@ -5,13 +5,13 @@ include('../../config/koneksi.php');
 
 $sql   = "
 SELECT  
-    cerai.id,
-    pelapor.nama_warga as nama_pelapor,
-    cerai.tanggal_cerai,
-    cerai.status_pelapor
-FROM cerai 
-LEFT JOIN warga as pelapor ON pelapor.id_warga = cerai.pelapor_id 
-ORDER BY cerai.id DESC
+    permohonan_perubahan_data_penduduk.id,
+    permohonan_perubahan_data_penduduk.tanggal_pembuatan,
+    permohonan_perubahan_data_penduduk.acuan,
+    warga.nama_warga
+FROM permohonan_perubahan_data_penduduk 
+LEFT JOIN warga ON warga.id_warga = permohonan_perubahan_data_penduduk.warga_id 
+ORDER BY permohonan_perubahan_data_penduduk.id DESC
 ";
 $query = mysqli_query($db, $sql);
 ?>
@@ -35,8 +35,9 @@ $query = mysqli_query($db, $sql);
                 <caption>Daftar Permohonan Perubahan Data Penduduk</caption>
                 <thead class="bg-primary">
                     <tr>
-                        <th>Nama Pelapor</th>
-                        <th>Status Pelapor</th>
+                        <th>Tanggal Pembuatan</th>
+                        <th>Nama</th>
+                        <th>Acuan</th>
                         <td class="text-center">
                             <i class="fa fa-cog"></i>
                         </td>
@@ -46,14 +47,14 @@ $query = mysqli_query($db, $sql);
                     <?php if (mysqli_num_rows($query) > 0) { ?>
                         <?php while ($row = mysqli_fetch_assoc($query)) { ?>
                             <tr>
-                                <td><?= $row['nama_pelapor']; ?></td>
                                 <td>
                                     <?php
-                                    $tgl_obj = new DateTime($row['tanggal_cerai']);
+                                    $tgl_obj = new DateTime($row['tanggal_pembuatan']);
                                     echo $tgl_obj->format('d-m-Y');
                                     ?>
                                 </td>
-                                <td><?= $row['status_pelapor']; ?></td>
+                                <td><?= $row['nama_warga']; ?></td>
+                                <td><?= $row['acuan']; ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
@@ -62,7 +63,7 @@ $query = mysqli_query($db, $sql);
                                         <a href="print.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-success" title="Print Data">
                                             <i class="fa fa-print fa-fw"></i>
                                         </a>
-                                        <button type="button" class="btn btn-danger" title="Delete Data" onclick="deleteData(<?= $row['id']; ?>, '<?= $row['nama_pelapor']; ?>')">
+                                        <button type="button" class="btn btn-danger" title="Delete Data" onclick="deleteData(<?= $row['id']; ?>, '<?= $row['nama_warga']; ?>')">
                                             <i class="fa fa-trash fa-fw"></i>
                                         </button>
                                     </div>
