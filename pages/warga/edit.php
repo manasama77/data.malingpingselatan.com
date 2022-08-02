@@ -101,30 +101,14 @@
       <th>RT</th>
       <td>:</td>
       <td>
-        <input type="number" class="form-control" name="rt_warga" required />
-        <!-- <select class="form-control selectpicker" name="rt_warga" required>
-          <option value="<?php echo $data_warga[0]['rt_warga'] ?>" selected><?php echo $data_warga[0]['rt_warga'] ?></option>
-          <option value="01">01</option>
-          <option value="02">02</option>
-          <option value="03">03</option>
-          <option value="04">04</option>
-          <option value="05">05</option>
-          <option value="06">06</option>
-        </select> -->
+        <input type="number" class="form-control" name="rt_warga" value="<?php echo $data_warga[0]['rt_warga'] ?>" required />
       </td>
     </tr>
     <tr>
       <th>RW</th>
       <td>:</td>
       <td>
-        <input type="number" class="form-control" name="rw_warga" required />
-        <!-- <select class="form-control selectpicker" name="rw_warga" required>
-          <option value="<?php echo $data_warga[0]['rw_warga'] ?>" selected><?php echo $data_warga[0]['rw_warga'] ?></option>
-          <option value="01">01</option>
-        </select> -->
-
-        <!--
-        <input type="text" class="form-control" name="rw_warga" value="<?php echo $data_warga[0]['rw_warga'] ?>" readonly>-->
+        <input type="number" class="form-control" name="rw_warga" value="<?php echo $data_warga[0]['rw_warga'] ?>" required />
       </td>
     </tr>
     <tr>
@@ -165,7 +149,7 @@
           <option value="<?php echo $data_warga[0]['agama_warga'] ?>" selected><?php echo $data_warga[0]['agama_warga'] ?></option>
           <option value="Islam">Islam</option>
           <option value="Kristen">Kristen</option>
-          <option value="Katholik">Katholik</option>
+          <option value="Katolik">Katolik</option>
           <option value="Hindu">Hindu</option>
           <option value="Budha">Budha</option>
           <option value="Konghucu">Konghucu</option>
@@ -198,16 +182,29 @@
       <td><input type="text" class="form-control" name="pekerjaan_warga" value="<?php echo $data_warga[0]['pekerjaan_warga'] ?>"></td>
     </tr>
     <tr>
-      <th>Status Tinggal</th>
+      <th>Status Penduduk</th>
       <td>:</td>
       <td>
         <select class="form-control selectpicker" name="status_warga" required>
-          <option value="<?php echo $data_warga[0]['status_warga'] ?>" selected><?php echo $data_warga[0]['status_warga'] ?></option>
-          <option value="Tinggal Tetap">Tinggal Tetap</option>
-          <option value="Meninggal">Meninggal</option>
-          <option value="Pindah Datang">Pindah Datang</option>
-          <option value="Pindah Keluar">Pindah Keluar</option>
-          <option value="Kontrak">Kontrak</option>
+          <option value="">- pilih -</option>
+          <option <?= ($data_warga[0]['status_warga'] == "Tinggal Tetap") ? "selected" : "" ?> value="Tinggal Tetap">Tinggal Tetap</option>
+          <option <?= ($data_warga[0]['status_warga'] == "Meninggal") ? "selected" : "" ?> value="Meninggal">Meninggal</option>
+          <option <?= ($data_warga[0]['status_warga'] == "Pindah Datang") ? "selected" : "" ?> value="Pindah Datang">Pindah Datang</option>
+          <option <?= ($data_warga[0]['status_warga'] == "Pindah Keluar") ? "selected" : "" ?> value="Pindah Keluar">Pindah Keluar</option>
+          <option <?= ($data_warga[0]['status_warga'] == "Kontrak") ? "selected" : "" ?> value="Kontrak">Kontrak</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Status Perkawinan</th>
+      <td>:</td>
+      <td>
+        <select class="form-control" name="status_perkawinan" required>
+          <option value="" selected disabled>- pilih -</option>
+          <option <?= ($data_warga[0]['status_perkawinan'] == "Belum Kawin") ? "selected" : "" ?> value="Belum Kawin">Belum Kawin</option>
+          <option <?= ($data_warga[0]['status_perkawinan'] == "Kawin") ? "selected" : "" ?> value="Kawin">Kawin</option>
+          <option <?= ($data_warga[0]['status_perkawinan'] == "Cerai Hidup") ? "selected" : "" ?> value="Cerai Hidup">Cerai Hidup</option>
+          <option <?= ($data_warga[0]['status_perkawinan'] == "Cerai Mati") ? "selected" : "" ?> value="Cerai Mati">Cerai Mati</option>
         </select>
       </td>
     </tr>

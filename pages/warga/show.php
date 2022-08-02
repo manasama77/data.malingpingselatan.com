@@ -23,11 +23,6 @@ if ($data_kk[] = !NULL) {
       <td>:</td>
       <td><?php echo $data_kk[0]['alamat_keluarga'] ?></td>
     </tr>
-    <!-- <tr>
-      <th>Dusun</th>
-      <td>:</td>
-      <td><?php echo "-" ?></td>
-    </tr> -->
     <tr>
       <th>RT</th>
       <td>:</td>
@@ -85,11 +80,6 @@ if ($data_kk[] = !NULL) {
     <td>:</td>
     <td><?php echo $data_warga[0]['alamat_warga'] ?></td>
   </tr>
-  <!-- <tr>
-    <th>Dusun</th>
-    <td>:</td>
-    <td><?php echo $data_warga[0]['dusun_warga'] ?></td>
-  </tr> -->
   <tr>
     <th>RT</th>
     <td>:</td>
@@ -149,6 +139,11 @@ if ($data_kk[] = !NULL) {
     <th>Status Tinggal</th>
     <td>:</td>
     <td><?php echo $data_warga[0]['status_warga'] ?></td>
+  </tr>
+  <tr>
+    <th>Status Perkawinan</th>
+    <td>:</td>
+    <td><?php echo $data_warga[0]['status_perkawinan'] ?></td>
   </tr>
 </table>
 

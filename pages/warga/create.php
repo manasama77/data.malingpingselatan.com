@@ -64,35 +64,6 @@
       <td>:</td>
       <td><textarea class="form-control" name="alamat_warga" required></textarea></td>
     </tr>
-    <!--
-  <tr>
-    <th>Dusun</th>
-    <td>:</td>
-    <td>
-      <select class="form-control selectpicker" name="dusun_warga" required>
-        <option value="" selected disabled>- pilih -</option>
-        <option value="Dukuh">Dukuh</option>
-        <option value="Tarikolot">Tarikolot</option>
-      </select>
-    </td>
-  </tr>
-  -->
-    <!--
-  <tr>
-    <th>RT</th>
-    <td>:</td>
-    <td>
-      <select class="form-control selectpicker" name="rt_warga" required>
-        <option value="" selected disabled>- pilih -</option>
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-      </select>
-  </tr>
-  -->
     <tr>
       <th>RT</th>
       <td>:</td>
@@ -100,17 +71,6 @@
         <input type="number" class="form-control" name="rt_warga" min="1" required />
       </td>
     </tr>
-    <!--
-  <tr>
-    <th>RW</th>
-    <td>:</td>
-    <td>
-      <select class="form-control selectpicker" name="rw_warga" required>
-        <option value="" selected disabled>- pilih -</option>
-        <option value="01">01</option>
-      </select>
-  </tr>
-  -->
     <tr>
       <th>RW</th>
       <td>:</td>
@@ -155,7 +115,7 @@
           <option value="" selected disabled>- pilih -</option>
           <option value="Islam">Islam</option>
           <option value="Kristen">Kristen</option>
-          <option value="Katholik">Katholik</option>
+          <option value="Katolik">Katolik</option>
           <option value="Hindu">Hindu</option>
           <option value="Budha">Budha</option>
           <option value="Konghucu">Konghucu</option>
@@ -198,6 +158,19 @@
           <option value="Pindah Datang">Pindah Datang</option>
           <option value="Pindah Keluar">Pindah Keluar</option>
           <option value="Kontrak">Kontrak</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Status Perkawinan</th>
+      <td>:</td>
+      <td>
+        <select class="form-control" name="status_perkawinan" required>
+          <option value="" selected disabled>- pilih -</option>
+          <option value="Belum Kawin">Belum Kawin</option>
+          <option value="Kawin">Kawin</option>
+          <option value="Cerai Hidup">Cerai Hidup</option>
+          <option value="Cerai Mati">Cerai Mati</option>
         </select>
       </td>
     </tr>
