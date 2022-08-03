@@ -114,7 +114,7 @@
         <select class="form-control selectlive" name="agama_warga" required>
           <option value="" selected disabled>- pilih -</option>
           <option value="Islam">Islam</option>
-          <option value="Kristen">Kristen</option>
+          <option value="Protestan">Protestan</option>
           <option value="Katolik">Katolik</option>
           <option value="Hindu">Hindu</option>
           <option value="Budha">Budha</option>

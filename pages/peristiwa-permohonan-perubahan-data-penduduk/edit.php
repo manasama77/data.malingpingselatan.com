@@ -140,7 +140,7 @@ if (mysqli_num_rows($query) == 0) {
                 <select class="form-control" id="agama" name="agama_to" required>
                     <option value=""></option>
                     <option <?= ($row['agama_to'] == "Islam") ? "selected" : ""; ?> value="Islam">Islam</option>
-                    <option <?= ($row['agama_to'] == "Kristen") ? "selected" : ""; ?> value="Kristen">Kristen</option>
+                    <option <?= ($row['agama_to'] == "Protestan") ? "selected" : ""; ?> value="Protestan">Protestan</option>
                     <option <?= ($row['agama_to'] == "Katolik") ? "selected" : ""; ?> value="Katolik">Katolik</option>
                     <option <?= ($row['agama_to'] == "Hindu") ? "selected" : ""; ?> value="Hindu">Hindu</option>
                     <option <?= ($row['agama_to'] == "Budha") ? "selected" : ""; ?> value="Budha">Budha</option>
