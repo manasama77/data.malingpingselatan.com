@@ -11,7 +11,7 @@ if (!$id) {
     exit;
 }
 
-$sql   = "SELECT * FROM `bekerja_luar_negeri_kota` WHERE `bekerja_luar_negeri_kota`.`id` = " . $id;
+$sql   = "SELECT * FROM `permohonan_perubahan_data_penduduk` WHERE `permohonan_perubahan_data_penduduk`.`id` = " . $id;
 $query = mysqli_query($db, $sql);
 $total = mysqli_num_rows($query);
 
@@ -23,7 +23,7 @@ if ($total == 0) {
     exit;
 }
 
-$sql = "DELETE FROM `bekerja_luar_negeri_kota` WHERE id = " . $id . "";
+$sql = "DELETE FROM `permohonan_perubahan_data_penduduk` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
 $code = 500;
