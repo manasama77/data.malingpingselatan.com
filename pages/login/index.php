@@ -45,7 +45,7 @@ if (isset($_SESSION['user'])) {
                     <input type="text" class="form-control" name="captcha" id="captcha" minlength="4" maxlength="4" required />
                   </div>
                   <div class="col-sm-12 col-md-6">
-                    <img src="../../assets/captcha.php" alt="PHP Captcha">
+                    <img src="../../assets/captcha.php" alt="PHP Captcha" style="width: 100%;">
                   </div>
                 </div>
               </div>
