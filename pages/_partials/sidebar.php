@@ -69,6 +69,7 @@ function is_active($page)
           <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item">Belum Mempunyai Rumah</a>
           <a href="../peristiwa-cerai" class="list-group-item">SK Cerai</a>
           <a href="../peristiwa-permohonan-perubahan-data-penduduk" class="list-group-item">Permohonan Perubahan Data Penduduk</a>
+          <a href="../peristiwa-skck" class="list-group-item">Surat Pengantar Catatan Kepolisian</a>
         </div>
       </div>
 
