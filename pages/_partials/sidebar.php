@@ -70,6 +70,8 @@ function is_active($page)
           <a href="../peristiwa-cerai" class="list-group-item">SK Cerai</a>
           <a href="../peristiwa-permohonan-perubahan-data-penduduk" class="list-group-item">Permohonan Perubahan Data Penduduk</a>
           <a href="../peristiwa-skck" class="list-group-item">Surat Pengantar Catatan Kepolisian</a>
+          <a href="../peristiwa-sk_dokumen_kependudukan_dalam_proses_pembuatan" class="list-group-item">Surat Keterangan Dokumen Kependudukan
+            Dalam Proses Pembuatan</a>
         </div>
       </div>
 

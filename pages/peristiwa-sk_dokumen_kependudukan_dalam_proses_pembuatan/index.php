@@ -5,12 +5,13 @@ include('../../config/koneksi.php');
 
 $sql   = "
 SELECT  
-    skck.id,
-    skck.tanggal_pembuatan,
+    sk_dokumen_kependudukan_dalam_proses_pembuatan.id,
+    sk_dokumen_kependudukan_dalam_proses_pembuatan.tanggal_pembuatan,
+    sk_dokumen_kependudukan_dalam_proses_pembuatan.jenis_pembuatan,
     warga.nama_warga
-FROM skck 
-LEFT JOIN warga ON warga.id_warga = skck.warga_id 
-ORDER BY skck.id DESC
+FROM sk_dokumen_kependudukan_dalam_proses_pembuatan 
+LEFT JOIN warga ON warga.id_warga = sk_dokumen_kependudukan_dalam_proses_pembuatan.warga_id 
+ORDER BY sk_dokumen_kependudukan_dalam_proses_pembuatan.id DESC
 ";
 $query = mysqli_query($db, $sql);
 ?>
@@ -18,7 +19,7 @@ $query = mysqli_query($db, $sql);
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Peristiwa - Surat Pengantar Catatan Kepolisian
+            Peristiwa - Surat Keterangan Dokumen Kependudukan Dalam Proses Pembuatan
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
@@ -31,11 +32,12 @@ $query = mysqli_query($db, $sql);
     <div class="col-12">
         <div class="table-responsive">
             <table id="table_data" class="table table-bordered" style="width: 100%;">
-                <caption>Daftar Surat Pengantar Catatan Kepolisian</caption>
+                <caption>Daftar Surat Keterangan Dokumen Kependudukan Dalam Proses Pembuatan</caption>
                 <thead class="bg-primary">
                     <tr>
                         <th>Nama Warga</th>
                         <th>Tanggal Pembuatan</th>
+                        <th>Jenis Pembuatan</th>
                         <td class="text-center">
                             <i class="fa fa-cog"></i>
                         </td>
@@ -52,6 +54,7 @@ $query = mysqli_query($db, $sql);
                                     echo $tgl_obj->format('d-m-Y');
                                     ?>
                                 </td>
+                                <td><?= $row['jenis_pembuatan']; ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">

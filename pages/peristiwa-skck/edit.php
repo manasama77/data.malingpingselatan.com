@@ -41,7 +41,7 @@ if (mysqli_num_rows($query) == 0) {
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Edit Data Data Surat Pengantar Catatan Kepolisian
+            Edit Data Surat Pengantar Catatan Kepolisian
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
