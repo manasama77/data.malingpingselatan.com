@@ -11,17 +11,17 @@
  Target Server Version : 100421
  File Encoding         : 65001
 
- Date: 15/08/2022 14:43:21
+ Date: 15/08/2022 14:46:51
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for sk_domisili
+-- Table structure for sk_domisili_lembaga
 -- ----------------------------
-DROP TABLE IF EXISTS `sk_domisili`;
-CREATE TABLE `sk_domisili`  (
+DROP TABLE IF EXISTS `sk_domisili_lembaga`;
+CREATE TABLE `sk_domisili_lembaga`  (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `jenis_lembaga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama_lembaga` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `sk_domisili`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of sk_domisili
+-- Records of sk_domisili_lembaga
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
