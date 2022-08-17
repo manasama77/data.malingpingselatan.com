@@ -7,23 +7,13 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-    sk_domisili_usaha.id,
-    sk_domisili_usaha.warga_id,
-    sk_domisili_usaha.nama_usaha,
-    sk_domisili_usaha.bidang_usaha,
-    sk_domisili_usaha.alamat_usaha,
-    sk_domisili_usaha.status_bangunan,
-    sk_domisili_usaha.akta_pendirian,
-    sk_domisili_usaha.tahun_pendirian,
-    sk_domisili_usaha.pimpinan,
-    sk_domisili_usaha.jumlah_karyawan,
-    sk_domisili_usaha.modal,
-    sk_domisili_usaha.masa_berlaku,
-    sk_domisili_usaha.tanggal_pembuatan,
-    sk_domisili_usaha.nama_kepala_desa,
-    sk_domisili_usaha.nama_camat,
-    sk_domisili_usaha.nip_camat,
-    sk_domisili_usaha.nomor_surat,
+    sk_hilang.id,
+    sk_hilang.warga_id,
+    sk_hilang.keterangan_kehilangan,
+    sk_hilang.tanggal_pelaporan,
+    sk_hilang.nomor_surat,
+    sk_hilang.nama_kepala_desa,
+    sk_hilang.nrp,
     warga.nama_warga,
     warga.nik_warga,
     warga.tempat_lahir_warga,
@@ -34,10 +24,10 @@ SELECT
     warga.agama_warga,
     warga.pekerjaan_warga,
     warga.alamat_ktp_warga
-FROM sk_domisili_usaha 
-LEFT JOIN warga ON warga.id_warga = sk_domisili_usaha.warga_id
+FROM sk_hilang 
+LEFT JOIN warga ON warga.id_warga = sk_hilang.warga_id
 WHERE
-    sk_domisili_usaha.id = " . $id . "
+    sk_hilang.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -80,7 +70,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN DOMISILI USAHA</th>
+                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN HILANG</th>
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
@@ -90,7 +80,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> Kecamatan <?= KECAMATAN; ?> <?= KOKAB; ?> menerangkan dengan sebenarnya bahwa :
+                                Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> menerangkan bahwa :
                             </td>
                         </tr>
                         <tr>
@@ -142,59 +132,16 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td colspan="3"><br /></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Benar pada saat ini membuka/mempunyai usaha sebagaimana tersebut dibawah ini :</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><br /></td>
-                        </tr>
-                        <tr>
-                            <td>Nama Usaha</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nama_usaha']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Bidang Usaha</td>
-                            <td>:</td>
-                            <td><?= $row_warga['bidang_usaha']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Alamat Usaha</td>
-                            <td>:</td>
-                            <td><?= $row_warga['alamat_usaha']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Status Bangunan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['status_bangunan']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Akta Pendirian</td>
-                            <td>:</td>
-                            <td><?= $row_warga['akta_pendirian']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tahun Pendirian</td>
-                            <td>:</td>
-                            <td><?= $row_warga['tahun_pendirian']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Pimpinan/Pengelola</td>
-                            <td>:</td>
-                            <td><?= $row_warga['pimpinan']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Jumlah Karyawan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['jumlah_karyawan']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Modal</td>
-                            <td>:</td>
-                            <td><?= number_format($row_warga['modal'], 0, ',', '.'); ?></td>
+                            <td colspan="3">Nama tersebut diatas melapor kepada kami, bahwa yang bersangkutan benar telah kehilangan :</td>
                         </tr>
                         <tr>
                             <td colspan="3">
-                                Demikian Keterangan ini dibuat untuk dapat dipergunakan sebagaimana mestinya dan berlaku sampai dengan <b><?= tanggal_indo_no_dash($row_warga['masa_berlaku']); ?></b>.
+                                <?= nl2br($row_warga['keterangan_kehilangan']); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Demikian keterangan ini dibuat dan diberikan atas dasar yang sebenarnya dan kepada yang berkepentingan agar dipergunakan seperlunya.
                             </td>
                         </tr>
                         <tr>
@@ -229,11 +176,12 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <table class="table table-borderless table-condensed table-sm w-100 p-0">
                             <tbody>
                                 <tr>
-                                    <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?></td>
+                                    <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pelaporan']); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        Kepala Desa,
+                                        a.n Kepala Desa<br />
+                                        Kepala Urusan Umum,
                                     </td>
                                 </tr>
                                 <tr>
@@ -241,34 +189,8 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        <?= $row_warga['nama_kepala_desa']; ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-sm-4 offset-md-4 text-center">
-                        <table class="table table-borderless table-condensed table-sm w-100 p-0">
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">Mengetahui :</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        Camat <?= KECAMATAN; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height: 100px;">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center" style="border-bottom: 1px solid #000;">
-                                        <?= $row_warga['nama_camat']; ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        NIP. <?= $row_warga['nip_camat']; ?>
+                                        <?= $row_warga['nama_kepala_desa']; ?><br />
+                                        NRPDes. <?= $row_warga['nrp']; ?>
                                     </td>
                                 </tr>
                             </tbody>
