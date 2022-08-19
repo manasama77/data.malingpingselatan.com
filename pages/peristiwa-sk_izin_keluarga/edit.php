@@ -5,15 +5,15 @@ include('../../config/koneksi.php');
 
 $sql = "
 SELECT
-    sk_hubungan_keluarga.id,
-    sk_hubungan_keluarga.warga_id,
-    sk_hubungan_keluarga.jenis_relasi,
-    sk_hubungan_keluarga.keluarga_id,
-    sk_hubungan_keluarga.keperluan,
-    sk_hubungan_keluarga.tanggal_pelaporan,
-    sk_hubungan_keluarga.nama_kepala_desa,
-    sk_hubungan_keluarga.nrp,
-    sk_hubungan_keluarga.nomor_surat,
+    sk_izin_keluarga.id,
+    sk_izin_keluarga.warga_id,
+    sk_izin_keluarga.jenis_relasi,
+    sk_izin_keluarga.keluarga_id,
+    sk_izin_keluarga.keperluan,
+    sk_izin_keluarga.tanggal_pelaporan,
+    sk_izin_keluarga.nama_kepala_desa,
+    sk_izin_keluarga.nrp,
+    sk_izin_keluarga.nomor_surat,
     warga.nama_warga,
     warga.nik_warga,
     warga.tempat_lahir_warga,
@@ -23,7 +23,7 @@ SELECT
     warga.status_perkawinan,
     warga.agama_warga,
     warga.pekerjaan_warga,
-    warga.alamat_warga,
+    warga.alamat_ktp_warga,
 
     keluarga.nama_warga as nama_keluarga,
     keluarga.nik_warga as nik_keluarga,
@@ -34,12 +34,12 @@ SELECT
     keluarga.status_perkawinan as status_perkawinan_keluarga,
     keluarga.agama_warga as agama_keluarga,
     keluarga.pekerjaan_warga as pekerjaan_keluarga,
-    keluarga.alamat_warga as alamat_keluarga
-FROM sk_hubungan_keluarga 
-LEFT JOIN warga ON warga.id_warga = sk_hubungan_keluarga.warga_id
-LEFT JOIN warga as keluarga ON keluarga.id_warga = sk_hubungan_keluarga.keluarga_id
+    keluarga.alamat_ktp_warga as alamat_ktp_keluarga
+FROM sk_izin_keluarga 
+LEFT JOIN warga ON warga.id_warga = sk_izin_keluarga.warga_id
+LEFT JOIN warga as keluarga ON keluarga.id_warga = sk_izin_keluarga.keluarga_id
 WHERE 
-    sk_hubungan_keluarga.id = " . $_GET['id'] . "
+    sk_izin_keluarga.id = " . $_GET['id'] . "
 ";
 
 $query = mysqli_query($db, $sql);
@@ -53,7 +53,7 @@ if (mysqli_num_rows($query) == 0) {
 <div class="row page-header">
     <div class="col-sm-12 col-md-6">
         <h4>
-            Edit Data Surat Keterangan Hubungan Keluarga
+            Edit Data Surat Keterangan Izin Keluarga
         </h4>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
@@ -77,18 +77,14 @@ if (mysqli_num_rows($query) == 0) {
                 </select>
             </div>
             <div class="form-group">
-                <label for="jenis_relasi">Jenis Relasi <span class="text-danger">*</span></label>
+                <label for="jenis_relasi">Izin Untuk <span class="text-danger">*</span></label>
                 <select class="form-control" id="jenis_relasi" name="jenis_relasi" required>
                     <option value=""></option>
-                    <option <?= ($row['jenis_relasi'] == "Orang Tua Kandung") ? "selected" : ""; ?> value="Orang Tua Kandung">Orang Tua Kandung</option>
-                    <option <?= ($row['jenis_relasi'] == "Kakek") ? "selected" : ""; ?> value="Kakek">Kakek</option>
-                    <option <?= ($row['jenis_relasi'] == "Nenek") ? "selected" : ""; ?> value="Nenek">Nenek</option>
-                    <option <?= ($row['jenis_relasi'] == "Saudara") ? "selected" : ""; ?> value="Saudara">Saudara</option>
+                    <option <?= ($row['jenis_relasi'] == "Orang Tua") ? "selected" : ""; ?> value="Orang Tua">Orang Tua</option>
                     <option <?= ($row['jenis_relasi'] == "Anak") ? "selected" : ""; ?> value="Anak">Anak</option>
-                    <option <?= ($row['jenis_relasi'] == "Paman") ? "selected" : ""; ?> value="Paman">Paman</option>
-                    <option <?= ($row['jenis_relasi'] == "Bibi") ? "selected" : ""; ?> value="Bibi">Bibi</option>
-                    <option <?= ($row['jenis_relasi'] == "Cucu") ? "selected" : ""; ?> value="Cucu">Cucu</option>
-                    <option <?= ($row['jenis_relasi'] == "Mertua") ? "selected" : ""; ?> value="Mertua">Mertua</option>
+                    <option <?= ($row['jenis_relasi'] == "Saudara") ? "selected" : ""; ?> value="Saudara">Saudara</option>
+                    <option <?= ($row['jenis_relasi'] == "Suami") ? "selected" : ""; ?> value="Suami">Suami</option>
+                    <option <?= ($row['jenis_relasi'] == "Istri") ? "selected" : ""; ?> value="Istri">Istri</option>
                 </select>
             </div>
             <div class="form-group">

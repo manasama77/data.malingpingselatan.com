@@ -7,15 +7,15 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT
-    sk_hubungan_keluarga.id,
-    sk_hubungan_keluarga.warga_id,
-    sk_hubungan_keluarga.jenis_relasi,
-    sk_hubungan_keluarga.keluarga_id,
-    sk_hubungan_keluarga.keperluan,
-    sk_hubungan_keluarga.tanggal_pelaporan,
-    sk_hubungan_keluarga.nama_kepala_desa,
-    sk_hubungan_keluarga.nrp,
-    sk_hubungan_keluarga.nomor_surat,
+    sk_izin_keluarga.id,
+    sk_izin_keluarga.warga_id,
+    sk_izin_keluarga.jenis_relasi,
+    sk_izin_keluarga.keluarga_id,
+    sk_izin_keluarga.keperluan,
+    sk_izin_keluarga.tanggal_pelaporan,
+    sk_izin_keluarga.nama_kepala_desa,
+    sk_izin_keluarga.nrp,
+    sk_izin_keluarga.nomor_surat,
     warga.nama_warga,
     warga.nik_warga,
     warga.tempat_lahir_warga,
@@ -25,7 +25,7 @@ SELECT
     warga.status_perkawinan,
     warga.agama_warga,
     warga.pekerjaan_warga,
-    warga.alamat_warga,
+    warga.alamat_ktp_warga,
 
     keluarga.nama_warga as nama_keluarga,
     keluarga.nik_warga as nik_keluarga,
@@ -36,12 +36,12 @@ SELECT
     keluarga.status_perkawinan as status_perkawinan_keluarga,
     keluarga.agama_warga as agama_keluarga,
     keluarga.pekerjaan_warga as pekerjaan_keluarga,
-    keluarga.alamat_warga as alamat_keluarga
-FROM sk_hubungan_keluarga 
-LEFT JOIN warga ON warga.id_warga = sk_hubungan_keluarga.warga_id
-LEFT JOIN warga as keluarga ON keluarga.id_warga = sk_hubungan_keluarga.keluarga_id
+    keluarga.alamat_ktp_warga as alamat_ktp_keluarga
+FROM sk_izin_keluarga 
+LEFT JOIN warga ON warga.id_warga = sk_izin_keluarga.warga_id
+LEFT JOIN warga as keluarga ON keluarga.id_warga = sk_izin_keluarga.keluarga_id
 WHERE
-    sk_hubungan_keluarga.id = " . $id . "
+    sk_izin_keluarga.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -84,132 +84,153 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN HUBUNGAN KELUARGA</th>
+                            <th colspan="4" class="h5 text-center">SURAT KETERANGAN IZIN <?= strtoupper($row_warga['jenis_relasi']); ?></th>
                         </tr>
                         <tr>
-                            <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
+                            <th colspan="4" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
                         </tr>
                         <tr>
-                            <td colspan="3"><br /></td>
+                            <td colspan="4"><br /></td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> menerangkan dengan sebenarnya bahwa :
+                            <td colspan="4">
+                                Yang bertanda tangan dibawah ini <?= PERWAKILAN; ?> menerangkan bahwa :
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 250px;">Nama (Pemohon)</td>
+                            <td style="width: 10px;">1.</td>
+                            <td style="width: 250px;">Nama Lengkap (Pemohon)</td>
                             <td style="width: 5px;">:</td>
                             <td><?= $row_warga['nama_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Nomor Induk Kependudukan</td>
+                            <td></td>
+                            <td>NIK</td>
                             <td>:</td>
                             <td><?= $row_warga['nik_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Tempat / Tanggal Lahir</td>
+                            <td></td>
+                            <td>Tempat, Tanggal Lahir</td>
                             <td>:</td>
                             <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_warga']); ?></td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>Jenis Kelamin</td>
                             <td>:</td>
                             <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td>Warganegara</td>
+                            <td>:</td>
+                            <td><?= $row_warga['negara_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
                             <td>Status Perkawinan</td>
                             <td>:</td>
                             <td><?= $row_warga['status_perkawinan']; ?></td>
                         </tr>
                         <tr>
-                            <td>Warga Negara</td>
-                            <td>:</td>
-                            <td><?= $row_warga['negara_warga']; ?></td>
-                        </tr>
-
-                        <tr>
+                            <td></td>
                             <td>Agama</td>
                             <td>:</td>
                             <td><?= $row_warga['agama_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Pekerjaan Sekarang</td>
+                            <td></td>
+                            <td>Pekerjaan</td>
                             <td>:</td>
                             <td><?= $row_warga['pekerjaan_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Alamat</td>
+                            <td></td>
+                            <td>Alamat KTP</td>
                             <td>:</td>
-                            <td><?= $row_warga['alamat_warga']; ?></td>
+                            <td><?= $row_warga['alamat_ktp_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="3"><br /></td>
+                            <td colspan="4"><br /></td>
                         </tr>
                         <tr>
-                            <td colspan="3">Nama tersebut yang tercantum diatas adalah benar penduduk desa kami yang mempunyai Hubungan Keluarga sebagai <?= $row_warga['jenis_relasi']; ?> dari :</td>
+                            <td colspan="4">Nama tersebut diatas benar telah memberikan izin kepada <?= $row_warga['jenis_relasi']; ?> :</td>
                         </tr>
                         <tr>
-                            <td colspan="3"><br /></td>
+                            <td colspan="4"><br /></td>
                         </tr>
                         <tr>
-                            <td style="width: 220px;">Nama</td>
+                            <td>2.</td>
+                            <td style="width: 220px;">Nama Lengkap</td>
                             <td style="width: 5px;">:</td>
                             <td><?= $row_warga['nama_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Nomor Induk Kependudukan</td>
+                            <td></td>
+                            <td>NIK</td>
                             <td>:</td>
                             <td><?= $row_warga['nik_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Tempat / Tanggal Lahir</td>
+                            <td></td>
+                            <td>Tempat, Tanggal Lahir</td>
                             <td>:</td>
                             <td><?= $row_warga['tempat_lahir_keluarga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_keluarga']); ?></td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>Jenis Kelamin</td>
                             <td>:</td>
                             <td><?= ($row_warga['jenis_kelamin_keluarga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
                         </tr>
                         <tr>
+                            <td></td>
+                            <td>Warganegara</td>
+                            <td>:</td>
+                            <td><?= $row_warga['negara_keluarga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
                             <td>Status Perkawinan</td>
                             <td>:</td>
                             <td><?= $row_warga['status_perkawinan_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Warga Negara</td>
-                            <td>:</td>
-                            <td><?= $row_warga['negara_keluarga']; ?></td>
-                        </tr>
-
-                        <tr>
+                            <td></td>
                             <td>Agama</td>
                             <td>:</td>
                             <td><?= $row_warga['agama_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Pekerjaan Sekarang</td>
+                            <td></td>
+                            <td>Pekerjaan</td>
                             <td>:</td>
                             <td><?= $row_warga['pekerjaan_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td>Alamat</td>
+                            <td></td>
+                            <td>Alamat KTP</td>
                             <td>:</td>
-                            <td><?= $row_warga['alamat_keluarga']; ?></td>
+                            <td><?= $row_warga['alamat_ktp_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                Surat Keterangan ini diberikan untuk keperluan sebagai syarat untuk : <?= $row_warga['keperluan']; ?>
+                            <td colspan="4">
+                                Untuk : <?= $row_warga['keperluan']; ?>.
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
-                                Demikian Surat Keterangan ini kami buat dengan sebenarnya dan dapat dipergunakan sebagaimana mestinya.
+                            <td colspan="4">
+                                Keterangan ini dibuat berdasarkan surat pernyataan Pemohon dan segala akibat yang timbul dikemudian hari dari pembuatan dan penggunaan surat keterangan ini, sepenuhnya menjadi tanggung jawab Pemohon, baik secara hukum ataupun secara moril dan materil tanpa melibatkan pihak lainnya.
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3"><br /></td>
+                            <td colspan="4">
+                                Demikian keterangan ini dibuat dengan sebenarnya untuk dipergunakan seperlunya.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><br /></td>
                         </tr>
                     </tbody>
                 </table>
