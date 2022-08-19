@@ -75,6 +75,7 @@ function is_active($page)
           <a href="../peristiwa-sk_domisili_lembaga" class="list-group-item">Surat Keterangan Domisili Perusahaan, Yayasan, Sekolah, Organisasi</a>
           <a href="../peristiwa-sk_domisili_usaha" class="list-group-item">Surat Keterangan Domisili Usaha</a>
           <a href="../peristiwa-sk_hilang" class="list-group-item">Surat Keterangan Hilang</a>
+          <a href="../peristiwa-sk_hubungan_keluarga" class="list-group-item">Surat Keterangan Hubungan Keluarga</a>
         </div>
       </div>
 
