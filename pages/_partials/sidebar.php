@@ -77,6 +77,7 @@ function is_active($page)
           <a href="../peristiwa-sk_hilang" class="list-group-item">Surat Keterangan Hilang</a>
           <a href="../peristiwa-sk_hubungan_keluarga" class="list-group-item">Surat Keterangan Hubungan Keluarga</a>
           <a href="../peristiwa-sk_izin_keluarga" class="list-group-item">Surat Keterangan Izin Keluarga</a>
+          <a href="../peristiwa-sk_pemakaman" class="list-group-item">Surat Keterangan Pemakaman</a>
         </div>
       </div>
 
