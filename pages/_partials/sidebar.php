@@ -65,7 +65,6 @@ function is_active($page)
           <a href="../peristiwa-tidak-mampu-umum" class="list-group-item">Keterangan Tidak Mampu Umum</a>
           <a href="../peristiwa-domisili" class="list-group-item">Domisili</a>
           <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
-          <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
           <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item">Belum Mempunyai Rumah</a>
           <a href="../peristiwa-cerai" class="list-group-item">SK Cerai</a>
           <a href="../peristiwa-permohonan-perubahan-data-penduduk" class="list-group-item">Permohonan Perubahan Data Penduduk</a>
@@ -78,6 +77,8 @@ function is_active($page)
           <a href="../peristiwa-sk_hubungan_keluarga" class="list-group-item">Surat Keterangan Hubungan Keluarga</a>
           <a href="../peristiwa-sk_izin_keluarga" class="list-group-item">Surat Keterangan Izin Keluarga</a>
           <a href="../peristiwa-sk_pemakaman" class="list-group-item">Surat Keterangan Pemakaman</a>
+          <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
+          <a href="../peristiwa-sk_telah_menikah" class="list-group-item">Surat Keterangan Telah Menikah</a>
         </div>
       </div>
 
