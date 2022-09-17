@@ -82,6 +82,7 @@ function is_active($page)
           <a href="../peristiwa-sk_penghasilan" class="list-group-item">Surat Keterangan Penghasilan</a>
           <a href="../peristiwa-sk_tidak_memiliki_hubungan_keluarga" class="list-group-item">Surat Keterangan Tidak Memiliki Hubungan Keluarga</a>
           <a href="../peristiwa-sk_penghasilan_orangtua" class="list-group-item">Surat Keterangan Penghasilan Orang Tua</a>
+          <a href="../peristiwa-surat_kuasa" class="list-group-item">Surat Kuasa</a>
         </div>
       </div>
 
