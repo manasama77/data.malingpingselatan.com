@@ -20,6 +20,14 @@ function full_tanggal_indo_no_dash($tanggal)
     return $nama_hari . ", " . $hari . " " . $bulan . " " . $tahun;
 }
 
+function jam($tanggal_jam)
+{
+    $tgl_obj = new DateTime($tanggal_jam);
+    $jam = $tgl_obj->format('H');
+    $menit = $tgl_obj->format('i');
+    return $jam . ":" . $menit;
+}
+
 function bulan_indo($bulan)
 {
     if ($bulan == "01") {
@@ -66,4 +74,12 @@ function hari_indo($hari)
     } elseif ($hari == "Sun") {
         return "Minggu";
     }
+}
+
+function umur($tanggal)
+{
+    $dob = new DateTime($tanggal);
+    $now = new DateTime();
+    $age = $now->diff($dob);
+    return $age->y;
 }
