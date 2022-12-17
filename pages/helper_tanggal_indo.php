@@ -76,6 +76,7 @@ function hari_indo($hari)
     }
 }
 
+// hitung umur
 function umur($tanggal)
 {
     $dob = new DateTime($tanggal);
