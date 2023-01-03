@@ -104,7 +104,7 @@ $query = mysqli_query($db, $sql);
             </div>
             <div class="form-group">
                 <label for="keterangan">Keterangan</label>
-                <input type="number" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" />
+                <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan" />
             </div>
             <button type="button" class="btn btn-info btn-block" onclick="tambahKayu()">
                 <i class="fa fa-plus fa-fw"></i> Tambah Jenis Pohon / Kayu

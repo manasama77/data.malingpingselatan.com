@@ -63,7 +63,7 @@ function simpanData() {
   let form = document.querySelector("#form");
   let formData = new FormData(form);
 
-  formData.append("arr_lingkungan", JSON.stringify(arrKayu));
+  formData.append("arr_pohon", JSON.stringify(arrKayu));
 
   $.ajax({
     url: `ajax_store_warga.php`,

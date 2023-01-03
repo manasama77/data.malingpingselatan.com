@@ -2,28 +2,15 @@
 include('../../config/koneksi.php');
 require '../constant.php';
 
-$warga_id              = $_POST['warga_id'];
-$acara                 = $_POST['acara'];
-$tanggal_jam_acara     = $_POST['tanggal_jam_acara'];
-$tempat_acara          = $_POST['tempat_acara'];
-$jumlah_peserta        = $_POST['jumlah_peserta'];
-$hiburan               = $_POST['hiburan'];
-$penanggungjawab_acara = $_POST['penanggungjawab_acara'];
-$tanggal_pelaporan     = $_POST['tanggal_pelaporan'];
-$nama_kepala_desa      = $_POST['nama_kepala_desa'];
-$nomor_kapolsek        = $_POST['nomor_kapolsek'];
-$tanggal_kapolsek      = $_POST['tanggal_kapolsek'];
-$diizinkan_kapolsek    = $_POST['diizinkan_kapolsek'];
-$catatan_kapolsek      = $_POST['catatan_kapolsek'];
-$nama_danramil         = $_POST['nama_danramil'];
-$nrp_danramil          = $_POST['nrp_danramil'];
-$nama_kapolsek         = $_POST['nama_kapolsek'];
-$nrp_kapolsek          = $_POST['nrp_kapolsek'];
-$no_rw                 = $_POST['no_rw'];
-$nama_rw               = $_POST['nama_rw'];
-$no_rt                 = $_POST['no_rt'];
-$nama_rt               = $_POST['nama_rt'];
-$arr_lingkungan        = json_decode($_POST['arr_lingkungan']);
+$tanggal_pelaporan = $_POST['tanggal_pelaporan'];
+$warga_id          = $_POST['warga_id'];
+$status_lahan      = $_POST['status_lahan'];
+$persil_girik_sppt = $_POST['persil_girik_sppt'];
+$lokasi_blok       = $_POST['lokasi_blok'];
+$nama_kepala_desa  = $_POST['nama_kepala_desa'];
+$no_rt             = $_POST['no_rt'];
+$nama_rt           = $_POST['nama_rt'];
+$arr_pohon         = json_decode($_POST['arr_lingkungan']);
 
 // PART NOMOR SURAT
 $sql   = "SELECT `surat_sequences`.`sequence` FROM `surat_sequences` WHERE `surat_sequences`.`tanggal` = '" . date('Y-m-d') . "' ORDER BY `sequence` DESC LIMIT 1";
@@ -51,54 +38,38 @@ if (mysqli_num_rows($query) > 0) {
 $nomor_surat = '140-' . KODE_DESA_SURAT . '/' . $no_urut . '/' . date('m') .  '/' . date('Y');
 
 $sql = "
-INSERT INTO `surat_pengantar_izin_keramaian` 
+INSERT INTO `sk_izin_tebang` 
 (
     warga_id,
-    acara,
-    tanggal_jam_acara,
-    tempat_acara,
-    jumlah_peserta,
-    hiburan,
-    penanggungjawab_acara,
-    tanggal_pelaporan,
-    nama_kepala_desa,
-    nomor_kapolsek,
-    tanggal_kapolsek,
-    diizinkan_kapolsek,
-    catatan_kapolsek,
-    nama_danramil,
-    nrp_danramil,
-    nama_kapolsek,
-    nrp_kapolsek,
-    no_rw,
-    nama_rw,
+    tempat,
+    tanggal_lahir,
+    pekerjaan,
+    alamat,
+    luas_lahan,
+    status_lahan,
+    persil_girik_sppt,
+    lokasi_blok,
+    tanggal_pembuatan,
     no_rt,
     nama_rt,
+    nama_kepala_desa,
     nomor_surat
 )
 VALUES
 (
     '$warga_id',
-    '$acara',
-    '$tanggal_jam_acara',
-    '$tempat_acara',
-    '$jumlah_peserta',
-    '$hiburan',
-    '$penanggungjawab_acara',
-    '$tanggal_pelaporan',
-    '$nama_kepala_desa',
-    '$nomor_kapolsek',
-    '$tanggal_kapolsek',
-    '$diizinkan_kapolsek',
-    '$catatan_kapolsek',
-    '$nama_danramil',
-    '$nrp_danramil',
-    '$nama_kapolsek',
-    '$nrp_kapolsek',
-    '$no_rw',
-    '$nama_rw',
+    '$tempat',
+    '$tanggal_lahir',
+    '$pekerjaan',
+    '$alamat',
+    '$luas_lahan',
+    '$status_lahan',
+    '$persil_girik_sppt',
+    '$lokasi_blok',
+    '$tanggal_pembuatan',
     '$no_rt',
     '$nama_rt',
+    '$nama_kepala_desa',
     '$nomor_surat'
 )
 ";
@@ -112,17 +83,23 @@ if ($query) {
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
 
-    foreach ($arr_lingkungan as $key) {
+    foreach ($arr_pohon as $key) {
         $sql_lingkungan = "
-            INSERT INTO `izin_lingkungan` 
+            INSERT INTO `sk_izin_tebang_item` 
             (
-                surat_pengantar_izin_keramaian_id,
-                nama
+                sk_izin_tebang_id,
+                jenis_kayu,
+                jumlah_batang,
+                hasil_klem,
+                keterangan
             )
             VALUES
             (
                 '$id',
-                '" . $key->name . "'
+                '" . $jenis_kayu . "',
+                '" . $jumlah_batang . "',
+                '" . $hasil_klem . "',
+                '" . $keterangan . "'
             )
         ";
 
