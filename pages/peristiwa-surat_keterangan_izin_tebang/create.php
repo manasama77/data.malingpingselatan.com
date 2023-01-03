@@ -29,8 +29,8 @@ $query = mysqli_query($db, $sql);
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
-                <label for="tanggal_pelaporan">Tanggal Pelaporan <span class="text-danger">*</span></label>
-                <input type="date" class="form-control" id="tanggal_pelaporan" name="tanggal_pelaporan" value="<?= date('Y-m-d'); ?>" placeholder="Tanggal Pelaporan" required />
+                <label for="tanggal_pembuatan">Tanggal Pelaporan <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" id="tanggal_pembuatan" name="tanggal_pembuatan" value="<?= date('Y-m-d'); ?>" placeholder="Tanggal Pelaporan" required />
             </div>
         </div>
         <div class="col-sm-12 col-md-6">
@@ -52,7 +52,7 @@ $query = mysqli_query($db, $sql);
             <h3>Detail Lahan / Tanah</h3>
             <div class="form-group">
                 <label for="luas_lahan">Luas Lahan</label>
-                <input type="text" class="form-control" id="luas_lahan" name="luas_lahan" placeholder="Luas Lahan" requried />
+                <input type="number" class="form-control" id="luas_lahan" name="luas_lahan" placeholder="Luas Lahan" requried />
             </div>
             <div class="form-group">
                 <label for="status_lahan">Status Lahan</label>

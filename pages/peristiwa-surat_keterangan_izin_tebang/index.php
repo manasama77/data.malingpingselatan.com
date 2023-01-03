@@ -7,13 +7,9 @@ $sql   = "
 SELECT  
     sk_izin_tebang.id,
     sk_izin_tebang.warga_id,
-    sk_izin_tebang.tempat,
-    sk_izin_tebang.tanggal_lahir,
-    sk_izin_tebang.pekerjaan,
-    sk_izin_tebang.alamat,
     sk_izin_tebang.luas_lahan,
     sk_izin_tebang.status_lahan,
-    sk_izin_tebang.persik_girik_sppt,
+    sk_izin_tebang.persil_girik_sppt,
     sk_izin_tebang.lokasi_blok,
     sk_izin_tebang.tanggal_pembuatan,
     sk_izin_tebang.nama_rt,
@@ -54,13 +50,13 @@ $query = mysqli_query($db, $sql);
     <div class="col-12">
         <div class="table-responsive">
             <table id="table_data" class="table table-bordered">
-                <caption>Daftar Surat Pengantar Izin Keramaian</caption>
+                <caption>Daftar Surat Keterangan Izin Tebang</caption>
                 <thead class="bg-primary">
                     <tr>
                         <td class="text-center">
                             <i class="fa fa-cog"></i>
                         </td>
-                        <th>Tanggal Pelaporan</th>
+                        <th>Tanggal Pembuatan</th>
                         <th>Nomor Surat</th>
                         <th>Warga</th>
                         <th>Luas Lahan</th>
@@ -72,9 +68,9 @@ $query = mysqli_query($db, $sql);
                             <tr>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
+                                        <!-- <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-warning" title="Edit Data">
                                             <i class="fa fa-pencil fa-fw"></i>
-                                        </a>
+                                        </a> -->
                                         <a href="print.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-success" title="Print Data">
                                             <i class="fa fa-print fa-fw"></i>
                                         </a>
@@ -84,11 +80,11 @@ $query = mysqli_query($db, $sql);
                                     </div>
                                 </td>
                                 <td>
-                                    <?= tanggal_indo_no_dash($row['tanggal_pelaporan']); ?>
+                                    <?= tanggal_indo_no_dash($row['tanggal_pembuatan']); ?>
                                 </td>
                                 <td><?= $row['nomor_surat']; ?></td>
                                 <td><?= $row['nama_warga']; ?></td>
-                                <td><?= number_format($row['luas_lahan'], 0, ',', '.'); ?> Orang</td>
+                                <td><?= number_format($row['luas_lahan'], 0, ',', '.'); ?></td>
                             </tr>
                         <?php }; ?>
                     <?php }; ?>

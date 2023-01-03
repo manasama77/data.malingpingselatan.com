@@ -7,29 +7,18 @@ $id = $_GET['id'];
 
 $sql = "
 SELECT  
-    surat_pengantar_izin_keramaian.id,
-    surat_pengantar_izin_keramaian.warga_id,
-    surat_pengantar_izin_keramaian.acara,
-    surat_pengantar_izin_keramaian.tanggal_jam_acara,
-    surat_pengantar_izin_keramaian.tempat_acara,
-    surat_pengantar_izin_keramaian.jumlah_peserta,
-    surat_pengantar_izin_keramaian.hiburan,
-    surat_pengantar_izin_keramaian.penanggungjawab_acara,
-    surat_pengantar_izin_keramaian.tanggal_pelaporan,
-    surat_pengantar_izin_keramaian.nama_kepala_desa,
-    surat_pengantar_izin_keramaian.nomor_kapolsek,
-    surat_pengantar_izin_keramaian.tanggal_kapolsek,
-    surat_pengantar_izin_keramaian.diizinkan_kapolsek,
-    surat_pengantar_izin_keramaian.catatan_kapolsek,
-    surat_pengantar_izin_keramaian.nama_danramil,
-    surat_pengantar_izin_keramaian.nrp_danramil,
-    surat_pengantar_izin_keramaian.nama_kapolsek,
-    surat_pengantar_izin_keramaian.nrp_kapolsek,
-    surat_pengantar_izin_keramaian.no_rw,
-    surat_pengantar_izin_keramaian.nama_rw,
-    surat_pengantar_izin_keramaian.no_rt,
-    surat_pengantar_izin_keramaian.nama_rt,
-    surat_pengantar_izin_keramaian.nomor_surat,
+    sk_izin_tebang.id,
+    sk_izin_tebang.warga_id,
+    sk_izin_tebang.luas_lahan,
+    sk_izin_tebang.status_lahan,
+    sk_izin_tebang.persil_girik_sppt,
+    sk_izin_tebang.lokasi_blok,
+    sk_izin_tebang.tanggal_pembuatan,
+    sk_izin_tebang.no_rt,
+    sk_izin_tebang.nama_rt,
+    sk_izin_tebang.nama_kepala_desa,
+    sk_izin_tebang.nomor_surat,
+
     
     warga.nama_warga as nama_warga,
     warga.nik_warga as nik_warga,
@@ -42,9 +31,9 @@ SELECT
     warga.pekerjaan_warga as pekerjaan_warga,
     warga.alamat_ktp_warga as alamat_ktp_warga
 
-FROM surat_pengantar_izin_keramaian 
-LEFT JOIN warga ON warga.id_warga = surat_pengantar_izin_keramaian.warga_id
-WHERE surat_pengantar_izin_keramaian.id = " . $id . "
+FROM sk_izin_tebang 
+LEFT JOIN warga ON warga.id_warga = sk_izin_tebang.warga_id
+WHERE sk_izin_tebang.id = " . $id . "
 ";
 $query_warga = mysqli_query($db, $sql);
 if (mysqli_num_rows($query_warga) == 0) {
@@ -52,6 +41,8 @@ if (mysqli_num_rows($query_warga) == 0) {
 } else {
     $row_warga = mysqli_fetch_assoc($query_warga);
 }
+
+$sql_kayu   = "SELECT * FROM sk_izin_tebang_item WHERE sk_izin_tebang_id = '" . $row_warga['id'] . "'";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,68 +86,23 @@ if (mysqli_num_rows($query_warga) == 0) {
 <body onload="window.print();">
 
     <!-- <body> -->
-    <div class="container">
+
+    <div class="container mt-5">
         <div class="row">
             <div class="col-12">
-                <?php include('../_partials/print_header.php'); ?>
-                <hr style="border-top: 5px solid black;" />
-                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 1;">
+                <h4 class="text-center mb-5">SURAT PERNYATAAN PEMILIK POHON</h4>
+                <p>Yang bertandatangan dibawah ini :</p>
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h6 text-center">SURAT PENGANTAR IZIN KERAMAIAN</th>
-                        </tr>
-                        <tr>
-                            <th colspan="3" class="h7 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                Kepala Desa <?= DESA; ?> dalam rangka menindaklanjuti Surat Izin Lingkungan setempat dan memenuhi permohonan dari :
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 250px;">Nama</td>
-                            <td style="width: 5px;">:</td>
+                            <td>Nama</td>
+                            <td>:</td>
                             <td><?= $row_warga['nama_warga']; ?></td>
                         </tr>
                         <tr>
-                            <td>N I K</td>
-                            <td>:</td>
-                            <td><?= $row_warga['nik_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tempat/Tanggal Lahir</td>
+                            <td>Tempat, Tgl. Lahir/Umur</td>
                             <td>:</td>
                             <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_warga']); ?></td>
-                        </tr>
-                        <tr>
-                            <td>Umur</td>
-                            <td>:</td>
-                            <td>
-                                <?= umur($row_warga['tanggal_lahir_warga']); ?> TAHUN
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jenis Kelamin</td>
-                            <td>:</td>
-                            <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td>:</td>
-                            <td><?= $row_warga['status_perkawinan_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Agama</td>
-                            <td>:</td>
-                            <td><?= $row_warga['agama_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Kewarganegaraan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['negara_warga']; ?></td>
                         </tr>
                         <tr>
                             <td>Pekerjaan</td>
@@ -168,73 +114,217 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>:</td>
                             <td><?= $row_warga['alamat_ktp_warga']; ?></td>
                         </tr>
+                    </tbody>
+                </table>
+                <p>Dengan ini mengajukan permohonan izin penebangan pohon kayu pada lahan dengan keterangan sebagai berikut :</p>
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 10px;">a.</td>
+                            <td style="width: 50px;">Jenis Kayu</td>
+                            <td style="width: 10px;">:</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="3">
+                                <ol>
+                                    <?php
+                                    $query_kayu = mysqli_query($db, $sql_kayu);
+                                    while ($row_kayu = mysqli_fetch_assoc($query_kayu)) {
+                                        echo '<li>' . $row_kayu['jenis_kayu'] . '</li>';
+                                    }
+                                    ?>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>b.</td>
+                            <td>Luas Lahan</td>
+                            <td>:</td>
+                            <td><?= $row_warga['luas_lahan']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>c.</td>
+                            <td>Status Lahan</td>
+                            <td>:</td>
+                            <td><?= $row_warga['status_lahan']; ?></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>Persil/Girik/SPPT</td>
+                            <td>:</td>
+                            <td><?= $row_warga['persil_girik_sppt']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>d.</td>
+                            <td>Lokasi/Blok</td>
+                            <td>:</td>
+                            <td><?= $row_warga['lokasi_blok']; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Demikian surat pernyataan ini dibuat dengan sebenarnya, apabila pernyataan ini <strong>TIDAK BENAR</strong>, maka saya bersedia dikenakan sangsi sesuai dengan ketentuan yang berlaku. Lokasi pohon tersebut berada dalam wilayah Desa Malingping Selatan.</p>
+            </div>
+            <div class="col-6">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0">
+                    <tbody>
+                        <tr>
+                            <td class="text-center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Pemohon
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 100px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <?= $row_warga['nama_warga']; ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0">
+                    <tbody>
+                        <tr>
+                            <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                Kepala Desa<br />
+                                <?= DESA; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 100px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">
+                                <?= $row_warga['nama_kepala_desa']; ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer>&nbsp;</footer>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <?php include('../_partials/print_header.php'); ?>
+                <hr style="border-top: 5px solid black;" />
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 1;">
+                    <tbody>
+                        <tr>
+                            <th colspan="3" class="h6 text-center">SURAT KETERANGAN</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" class="h7 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                Yang bertanda tangan dibawah ini Kepala Desa <?= DESA; ?> menerangkan bahwa :
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 250px;">Nama Lengkap</td>
+                            <td style="width: 5px;">:</td>
+                            <td><?= $row_warga['nama_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td>:</td>
+                            <td><?= $row_warga['nik_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Tempat, Tanggal Lahir</td>
+                            <td>:</td>
+                            <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_warga']); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Warganegara</td>
+                            <td>:</td>
+                            <td><?= $row_warga['negara_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Kelamin</td>
+                            <td>:</td>
+                            <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Pekerjaan</td>
+                            <td>:</td>
+                            <td><?= $row_warga['pekerjaan_warga']; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Alamat KTP</td>
+                            <td>:</td>
+                            <td><?= $row_warga['alamat_ktp_warga']; ?></td>
+                        </tr>
                         <tr>
                             <td colspan="3">&nbsp;</td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-justify">
-                                Selanjutnya disebut <u>Pemohon</u><br />
-                                Benar pemohon tersebut mengajukan permohonan untuk memperoleh Suart Pengantar Izin Keramaian dengan keterangan sebagai berikut :
+                                Berdasarkan hasil penelitian kami dilapangan dan data di desa, orang yang tercantum diatas adalah benar mempunyai Lahan/Tanah di wilayah administrasi Desa Malingping Selatan, dengan data-data sebagai berikut :
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 250px;">Acara</td>
+                            <td style="width: 250px;">a. Luas Lahan</td>
                             <td style="width: 5px;">:</td>
-                            <td><?= $row_warga['acara']; ?></td>
+                            <td><?= $row_warga['luas_lahan']; ?></td>
                         </tr>
                         <tr>
-                            <td>Hari/Tanggal</td>
-                            <td>:</td>
-                            <td><?= full_tanggal_indo_no_dash($row_warga['tanggal_jam_acara']); ?></td>
+                            <td style="width: 250px;">b. Persil/Girik/SPPT</td>
+                            <td style="width: 5px;">:</td>
+                            <td><?= $row_warga['persil_girik_sppt']; ?></td>
                         </tr>
                         <tr>
-                            <td>Pukul</td>
-                            <td>:</td>
-                            <td><?= jam($row_warga['tanggal_jam_acara']); ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tempat Acara</td>
-                            <td>:</td>
-                            <td><?= nl2br($row_warga['tempat_acara']); ?></td>
-                        </tr>
-                        <tr>
-                            <td>Jumlah peserta</td>
-                            <td>:</td>
-                            <td><?= $row_warga['jumlah_peserta']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Hiburan</td>
-                            <td>:</td>
-                            <td><?= $row_warga['hiburan']; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Penanggungjawab Acara</td>
-                            <td>:</td>
-                            <td><?= $row_warga['penanggungjawab_acara']; ?></td>
+                            <td style="width: 250px;">c. Lokasi/Blok</td>
+                            <td style="width: 5px;">:</td>
+                            <td><?= $row_warga['lokasi_blok']; ?></td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-justify">
-                                Dengan ini menerangkan bahwa pada dasarnya Pemerintah Desa <?= DESA; ?> tidak berkeberatan atas permohonan Pemohon dengan ketentuan sebagai berikut :
+                                Adapun lahan/tanah tersebut terdapat jenis pohon/kayu tersebut sebagai berikut :
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 1;">
+                    <thead>
                         <tr>
-                            <td colspan="3">
-                                <ol class="text-justify">
-                                    <li>
-                                        Pada waktu dilaksanakan Keramaian harus disertai dengan ketentraman dan ketertiban di lingkungan masyarakat/tetangga, menghargai waktu-waktu ibadah dalam menciptakan kerukunan umat beragama dan serta merta memperhatikan kebersihan lingkungan setelah selesai mengadakan Keramaian.
-                                    </li>
-                                    <li>
-                                        Pada waktu dilaksanakan Keramaian tidak dibenarkan/dilarang melakukan hal-hal/kegiatan yang bertentangan dengan norma agama, adat istiadat bangsa, SARA dan tindakan yang melanggar hukum di Negara Kesatuan Republik Indonesia.
-                                    </li>
-                                    <li>
-                                        Apabila terjadi hal-hal yang dapat menimbulkan ketidakondusifan/perpecahan/konflik di lingkungan masyarakat atas dilaksanakannya Keramaian tersebut, maka Pemohon/Penanggungjawab Acara wajib menyelesaikan hal tersebut secara arif dan bijaksana (musyawarah)/menempuh jalur hukum lainnya, sebagai bentuk pertanggungjawaban Pemohon/Penanggungjawab Acara.
-                                    </li>
-                                    <li>
-                                        Apabila dikemudian hari terdapat kekeliruan dari Surat Pengantar ini, maka akan diadakan peninjauan kembali.
-                                    </li>
-                                </ol>
-                            </td>
+                            <th>No.</th>
+                            <th>Jenis Pohon/Kayu</th>
+                            <th>Banyaknya</th>
+                            <th>Perkiraan Hasil Klem (m³)</th>
+                            <th>Ket.</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query_kayu = mysqli_query($db, $sql_kayu);
+                        $no = 1;
+                        while ($row_kayu = mysqli_fetch_assoc($query_kayu)) {
+                            echo '<tr>';
+                            echo '<td>' . $no++ . '.</td>';
+                            echo '<td>' . $row_kayu['jenis_kayu'] . '</td>';
+                            echo '<td>' . $row_kayu['jumlah_batang'] . ' Batang</td>';
+                            echo '<td>' . $row_kayu['hasil_klem'] . '</td>';
+                            echo '<td>' . $row_kayu['keterangan'] . '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
                     </tbody>
                 </table>
                 <div class="row">
@@ -246,7 +336,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        Pemohon
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -254,7 +344,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        <?= $row_warga['nama_warga']; ?>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -264,7 +354,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem;">
                             <tbody>
                                 <tr>
-                                    <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pelaporan']); ?></td>
+                                    <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center">
@@ -284,103 +374,56 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">&nbsp;</div>
-                    <div class="col-6">
-                        <table class="table table-borderless table-condensed table-sm w-100" style="font-size: 0.8rem; line-height: .9;">
-                            <tbody>
-                                <tr>
-                                    <td colspan="3">
-                                        Pertimbangan Kapolsek Malingping :
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 15px;">Nomor</td>
-                                    <td style="width: 5px;">:</td>
-                                    <td style="border-bottom: 1px solid black;"><?= $row_warga['nomor_kapolsek']; ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Tanggal</td>
-                                    <td>:</td>
-                                    <td style="border-bottom: 1px solid black;"><?= tanggal_indo_no_dash($row_warga['tanggal_kapolsek']); ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" class="text-uppercase">
-                                        Atas permohonannya :<br />
-                                        <?= $row_warga['diizinkan_kapolsek']; ?> DIIZINKAN, DENGAN CATATAN :<br />
-                                        <?= nl2br($row_warga['catatan_kapolsek']); ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6 text-center" style="font-size: 0.9rem;">
-                        Mengetahui :<br />
-                        Danramil <?= KECAMATAN; ?>,<br />
-                        <div style="height: 100px;">&nbsp;</div>
-                        <?= $row_warga['nama_danramil']; ?><br />
-                        NRP.<?= $row_warga['nrp_danramil']; ?>
-                    </div>
-                    <div class="col-6 text-center" style="font-size: 0.9rem;">
-                        <br />
-                        Kapolsek <?= KECAMATAN; ?>,<br />
-                        <div style="height: 100px;">&nbsp;</div>
-                        <?= $row_warga['nama_kapolsek']; ?><br />
-                        NRP.<?= $row_warga['nrp_kapolsek']; ?>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <footer>&nbsp;</footer>
     <div class="container mt-5">
-        <h5 class="h5 text-center">SURAT IZIN LINGKUNGAN</h5>
-        <p>Saya yang bertanda tangan dibawah ini :</p>
-        <table class="table table-borderless table-condensed table-sm w-100 p-0">
+        <div class="row">
+            <div class="col-6">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
+                    <tbody>
+                        <tr>
+                            <td>Perihal</td>
+                            <td>:</td>
+                            <td>Permohonan Izin<br />Penebangan Pohon/Kayu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td style="width: 30px;">Kepada</td>
+                            <td>:</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Yth.</td>
+                            <td colspan="3">Ketua TimTeknis Pelayanan Perizinan Terpadu <?= KOKAB; ?></td>
+                        </tr>
+                        <tr>
+                            <td>c.q.</td>
+                            <td colspan="3">Ketua Tim Teknis Pelayanan Perizinan Terpadu Kecamatan <?= KECAMATAN; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p>Yang bertandatangan dibawah ini :</p>
+        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
             <tbody>
                 <tr>
                     <td style="width: 250px;">Nama</td>
-                    <td style="width: 5px;">:</td>
+                    <td style="width: 10px;">:</td>
                     <td><?= $row_warga['nama_warga']; ?></td>
                 </tr>
                 <tr>
-                    <td>N I K</td>
-                    <td>:</td>
-                    <td><?= $row_warga['nik_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Tempat/Tanggal Lahir</td>
+                    <td>Tempat, Tgl. Lahir/Umur</td>
                     <td>:</td>
                     <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_warga']); ?></td>
-                </tr>
-                <tr>
-                    <td>Umur</td>
-                    <td>:</td>
-                    <td>
-                        <?= umur($row_warga['tanggal_lahir_warga']); ?> TAHUN
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>:</td>
-                    <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>:</td>
-                    <td><?= $row_warga['status_perkawinan_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Agama</td>
-                    <td>:</td>
-                    <td><?= $row_warga['agama_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Kewarganegaraan</td>
-                    <td>:</td>
-                    <td><?= $row_warga['negara_warga']; ?></td>
                 </tr>
                 <tr>
                     <td>Pekerjaan</td>
@@ -392,93 +435,57 @@ if (mysqli_num_rows($query_warga) == 0) {
                     <td>:</td>
                     <td><?= $row_warga['alamat_ktp_warga']; ?></td>
                 </tr>
+            </tbody>
+        </table>
+        <p>Dengan ini mengajukan permohonan izin penebangan pohon/kayu pada lahan Milik dengan keterangan sebagai berikut :</p>
+        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 1;">
+            <tbody>
                 <tr>
-                    <td colspan="3">&nbsp;</td>
+                    <td style="width: 10px;">a.</td>
+                    <td style="width: 150px;">Jenis Pohon/Kayu</td>
+                    <td style="width: 10px;">:</td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td colspan="3" class="text-justify">
-                        Dalam hal ini kami bermaksud memohon Ijin Lingkungan dalam rangka :
+                    <td></td>
+                    <td colspan="3">
+                        <ol>
+                            <?php
+                            $query_kayu = mysqli_query($db, $sql_kayu);
+                            while ($row_kayu = mysqli_fetch_assoc($query_kayu)) {
+                                echo '<li>' . $row_kayu['jenis_kayu'] . '</li>';
+                            }
+                            ?>
+                        </ol>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 250px;">Acara</td>
-                    <td style="width: 5px;">:</td>
-                    <td><?= $row_warga['acara']; ?></td>
-                </tr>
-                <tr>
-                    <td>Hari/Tanggal</td>
+                    <td>b.</td>
+                    <td>Luas Lahan</td>
                     <td>:</td>
-                    <td><?= full_tanggal_indo_no_dash($row_warga['tanggal_jam_acara']); ?></td>
+                    <td><?= $row_warga['luas_lahan']; ?></td>
                 </tr>
                 <tr>
-                    <td>Pukul</td>
+                    <td>c.</td>
+                    <td>Status Lahan</td>
                     <td>:</td>
-                    <td><?= jam($row_warga['tanggal_jam_acara']); ?></td>
+                    <td><?= $row_warga['status_lahan']; ?></td>
                 </tr>
                 <tr>
-                    <td>Tempat Acara</td>
+                    <td></td>
+                    <td>Persil/Girik/SPPT</td>
                     <td>:</td>
-                    <td><?= nl2br($row_warga['tempat_acara']); ?></td>
+                    <td><?= $row_warga['persil_girik_sppt']; ?></td>
                 </tr>
                 <tr>
-                    <td>Jumlah peserta</td>
+                    <td>d.</td>
+                    <td>Lokasi/Blok</td>
                     <td>:</td>
-                    <td><?= $row_warga['jumlah_peserta']; ?></td>
-                </tr>
-                <tr>
-                    <td>Hiburan</td>
-                    <td>:</td>
-                    <td><?= $row_warga['hiburan']; ?></td>
-                </tr>
-                <tr>
-                    <td>Penanggungjawab Acara</td>
-                    <td>:</td>
-                    <td><?= $row_warga['penanggungjawab_acara']; ?></td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-justify">
-                        Izin Lingkungan kami kepada (perwakilan warga/tetangga) :
-                    </td>
+                    <td><?= $row_warga['lokasi_blok']; ?></td>
                 </tr>
             </tbody>
         </table>
-        <div class="row mb-3">
-            <div class="col-6">
-                <ol>
-                    <?php
-                    $sql_lingkungan   = "select * from izin_lingkungan where surat_pengantar_izin_keramaian_id = '" . $id . "'";
-                    $query_lingkungan = mysqli_query($db, $sql_lingkungan);
-
-                    while ($row_lingkungan = mysqli_fetch_assoc($query_lingkungan)) {
-                    ?>
-                        <li><?= $row_lingkungan['nama']; ?></li>
-                    <?php } ?>
-                </ol>
-            </div>
-            <div class="col-6">
-                <?php
-                $query_lingkungan = mysqli_query($db, $sql_lingkungan);
-                $i = 1;
-                while ($row_lingkungan = mysqli_fetch_assoc($query_lingkungan)) {
-                ?>
-                    <?php if ($i % 2 == 1) { ?>
-                        <div class="row">
-                            <div class="col-6" style="border-bottom: 1px solid black;"><?= $i; ?>.</div>
-                            <div class="col-6"></div>
-                        </div>
-                    <?php } else { ?>
-                        <div class="row">
-                            <div class="col-6"></div>
-                            <div class="col-6" style="border-bottom: 1px solid black;"><?= $i; ?>.</div>
-                        </div>
-                <?php
-                    }
-                    $i++;
-                }
-                ?>
-            </div>
-        </div>
-        <p class="text-justify">Demikian Permohonan Izin Lingkungan kami buat dengan sebenarnya. Atas kerjasamanya diucapkan terima kasih.</p>
+        <p class="text-justify">Sebagai bahan pertimbangan Bapak/Ibu, Daftar Klaim Tegakan dan Surat Keterangan dari Desa terlampir. Demikian permohonan ini saya buat dengan sebenarnya, atas perhatiannya saya ucapkan terima kasih.</p>
         <div class="row">
             <div class="col-6">
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
@@ -506,212 +513,11 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pelaporan']); ?></td>
+                            <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pembuatan']); ?></td>
                         </tr>
                         <tr>
                             <td class="text-center">
-                                Hormat Saya,
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height: 100px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <?= $row_warga['nama_warga']; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <p class="text-center">Mengetahui :</p>
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
-                    <tbody>
-                        <tr>
-                            <td class="text-center">Ketua Lingkungan</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                Rukun Warga <?= $row_warga['no_rw']; ?>,
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height: 100px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <?= $row_warga['nama_rw']; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-6">
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
-                    <tbody>
-                        <tr>
-                            <td class="text-center">Ketua Lingkungan</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                Rukun Tetangga <?= $row_warga['no_rt']; ?>,
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height: 100px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                <?= $row_warga['nama_rt']; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <footer>&nbsp;</footer>
-    <div class="container mt-5">
-        <h5 class="h5 text-center">SURAT PERNYATAAN</h5>
-        <p>Dengan Hormat,</p>
-        <p>Saya yang bertanda tangan dibawah ini :</p>
-        <table class="table table-borderless table-condensed table-sm w-100 p-0">
-            <tbody>
-                <tr>
-                    <td style="width: 250px;">Nama</td>
-                    <td style="width: 5px;">:</td>
-                    <td><?= $row_warga['nama_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>N I K</td>
-                    <td>:</td>
-                    <td><?= $row_warga['nik_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Tempat/Tanggal Lahir</td>
-                    <td>:</td>
-                    <td><?= $row_warga['tempat_lahir_warga']; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_lahir_warga']); ?></td>
-                </tr>
-                <tr>
-                    <td>Umur</td>
-                    <td>:</td>
-                    <td>
-                        <?= umur($row_warga['tanggal_lahir_warga']); ?> TAHUN
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>:</td>
-                    <td><?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?></td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>:</td>
-                    <td><?= $row_warga['status_perkawinan_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Agama</td>
-                    <td>:</td>
-                    <td><?= $row_warga['agama_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Kewarganegaraan</td>
-                    <td>:</td>
-                    <td><?= $row_warga['negara_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Pekerjaan</td>
-                    <td>:</td>
-                    <td><?= $row_warga['pekerjaan_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td>Alamat</td>
-                    <td>:</td>
-                    <td><?= $row_warga['alamat_ktp_warga']; ?></td>
-                </tr>
-                <tr>
-                    <td colspan="3">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-justify">
-                        Selaku Penanggungjawab kegiatan Keramaian :
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 250px;">Acara</td>
-                    <td style="width: 5px;">:</td>
-                    <td><?= $row_warga['acara']; ?></td>
-                </tr>
-                <tr>
-                    <td>Hari/Tanggal</td>
-                    <td>:</td>
-                    <td><?= full_tanggal_indo_no_dash($row_warga['tanggal_jam_acara']); ?></td>
-                </tr>
-                <tr>
-                    <td>Pukul</td>
-                    <td>:</td>
-                    <td><?= jam($row_warga['tanggal_jam_acara']); ?></td>
-                </tr>
-                <tr>
-                    <td>Tempat Acara</td>
-                    <td>:</td>
-                    <td><?= nl2br($row_warga['tempat_acara']); ?></td>
-                </tr>
-                <tr>
-                    <td>Jumlah peserta</td>
-                    <td>:</td>
-                    <td><?= $row_warga['jumlah_peserta']; ?></td>
-                </tr>
-                <tr>
-                    <td>Hiburan</td>
-                    <td>:</td>
-                    <td><?= $row_warga['hiburan']; ?></td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="text-justify">Dengan ini menyatakan bahwa dalam pelaksanaan acara tersebut akan mematuhi peraturan sesuai dengan ketentuan/syarat-syarat sebagai berikut :</p>
-        <ol>
-            <li>Pada waktu dilaksanakan Keramaian akan disertai dengan ketentraman dan ketertiban di lingkungan masyarakat/tetangga, menghargai waktu-waktu ibadah dalam menciptakan kerukunan umat beragama dan serta merta memperhatikan kebersihan lingkungan setelah selesai mengadakan Keramaian.</li>
-            <li>Pada waktu dilaksanakan Keramaian saya menjamin tidak akan melakukan hal-hal/kegiatan/tindakan yang dilarang/melakukan hal-hal/kegiatan/tindakan yang bertentangan dengan norma agama, adat istiadat bangsa, SARA dan tindakan yang melanggar hukum di Negara Kesatuan Republik Indonesia.</li>
-            <li>Apabila terjadi hal-hal yang menimbulkan ketidakondusifan/perpecahan/konflik di lingkungan masyarakat atas dilaksanakannya Keramaian tersebut, maka saya bersedia menyelesaikan hal tersebut secara arif dan bijaksana (musyawarah)/menempuh jalur hukum lainnya.</li>
-            <li>Selanjutnya saya menyatakan juga dengan sesungguhnya tanpa paksaan bilamana ketentuan/syarat-syarat tersebut dilanggar maka aparat/pejabat yang berwenang dapat mencabut izin/membatalkan acara/keramaiann tersebut, dan segala kerugian yang dialami akibat pencabutan izin/pembatalan acara/keramaian ini kami tidak menuntut ganti rugi apapun terhadap tindakan tersebut.</li>
-        </ol>
-        <p class="text-justify">Demikian surat pernyataan ini saya buat dengan sebenarnya dalam keadaan sehat jasmani dan rohani untuk diketahui dan dipergunakan seperlunya.</p>
-        <div class="row">
-            <div class="col-6">
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
-                    <tbody>
-                        <tr>
-                            <td class="text-center">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                &nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height: 100px;">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                &nbsp;
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-6">
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
-                    <tbody>
-                        <tr>
-                            <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pelaporan']); ?></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">
-                                Hormat Saya,
+                                Pemohon,
                             </td>
                         </tr>
                         <tr>

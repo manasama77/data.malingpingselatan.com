@@ -2,8 +2,9 @@
 include('../../config/koneksi.php');
 require '../constant.php';
 
-$tanggal_pelaporan = $_POST['tanggal_pelaporan'];
+$tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id'];
+$luas_lahan        = $_POST['luas_lahan'];
 $status_lahan      = $_POST['status_lahan'];
 $persil_girik_sppt = $_POST['persil_girik_sppt'];
 $lokasi_blok       = $_POST['lokasi_blok'];
@@ -41,10 +42,6 @@ $sql = "
 INSERT INTO `sk_izin_tebang` 
 (
     warga_id,
-    tempat,
-    tanggal_lahir,
-    pekerjaan,
-    alamat,
     luas_lahan,
     status_lahan,
     persil_girik_sppt,
@@ -58,10 +55,6 @@ INSERT INTO `sk_izin_tebang`
 VALUES
 (
     '$warga_id',
-    '$tempat',
-    '$tanggal_lahir',
-    '$pekerjaan',
-    '$alamat',
     '$luas_lahan',
     '$status_lahan',
     '$persil_girik_sppt',
@@ -96,10 +89,10 @@ if ($query) {
             VALUES
             (
                 '$id',
-                '" . $jenis_kayu . "',
-                '" . $jumlah_batang . "',
-                '" . $hasil_klem . "',
-                '" . $keterangan . "'
+                '" . $key->nama_kayu . "',
+                '" . $key->jumlah_batang . "',
+                '" . $key->hasil_klem . "',
+                '" . $key->keterangan . "'
             )
         ";
 
