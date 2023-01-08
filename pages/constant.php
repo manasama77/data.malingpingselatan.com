@@ -14,3 +14,7 @@ define("PRINT_KOKAB",  "PEMERINTAH KABUPATEN LEBAK");
 define("PRINT_KECAMATAN",  "KECAMATAN MALINGPING");
 define("PRINT_DESA",  "DESA MALINGPING SELATAN");
 define("INSTANSI",  "Pemerintah Desa Malingping Selatan");
+define("KODE_PROVINSI",  36);
+define("KODE_KOKAB",  02);
+define("KODE_KECAMATAN",  01);
+define("KODE_DESA",  2018);
