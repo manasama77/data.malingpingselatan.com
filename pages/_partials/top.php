@@ -6,7 +6,7 @@ if (!isset($_SESSION['user'])) {
   exit();
 }
 require('../../config/koneksi.php');
-require('../constant.php');
+require_once('../constant.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -75,7 +75,7 @@ if (mysqli_num_rows($query_warga) == 0) {
             <div class="col-12">
                 <?php include('../_partials/print_header.php'); ?>
                 <hr style="border-top: 5px solid black;" />
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 0.9">
                     <tbody>
                         <tr>
                             <th colspan="3" class="h5 text-center">SURAT KETERANGAN BELUM MENIKAH</th>
@@ -150,9 +150,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td colspan="3" class="text-justify">
                                 Nama tersebut yang tercantum diatas sepanjang sepengetahuan kami dan berdasarkan surat pengantar dari Ketua RT/RW serta pengakuan dari Pemohon, adalah benar pada saat surat ini diterbitkan nama tersebut/Pemohon Belum Menikah
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><br /></td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-justify">

@@ -52,4 +52,5 @@ echo json_encode([
     'keyword' => $keyword,
     'total'   => mysqli_num_rows($query),
     'data'    => $data,
+    'sql'    => $sql,
 ]);

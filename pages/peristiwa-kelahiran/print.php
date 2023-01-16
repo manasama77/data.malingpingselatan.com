@@ -109,7 +109,7 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
             <div class="col-12">
                 <?php include('../_partials/print_header.php'); ?>
                 <hr style="border-top: 5px solid black;" />
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 0.9;">
                     <tbody>
                         <tr>
                             <th colspan="4" class="h5 text-center">SURAT KETERANGAN KELAHIRAN</th>
@@ -151,14 +151,14 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
                             <td><?= $row_warga['tempat_kelahiran']; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center;">
-                                Telah lahir seorang bayi <?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?> bernama :
+                            <td colspan="4">
+                                Telah lahir seorang bayi <?= ($row_warga['jenis_kelamin_warga'] == "L") ? "Laki-Laki" : "Perempuan"; ?>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center; text-decoration: underline;">
-                                <?= $row_warga['nama_warga']; ?>
-                            </td>
+                            <td colspan="2">Bernama</td>
+                            <td>:</td>
+                            <td><?= $row_warga['nama_warga']; ?></td>
                         </tr>
                         <tr>
                             <td colspan="2">Anak ke</td>

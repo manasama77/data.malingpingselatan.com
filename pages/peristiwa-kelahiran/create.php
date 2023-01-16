@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . '../../_partials/top.php';
 include('../../config/koneksi.php');
-include('../constant.php');
 ?>
 
 <div class="row page-header">

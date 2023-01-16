@@ -81,7 +81,7 @@ if (mysqli_num_rows($query_warga) == 0) {
             <div class="col-12">
                 <?php include('../_partials/print_header.php'); ?>
                 <hr style="border-top: 5px solid black;" />
-                <table class="table table-borderless table-condensed table-sm w-100 p-0">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="line-height: 0.9">
                     <tbody>
                         <tr>
                             <th colspan="4" class="h5 text-center">SURAT KETERANGAN IZIN <?= strtoupper($row_warga['jenis_relasi']); ?></th>
@@ -243,7 +243,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                                 </tr>
                                 <tr>
                                     <td class="text-center">
-                                        Pemohon,
+                                        Pemohon,<br />&nbsp;
                                     </td>
                                 </tr>
                                 <tr>

@@ -100,7 +100,7 @@ if (mysqli_num_rows($query_warga) == 0) {
             <div class="col-12">
                 <?php include('../_partials/print_header.php'); ?>
                 <hr style="border-top: 5px solid black;" />
-                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 1;">
+                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 0.9;">
                     <tbody>
                         <tr>
                             <th colspan="3" class="h6 text-center">SURAT PENGANTAR IZIN KERAMAIAN</th>
@@ -239,7 +239,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                 </table>
                 <div class="row">
                     <div class="col-6">
-                        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem;">
+                        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 0.9;">
                             <tbody>
                                 <tr>
                                     <td class="text-center">&nbsp;</td>
@@ -261,7 +261,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </table>
                     </div>
                     <div class="col-6">
-                        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem;">
+                        <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 0.9;">
                             <tbody>
                                 <tr>
                                     <td class="text-center"><?= DESA; ?>, <?= tanggal_indo_no_dash($row_warga['tanggal_pelaporan']); ?></td>
@@ -287,7 +287,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <div class="row">
                     <div class="col-6">&nbsp;</div>
                     <div class="col-6">
-                        <table class="table table-borderless table-condensed table-sm w-100" style="font-size: 0.8rem; line-height: .9;">
+                        <table class="table table-borderless table-condensed table-sm w-100" style="font-size: 0.8rem; line-height:0 .9;">
                             <tbody>
                                 <tr>
                                     <td colspan="3">
