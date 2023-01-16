@@ -85,6 +85,7 @@ function is_active($page)
           <a href="../peristiwa-surat_kuasa" class="list-group-item">Surat Kuasa</a>
           <a href="../peristiwa-surat_pengantar_izin_keramaian" class="list-group-item">Surat Pengantar Izin Keramaian</a>
           <a href="../peristiwa-surat_keterangan_izin_tebang" class="list-group-item">Surat Keterangan Izin Tebang</a>
+          <a href="../peristiwa_sk_datang_wni" class="list-group-item">Surat Keterangan Datang WNI</a>
         </div>
       </div>
 
