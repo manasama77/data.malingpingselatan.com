@@ -20,7 +20,7 @@ require_once('../constant.php');
   <meta name="author" content="Murti Ayu Wijayanti">
   <link rel="icon" href="../../../favicon.ico">
 
-  <title>Aplikasi Penduduk Desa Malingping Selatan - Banten</title>
+  <title>Aplikasi Penduduk Desa <?= DESA; ?> - <?= PROVINSI; ?></title>
 
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">

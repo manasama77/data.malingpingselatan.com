@@ -19,25 +19,34 @@
       <td><input type="text" class="form-control" name="nama_warga" required></td>
     </tr>
     <tr>
-      <th>Tempat Lahir</th>
-      <td>:</td>
-      <td><input type="text" class="form-control" name="tempat_lahir_warga" required></td>
-    </tr>
-    <tr>
-      <th>Tanggal Lahir</th>
+      <th>Tempat, Tanggal Lahir</th>
       <td>:</td>
       <td>
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <span class="fa fa-table"></span>
-            </span>
-            <input type="text" class="form-control datepicker input-md" name="tgl_kelahiran" size="20" readonly="readonly" />
+        <div class="row">
+          <div class="col-sm-3">
+            <input type="text" class="form-control" name="tempat_lahir_warga" required>
           </div>
-          <span class="help-block">
-          </span>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="fa fa-table"></span>
+              </span>
+              <input type="text" class="form-control datepicker input-md" name="tgl_kelahiran" size="20" readonly="readonly" />
+            </div>
+          </div>
         </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Golongan Darah</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="golongan_darah" minlength="1" maxlength="3">
+          </div>
         </div>
+      </td>
     </tr>
     <tr>
       <th>Jenis Kelamin</th>
@@ -165,13 +174,60 @@
       <th>Status Perkawinan</th>
       <td>:</td>
       <td>
-        <select class="form-control" name="status_perkawinan" required>
+        <select class="form-control" name="status_perkawinan">
           <option value="" selected disabled>- pilih -</option>
           <option value="Belum Kawin">Belum Kawin</option>
           <option value="Kawin">Kawin</option>
           <option value="Cerai Hidup">Cerai Hidup</option>
           <option value="Cerai Mati">Cerai Mati</option>
         </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Tanggal Perkawinan</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="fa fa-table"></span>
+              </span>
+              <input type="text" class="form-control datepicker input-md" name="tanggal_perkawinan" readonly="readonly" />
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Status hubungan dalam keluarga</th>
+      <td>:</td>
+      <td>
+        <input type="text" class="form-control" name="status_hubungan_dalam_keluarga" maxlength="100" required>
+      </td>
+    </tr>
+    <tr>
+      <th>Nama Orang Tua</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="input-group">
+              <div class="input-group-addon">
+                Ayah
+              </div>
+              <input type="text" class="form-control" name="nama_ayah" placeholder="Nama Ayah" required>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="input-group">
+              <div class="input-group-addon">
+                Ibu
+              </div>
+              <input type="text" class="form-control" name="nama_ibu" placeholder="Nama Ibu" required>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
   </table>

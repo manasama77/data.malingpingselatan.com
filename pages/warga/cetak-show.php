@@ -2,6 +2,7 @@
 require_once("../../assets/lib/fpdf/fpdf.php");
 require_once("../../config/koneksi.php");
 require('../constant.php');
+require '../helper_tanggal_indo.php';
 
 class PDF extends FPDF
 {
@@ -45,6 +46,51 @@ class PDF extends FPDF
         // Page number
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
+
+    function WordWrap(&$text, $maxwidth)
+    {
+        $text = trim($text);
+        if ($text === '')
+            return 0;
+        $space = $this->GetStringWidth(' ');
+        $lines = explode("\n", $text);
+        $text = '';
+        $count = 0;
+
+        foreach ($lines as $line) {
+            $words = preg_split('/ +/', $line);
+            $width = 0;
+
+            foreach ($words as $word) {
+                $wordwidth = $this->GetStringWidth($word);
+                if ($wordwidth > $maxwidth) {
+                    // Word is too long, we cut it
+                    for ($i = 0; $i < strlen($word); $i++) {
+                        $wordwidth = $this->GetStringWidth(substr($word, $i, 1));
+                        if ($width + $wordwidth <= $maxwidth) {
+                            $width += $wordwidth;
+                            $text .= substr($word, $i, 1);
+                        } else {
+                            $width = $wordwidth;
+                            $text = rtrim($text) . "\n" . substr($word, $i, 1);
+                            $count++;
+                        }
+                    }
+                } elseif ($width + $wordwidth <= $maxwidth) {
+                    $width += $wordwidth + $space;
+                    $text .= $word . ' ';
+                } else {
+                    $width = $wordwidth + $space;
+                    $text = rtrim($text) . "\n" . $word . ' ';
+                    $count++;
+                }
+            }
+            $text = rtrim($text) . "\n";
+            $count++;
+        }
+        $text = rtrim($text);
+        return $count;
+    }
 }
 
 // ambil dari url
@@ -82,6 +128,10 @@ $pdf->cell(80, 7, strtoupper($data_warga[0]['tempat_lahir_warga']), 0, 1, 'L');
 $pdf->cell(45, 7, 'Tanggal Lahir', 0, 0, 'L');
 $pdf->cell(2, 7, ':', 0, 0, 'L');
 $pdf->cell(80, 7, ($data_warga[0]['tanggal_lahir_warga'] != '0000-00-00') ? date('d-m-Y', strtotime($data_warga[0]['tanggal_lahir_warga'])) : '', 0, 1, 'L');
+
+$pdf->cell(45, 7, 'Golongan Darah', 0, 0, 'L');
+$pdf->cell(2, 7, ':', 0, 0, 'L');
+$pdf->cell(80, 7, $data_warga[0]['golongan_darah'], 0, 1, 'L');
 
 $pdf->cell(45, 7, 'Jenis Kelamin', 0, 0, 'L');
 $pdf->cell(2, 7, ':', 0, 0, 'L');
@@ -142,6 +192,22 @@ $pdf->cell(20, 7, strtoupper($data_warga[0]['pekerjaan_warga']), 0, 1, 'L');
 $pdf->cell(45, 7, 'Status Kependudukan', 0, 0, 'L');
 $pdf->cell(2, 7, ':', 0, 0, 'L');
 $pdf->cell(24, 7, strtoupper($data_warga[0]['status_warga']), 0, 1, 'L');
+
+$pdf->cell(45, 7, 'Status Perkawinan', 0, 0, 'L');
+$pdf->cell(2, 7, ':', 0, 0, 'L');
+$pdf->cell(80, 7, $data_warga[0]['status_perkawinan'], 0, 1, 'L');
+
+$pdf->cell(45, 7, 'Tanggal Perkawinan', 0, 0, 'L');
+$pdf->cell(2, 7, ':', 0, 0, 'L');
+$pdf->cell(80, 7, tanggal_indo_no_dash($data_warga[0]['tanggal_perkawinan']), 0, 1, 'L');
+
+$pdf->cell(45, 7, 'Nama Ayah', 0, 0, 'L');
+$pdf->cell(2, 7, ':', 0, 0, 'L');
+$pdf->cell(80, 7, $data_warga[0]['nama_ayah'], 0, 1, 'L');
+
+$pdf->cell(45, 7, 'Nama Ibu', 0, 0, 'L');
+$pdf->cell(2, 7, ':', 0, 0, 'L');
+$pdf->cell(80, 7, $data_warga[0]['nama_ibu'], 0, 1, 'L');
 
 $pdf->Ln(10);
 

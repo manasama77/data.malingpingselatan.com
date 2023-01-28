@@ -1,4 +1,7 @@
-<?php include('../_partials/top.php') ?>
+<?php
+include('../_partials/top.php');
+require '../helper_tanggal_indo.php';
+?>
 
 <h1 class="page-header">Data Warga</h1>
 <?php include('_partials/menu.php') ?>
@@ -58,8 +61,13 @@ if ($data_kk[] = !NULL) {
     <th>Tanggal Lahir</th>
     <td>:</td>
     <td>
-      <?php echo ($data_warga[0]['tanggal_lahir_warga'] != '0000-00-00') ? date('d-m-Y', strtotime($data_warga[0]['tanggal_lahir_warga'])) : '' ?>
+      <?= tanggal_indo_no_dash($data_warga[0]['tanggal_lahir_warga']); ?>
     </td>
+  </tr>
+  <tr>
+    <th>Golongan Darah</th>
+    <td>:</td>
+    <td><?php echo $data_warga[0]['golongan_darah'] ?></td>
   </tr>
   <tr>
     <th>Jenis Kelamin</th>
@@ -144,6 +152,26 @@ if ($data_kk[] = !NULL) {
     <th>Status Perkawinan</th>
     <td>:</td>
     <td><?php echo $data_warga[0]['status_perkawinan'] ?></td>
+  </tr>
+  <tr>
+    <th>Tanggal Perkawinan</th>
+    <td>:</td>
+    <td><?php echo tanggal_indo_no_dash($data_warga[0]['tanggal_perkawinan']) ?></td>
+  </tr>
+  <tr>
+    <th>Status hubungan dalam keluarga</th>
+    <td>:</td>
+    <td><?= $data_warga[0]['status_hubungan_dalam_keluarga']; ?></td>
+  </tr>
+  <tr>
+    <th>Nama Ayah</th>
+    <td>:</td>
+    <td><?= $data_warga[0]['nama_ayah']; ?></td>
+  </tr>
+  <tr>
+    <th>Nama Ibu</th>
+    <td>:</td>
+    <td><?= $data_warga[0]['nama_ibu']; ?></td>
   </tr>
 </table>
 

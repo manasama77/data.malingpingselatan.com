@@ -22,29 +22,33 @@
       <td><input type="text" class="form-control" name="nama_warga" value="<?php echo $data_warga[0]['nama_warga'] ?>"></td>
     </tr>
     <tr>
-      <th>Tempat Lahir</th>
-      <td>:</td>
-      <td><input type="text" class="form-control" name="tempat_lahir_warga" value="<?php echo $data_warga[0]['tempat_lahir_warga'] ?>"></td>
-    </tr>
-    <tr>
-      <th>Tanggal Lahir</th>
+      <th>Tempat, Tanggal Lahir</th>
       <td>:</td>
       <td>
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <span class="fa fa-table"></span>
-            </span>
-            <input type="text" class="form-control datepicker input-md" name="tanggal_lahir_warga" size="20" value="<?php echo ($data_warga[0]['tanggal_lahir_warga'] == "0000-00-00") ? null : $data_warga[0]['tanggal_lahir_warga'] ?>" />
+        <div class="row">
+          <div class="col-sm-3">
+            <input type="text" class="form-control" name="tempat_lahir_warga" value="<?php echo $data_warga[0]['tempat_lahir_warga'] ?>" required>
           </div>
-          <span class="help-block">
-            <?php # echo form_error('tgl_kelahiran', '<p class="field_error">','</p>')
-            ?>
-          </span>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="fa fa-table"></span>
+              </span>
+              <input type="text" class="form-control datepicker input-md" name="tgl_kelahiran" value="<?php echo ($data_warga[0]['tanggal_lahir_warga'] == "0000-00-00") ? null : $data_warga[0]['tanggal_lahir_warga'] ?>" readonly="readonly" />
+            </div>
+          </div>
         </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Golongan Darah</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-2">
+            <input type="text" class="form-control" name="golongan_darah" minlength="1" maxlength="3" value="<?= $data_warga[0]['golongan_darah']; ?>">
+          </div>
         </div>
-        <!-- <input type="text" class="form-control datepicker" name="tanggal_lahir_warga" value="<?php echo $data_warga[0]['tanggal_lahir_warga'] ?>">-->
-
       </td>
     </tr>
     <tr>
@@ -206,6 +210,53 @@
           <option <?= ($data_warga[0]['status_perkawinan'] == "Cerai Hidup") ? "selected" : "" ?> value="Cerai Hidup">Cerai Hidup</option>
           <option <?= ($data_warga[0]['status_perkawinan'] == "Cerai Mati") ? "selected" : "" ?> value="Cerai Mati">Cerai Mati</option>
         </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Tanggal Perkawinan</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="fa fa-table"></span>
+              </span>
+              <input type="text" class="form-control datepicker input-md" name="tanggal_perkawinan" readonly="readonly" value="<?= $data_warga[0]['tanggal_perkawinan']; ?>" />
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Status hubungan dalam keluarga</th>
+      <td>:</td>
+      <td>
+        <input type="text" class="form-control" name="status_hubungan_dalam_keluarga" maxlength="100" value="<?= $data_warga[0]['status_hubungan_dalam_keluarga']; ?>" required>
+      </td>
+    </tr>
+    <tr>
+      <th>Nama Orang Tua</th>
+      <td>:</td>
+      <td>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="input-group">
+              <div class="input-group-addon">
+                Ayah
+              </div>
+              <input type="text" class="form-control" name="nama_ayah" placeholder="Nama Ayah" value="<?= $data_warga[0]['nama_ayah']; ?>" required>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="input-group">
+              <div class="input-group-addon">
+                Ibu
+              </div>
+              <input type="text" class="form-control" name="nama_ibu" placeholder="Nama Ibu" value="<?= $data_warga[0]['nama_ibu']; ?>" required>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
   </table>

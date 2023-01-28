@@ -7,7 +7,7 @@
 <?php include('../dasbor/data-index.php') ?>
 
 <div class="table-responsive">
-  <table class="table table-striped table-condensed table-hover" id="datatable">
+  <table class="table table-striped table-condensed table-hover" id="datatable" style="min-height: 500px;">
     <thead>
       <tr>
         <th>#</th>
