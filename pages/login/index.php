@@ -9,6 +9,17 @@ if (isset($_SESSION['user'])) {
 ?>
 
 <?php include('../_partials/top-login.php') ?>
+<style>
+  @media only screen and (min-width: 992px) {
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden
+    }
+  }
+</style>
 
 <body class="unsplash-bg-random">
   <div class="row">
