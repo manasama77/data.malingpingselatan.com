@@ -114,7 +114,7 @@ if (mysqli_num_rows($query) == 0) {
             </div>
             <div class="form-group">
                 <label for="nip_camat">NIP <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nip_camat" name="nip_camat" placeholder="NIP" value="<?= $row['nip_camat']; ?>" required />
+                <input type="text" class="form-control" id="nip_camat" name="nip_camat" placeholder="NIP" value="<?= $row['nip_camat']; ?>" />
             </div>
             <div class="form-group">
                 <hr />

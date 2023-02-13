@@ -82,8 +82,8 @@ $query = mysqli_query($db, $sql);
                 <input type="text" class="form-control" id="nama_camat" name="nama_camat" placeholder="Nama Camat" required />
             </div>
             <div class="form-group">
-                <label for="nip_camat">NIP <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nip_camat" name="nip_camat" placeholder="NIP" required />
+                <label for="nip_camat">NIP</label>
+                <input type="text" class="form-control" id="nip_camat" name="nip_camat" placeholder="NIP" />
             </div>
             <div class="form-group">
                 <hr />
