@@ -72,6 +72,7 @@ if (mysqli_num_rows($query_warga) == 0) {
 
         * {
             font-family: bookman, sans-serif;
+            line-height: 1.5;
         }
 
         .text-justify {
@@ -107,9 +108,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <th colspan="3" class="h7 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>
-                        </tr>
-                        <tr>
-                            <td colspan="3">&nbsp;</td>
                         </tr>
                         <tr>
                             <td colspan="3">
@@ -167,9 +165,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>Alamat</td>
                             <td>:</td>
                             <td><?= $row_warga['alamat_ktp_warga']; ?></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">&nbsp;</td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-justify">
