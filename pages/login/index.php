@@ -16,7 +16,6 @@ if (isset($_SESSION['user'])) {
     body {
       margin: 0;
       height: 100%;
-      overflow: hidden
     }
   }
 </style>
