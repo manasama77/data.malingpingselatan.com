@@ -59,7 +59,7 @@ $query = mysqli_query($db, $sql);
 <div class="row">
     <div class="col-12">
         <div class="table-responsive">
-            <table id="table_data" class="table table-bordered" style="width: 1010px;">
+            <table id="table_data" class="table table-bordered">
                 <caption>Daftar Surat Keterangan Tidak Memiliki Hubungan Keluarga</caption>
                 <thead class="bg-primary">
                     <tr>

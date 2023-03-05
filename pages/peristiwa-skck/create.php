@@ -63,8 +63,8 @@ $query = mysqli_query($db, $sql);
                         <input type="text" class="form-control" id="nama_danramil" name="nama_danramil" placeholder="Nama Danramil" required />
                     </div>
                     <div class="form-group">
-                        <label for="nrp_danramil">NRP Danramil <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nrp_danramil" name="nrp_danramil" placeholder="NRP Danramil" required />
+                        <label for="nrp_danramil">NRP Danramil</label>
+                        <input type="text" class="form-control" id="nrp_danramil" name="nrp_danramil" placeholder="NRP Danramil" />
                     </div>
                     <div class="form-group">
                         <label for="reg_no_danramil">Reg. No Danramil</label>
@@ -82,8 +82,8 @@ $query = mysqli_query($db, $sql);
                         <input type="text" class="form-control" id="nama_kapolsek" name="nama_kapolsek" placeholder="Nama Kapolsek" required />
                     </div>
                     <div class="form-group">
-                        <label for="nrp_kapolsek">NRP Kapolsek <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nrp_kapolsek" name="nrp_kapolsek" placeholder="NRP Kapolsek" required />
+                        <label for="nrp_kapolsek">NRP Kapolsek</label>
+                        <input type="text" class="form-control" id="nrp_kapolsek" name="nrp_kapolsek" placeholder="NRP Kapolsek" />
                     </div>
                     <div class="form-group">
                         <label for="reg_no_kapolsek">Reg. No Kapolsek</label>

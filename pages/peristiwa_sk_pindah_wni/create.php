@@ -293,8 +293,8 @@ $query = mysqli_query($db, $sql);
                 <input type="text" class="form-control" id="nama_kepala_desa" name="nama_kepala_desa" placeholder="Nama Kepala Desa" required />
             </div>
             <div class="form-group">
-                <label for="nrp">NRP Kepala Desa <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NRP Kepala Desa" required />
+                <label for="nrp">NRP Kepala Desa</label>
+                <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NRP Kepala Desa" />
             </div>
         </div>
     </div>

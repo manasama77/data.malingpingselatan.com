@@ -94,8 +94,8 @@ if (mysqli_num_rows($query) == 0) {
                         <input type="text" class="form-control" id="nama_danramil" name="nama_danramil" placeholder="Nama Danramil" value="<?= $row['nama_danramil']; ?>" required />
                     </div>
                     <div class="form-group">
-                        <label for="nrp_danramil">NRP Danramil <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nrp_danramil" name="nrp_danramil" placeholder="NRP Danramil" value="<?= $row['nrp_danramil']; ?>" required />
+                        <label for="nrp_danramil">NRP Danramil</label>
+                        <input type="text" class="form-control" id="nrp_danramil" name="nrp_danramil" placeholder="NRP Danramil" value="<?= $row['nrp_danramil']; ?>" />
                     </div>
                     <div class="form-group">
                         <label for="reg_no_danramil">Reg. No Danramil</label>
@@ -113,8 +113,8 @@ if (mysqli_num_rows($query) == 0) {
                         <input type="text" class="form-control" id="nama_kapolsek" name="nama_kapolsek" placeholder="Nama Kapolsek" value="<?= $row['nama_kapolsek']; ?>" required />
                     </div>
                     <div class="form-group">
-                        <label for="nrp_kapolsek">NRP Kapolsek <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="nrp_kapolsek" name="nrp_kapolsek" placeholder="NRP Kapolsek" value="<?= $row['nrp_kapolsek']; ?>" required />
+                        <label for="nrp_kapolsek">NRP Kapolsek</label>
+                        <input type="text" class="form-control" id="nrp_kapolsek" name="nrp_kapolsek" placeholder="NRP Kapolsek" value="<?= $row['nrp_kapolsek']; ?>" />
                     </div>
                     <div class="form-group">
                         <label for="reg_no_kapolsek">Reg. No Kapolsek</label>

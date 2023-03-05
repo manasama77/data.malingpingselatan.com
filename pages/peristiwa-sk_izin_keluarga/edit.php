@@ -104,8 +104,8 @@ if (mysqli_num_rows($query) == 0) {
                 <input type="text" class="form-control" id="nama_kepala_desa" name="nama_kepala_desa" placeholder="Nama Kepala Desa" value="<?= $row['nama_kepala_desa']; ?>" required />
             </div>
             <div class="form-group">
-                <label for="nrp">NRP <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NRP" value="<?= $row['nrp']; ?>" required />
+                <label for="nrp">NRP</label>
+                <input type="text" class="form-control" id="nrp" name="nrp" placeholder="NRP" value="<?= $row['nrp']; ?>" />
             </div>
             <div class="form-group">
                 <hr />
