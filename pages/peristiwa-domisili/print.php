@@ -39,6 +39,7 @@ if (mysqli_num_rows($query_warga) == 0) {
 
         * {
             font-family: bookman, sans-serif;
+            line-height: 1.5;
         }
     </style>
 </head>

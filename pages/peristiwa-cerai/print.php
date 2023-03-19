@@ -67,6 +67,7 @@ if (mysqli_num_rows($query_warga) == 0) {
 
         * {
             font-family: bookman, sans-serif;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -149,9 +150,6 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td>
                                 <?= $row_warga['alamat_ktp_pelapor']; ?>
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><br /></td>
                         </tr>
                         <tr>
                             <td>2.</td>

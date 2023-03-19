@@ -45,6 +45,9 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Update Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    $sql_warga = "UPDATE warga SET status_warga = 'Meninggal' WHERE id_warga = '$warga_id'";
+    mysqli_query($db, $sql_warga);
 }
 
 echo json_encode([

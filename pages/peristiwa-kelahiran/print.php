@@ -97,6 +97,7 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
 
         * {
             font-family: bookman, sans-serif;
+            line-height: 1.5;
         }
     </style>
 </head>
