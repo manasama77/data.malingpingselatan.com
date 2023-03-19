@@ -1,11 +1,12 @@
 <?php
 session_start();
-
+require('../../pages/constant.php');
 // jika sudah login, alihkan ke halaman dasbor
 if (isset($_SESSION['user'])) {
   header('Location: ../dasbor/index.php');
   exit();
 }
+
 ?>
 
 <?php include('../_partials/top-login.php') ?>
@@ -27,10 +28,10 @@ if (isset($_SESSION['user'])) {
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-heading text-center">
-              FORM LOGIN APLIKASI KEPENDUDUKAN MALINGPING SELATAN BANTEN<br />
+              FORM LOGIN APLIKASI KEPENDUDUKAN <?= strtoupper(DESA); ?><br /><?= strtoupper(PROVINSI); ?><br />
             </h3>
             <div class="text-center">
-              <img src="../../assets/img/foto.jpeg" style="background-size: cover; width: 50%;" class="img-thumbnail" />
+              <img src="../../assets/img/<?= LOGO; ?>" style="background-size: cover; width: 50%;" class="img-thumbnail" />
             </div>
           </div>
         </div>

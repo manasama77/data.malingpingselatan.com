@@ -16,7 +16,7 @@
         <div class="col-xs-12">
           <!--<font color="grey"><h4>Selamat Datang di Aplikasi Kependudukan Griya Sangiangmas - Gebang Raya - Periuk Kota Tangerang</h4></font>-->
           <font color="grey" style="text-align: center;">
-            <h4>Selamat Datang di Aplikasi Kependudukan Malingping Selatan Banten</h4>
+            <h4>Selamat Datang di Aplikasi Kependudukan <?= DESA; ?> <?= PROVINSI; ?></h4>
           </font>
         </div>
       </div>
