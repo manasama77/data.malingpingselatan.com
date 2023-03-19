@@ -1,7 +1,6 @@
 <?php include('../_partials/top.php') ?>
 
 <h1 class="page-header">Data Warga</h1>
-<?php include('_partials/menu.php') ?>
 
 <?php include('data-index.php') ?>
 <?php include('../dasbor/data-index.php') ?>
@@ -57,14 +56,17 @@ if (isset($_GET['keyword'])) {
 
 $sql .= "limit $halaman_awal, $batas";
 
-echo $sql;
-
 $query = mysqli_query($db, $sql);
 $jumlah_data_filtered = mysqli_num_rows($query);
 ?>
 <div class="row" style="margin-bottom: 30px;">
+  <div class="col-sm-12 col-lg-6">
+    <a href="create.php" class="btn btn-primary">
+      <i class="fa fa-plus"></i> Tambah
+    </a>
+  </div>
   <form action="./index.php" method="get">
-    <div class="col-lg-6">
+    <div class="col-sm-12 col-lg-6">
       <div class="input-group">
         <input type="text" name="keyword" class="form-control" placeholder="Masukan kata kunci..." value="<?= $keyword ?? null; ?>">
         <span class="input-group-btn">
