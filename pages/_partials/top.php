@@ -30,7 +30,8 @@ require_once('../constant.php');
   <link href="../../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- DataTable CSS -->
-  <link href="../../assets/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="../../assets/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
+  <link href="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.css" rel="stylesheet" />
 
   <!-- Custom styles for this template -->
   <link href="../../assets/css/dashboard.css" rel="stylesheet">

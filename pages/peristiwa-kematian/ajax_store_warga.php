@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
@@ -55,6 +56,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "KEMATIAN", $nomor_surat, 'kematian', $id);
 
     $sql_warga = "UPDATE warga SET status_warga = 'Meninggal' WHERE id_warga = '$warga_id'";
     mysqli_query($db, $sql_warga);

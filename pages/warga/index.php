@@ -78,8 +78,8 @@ $jumlah_data_filtered = mysqli_num_rows($query);
   </form>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-striped table-condensed table-hover" style="min-height: 500px;">
+<div class="table-responsive" style="min-height: 500px;">
+  <table class="table table-striped table-condensed table-hover">
     <thead>
       <tr>
         <th>#</th>

@@ -102,6 +102,12 @@ function is_active($page)
 </ul>
 -->
 
+  <ul class="nav nav-sidebar">
+    <li class="<?php is_active('laporan'); ?>">
+      <a href="../laporan"><i class="fa fa-file"></i> Laporan</a>
+    </li>
+  </ul>
+
   <?php if ($_SESSION['user']['status_user'] != 'Kasi_Pemerintahan') : ?>
     <ul class="nav nav-sidebar">
       <li class="<?php is_active('user'); ?>">
