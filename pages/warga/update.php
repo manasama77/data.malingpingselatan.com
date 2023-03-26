@@ -12,7 +12,7 @@ include('../../config/koneksi.php');
 $nik_warga           = htmlspecialchars($_POST['nik_warga']);
 $nama_warga          = htmlspecialchars($_POST['nama_warga']);
 $tempat_lahir_warga  = htmlspecialchars($_POST['tempat_lahir_warga']);
-$tanggal_lahir_warga = htmlspecialchars($_POST['tanggal_lahir_warga']);
+$tanggal_lahir_warga = htmlspecialchars($_POST['tgl_kelahiran']);
 $golongan_darah      = htmlspecialchars($_POST['golongan_darah']);
 $jenis_kelamin_warga = htmlspecialchars($_POST['jenis_kelamin_warga']);
 
