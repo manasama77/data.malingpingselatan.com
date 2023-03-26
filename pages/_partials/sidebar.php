@@ -13,7 +13,10 @@ function is_active($page)
     echo '';
   }
 }
-
+$uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri_segments = explode('/', $uri_path);
+echo '<pre>' . print_r($uri_segments[3], 1) . '</pre>';
+exit;
 function contain_peristiwa($type)
 {
   $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
