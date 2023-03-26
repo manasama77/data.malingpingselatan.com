@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $warga_id              = $_POST['warga_id'];
 $acara                 = $_POST['acara'];
@@ -111,6 +112,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Pengantar Izin Keramaian", $nomor_surat, 'surat_pengantar_izin_keramaian', $id);
 
     foreach ($arr_lingkungan as $key) {
         $sql_lingkungan = "

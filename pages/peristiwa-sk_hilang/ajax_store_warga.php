@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $warga_id              = $_POST['warga_id'];
 $keterangan_kehilangan = $_POST['keterangan_kehilangan'];
@@ -63,6 +64,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Keterangan Hilang", $nomor_surat, 'sk_hilang', $id);
 }
 
 echo json_encode([

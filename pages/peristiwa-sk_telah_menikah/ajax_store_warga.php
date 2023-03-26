@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $pelapor_id          = $_POST['pelapor_id'];
 $pasangan_id         = $_POST['pasangan_id'];
@@ -84,6 +85,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Keterangan Telah Menikah", $nomor_surat, 'sk_telah_menikah', $id);
 }
 
 echo json_encode([

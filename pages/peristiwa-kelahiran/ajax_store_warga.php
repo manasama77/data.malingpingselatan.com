@@ -1,8 +1,8 @@
 <?php
 session_start();
 require '../../config/koneksi.php';
-require '../../f_logs.php';
 require '../constant.php';
+require '../../f_logs.php';
 
 $tanggal_pembuatan   = $_POST['tanggal_pembuatan'];
 $nama_bayi           = $_POST['nama_bayi'];
@@ -178,7 +178,7 @@ if ($query) {
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
 
-    logs($warga_id, "KELAHIRAN", $nomor_surat, 'kelahiran', $id);
+    logs($warga_id, "Kelahiran", $nomor_surat, 'kelahiran', $id);
 }
 
 echo json_encode([

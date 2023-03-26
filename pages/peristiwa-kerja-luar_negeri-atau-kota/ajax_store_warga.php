@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $warga_id          = $_POST['warga_id_hidden'];
@@ -54,6 +55,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Bekerja di Luar Negeri / Kota", $nomor_surat, 'bekerja_luar_negeri_kota', $id);
 }
 
 echo json_encode([

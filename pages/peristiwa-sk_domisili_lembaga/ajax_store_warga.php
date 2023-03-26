@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $tanggal_pembuatan = $_POST['tanggal_pembuatan'];
 $masa_berlaku      = $_POST['masa_berlaku'];
@@ -89,6 +90,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Keterangan Domisili Perusahaan, Yayasan, Sekolah, Organisasi", $nomor_surat, 'sk_domisili_lembaga', $id);
 }
 
 echo json_encode([

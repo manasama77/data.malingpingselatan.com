@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $warga_id          = $_POST['warga_id'];
 $kerabat_id        = $_POST['kerabat_id'];
@@ -66,6 +67,9 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Keterangan Tidak Memiliki Hubungan Keluarga
+    ", $nomor_surat, 'sk_tidak_memiliki_hubungan_keluarga', $id);
 }
 
 echo json_encode([

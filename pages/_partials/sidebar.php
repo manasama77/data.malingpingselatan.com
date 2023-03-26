@@ -1,18 +1,29 @@
 <?php
 $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri_segments = explode('/', $uri_path);
+
 function is_active($page)
 {
   $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   $uri_segments = explode('/', $uri_path);
-
-  echo $uri_segments[3];
 
   if ($uri_segments[3] == $page) {
     echo 'active';
   } else {
     echo '';
   }
+}
+
+function contain_peristiwa($type)
+{
+  $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+  $uri_segments = explode('/', $uri_path);
+
+  $arr_explode = explode('-', $uri_segments[3]);
+  if ($arr_explode[0] == "peristiwa") {
+    return $type;
+  }
+  return null;
 }
 ?>
 <div class="nav navbar-sidebar">
@@ -48,46 +59,46 @@ function is_active($page)
 
   <div class="dropdown">
     <ul class="nav nav-sidebar">
-      <li class="<?php is_active('peristiwa'); ?>">
+      <li class="<?= contain_peristiwa("active"); ?>">
         <a href="#peristiwa" data-toggle="collapse"><i class="fa fa-newspaper-o fa-fw"></i> Peristiwa</a>
         <!--<a href="../mutasi"><i class="glyphicon glyphicon-export"></i> Data Mutasi</a>-->
       </li>
-      <div id="peristiwa" class="collapse">
+      <div id="peristiwa" class="collapse <?= contain_peristiwa("in"); ?>">
         <div class="list-group">
-          <a href="../peristiwa-kelahiran" class="list-group-item">Kelahiran</a>
-          <a href="../peristiwa-kematian" class="list-group-item">Kematian</a>
-          <a href="../peristiwa-kerja-luar_negeri-atau-kota" class="list-group-item">Bekerja Luar Negeri / Kota</a>
-          <a href="../peristiwa-belum-bekerja" class="list-group-item">Belum Bekerja</a>
-          <a href="../peristiwa-keterangan-usaha" class="list-group-item">Keterangan Usaha</a>
-          <a href="../peristiwa-tidak-mampu-kesehatan-puskesmas" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (PUSKESMAS)</a>
-          <a href="../peristiwa-tidak-mampu-kesehatan-rsud" class="list-group-item">Keterangan Tidak Mampu Untuk Kesehatan (RSUD)</a>
-          <a href="../peristiwa-tidak-mampu-sekolah" class="list-group-item">Keterangan Tidak Mampu Untuk Sekolah</a>
-          <a href="../peristiwa-tidak-mampu-umum" class="list-group-item">Keterangan Tidak Mampu Umum</a>
-          <a href="../peristiwa-domisili" class="list-group-item">Domisili</a>
-          <a href="../peristiwa-surat-pengantar" class="list-group-item">Surat Pengantar</a>
-          <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item">Belum Mempunyai Rumah</a>
-          <a href="../peristiwa-cerai" class="list-group-item">SK Cerai</a>
-          <a href="../peristiwa-permohonan-perubahan-data-penduduk" class="list-group-item">Permohonan Perubahan Data Penduduk</a>
-          <a href="../peristiwa-skck" class="list-group-item">Surat Pengantar Catatan Kepolisian</a>
-          <a href="../peristiwa-sk_dokumen_kependudukan_dalam_proses_pembuatan" class="list-group-item">Surat Keterangan Dokumen Kependudukan
+          <a href="../peristiwa-kelahiran" class="list-group-item <?php is_active('peristiwa-kelahiran'); ?>">Kelahiran</a>
+          <a href="../peristiwa-kematian" class="list-group-item <?php is_active('peristiwa-kematian'); ?>">Kematian</a>
+          <a href="../peristiwa-kerja-luar_negeri-atau-kota" class="list-group-item <?php is_active('peristiwa-kerja-luar_negeri-atau-kota'); ?>">Bekerja Luar Negeri / Kota</a>
+          <a href="../peristiwa-belum-bekerja" class="list-group-item <?php is_active('peristiwa-belum-bekerja'); ?>">Belum Bekerja</a>
+          <a href="../peristiwa-keterangan-usaha" class="list-group-item <?php is_active('peristiwa-keterangan-usaha'); ?>">Keterangan Usaha</a>
+          <a href="../peristiwa-tidak-mampu-kesehatan-puskesmas" class="list-group-item <?php is_active('peristiwa-tidak-mampu-kesehatan-puskesmas'); ?>">Keterangan Tidak Mampu Untuk Kesehatan (PUSKESMAS)</a>
+          <a href="../peristiwa-tidak-mampu-kesehatan-rsud" class="list-group-item <?php is_active('peristiwa-tidak-mampu-kesehatan-rsud'); ?>">Keterangan Tidak Mampu Untuk Kesehatan (RSUD)</a>
+          <a href="../peristiwa-tidak-mampu-sekolah" class="list-group-item <?php is_active('peristiwa-tidak-mampu-sekolah'); ?>">Keterangan Tidak Mampu Untuk Sekolah</a>
+          <a href="../peristiwa-tidak-mampu-umum" class="list-group-item <?php is_active('peristiwa-tidak-mampu-umum'); ?>">Keterangan Tidak Mampu Umum</a>
+          <a href="../peristiwa-domisili" class="list-group-item <?php is_active('peristiwa-domisili'); ?>">Domisili</a>
+          <a href="../peristiwa-surat-pengantar" class="list-group-item <?php is_active('peristiwa-surat-pengantar'); ?>">Surat Pengantar</a>
+          <a href="../peristiwa-belum-mempunyai-rumah" class="list-group-item <?php is_active('peristiwa-belum-mempunyai-rumah'); ?>">Belum Mempunyai Rumah</a>
+          <a href="../peristiwa-cerai" class="list-group-item <?php is_active('peristiwa-cerai'); ?>">SK Cerai</a>
+          <a href="../peristiwa-permohonan-perubahan-data-penduduk" class="list-group-item <?php is_active('peristiwa-permohonan-perubahan-data-penduduk'); ?>">Permohonan Perubahan Data Penduduk</a>
+          <a href="../peristiwa-skck" class="list-group-item <?php is_active('peristiwa-skck'); ?>">Surat Pengantar Catatan Kepolisian</a>
+          <a href="../peristiwa-sk_dokumen_kependudukan_dalam_proses_pembuatan" class="list-group-item <?php is_active('peristiwa-sk_dokumen_kependudukan_dalam_proses_pembuatan'); ?>">Surat Keterangan Dokumen Kependudukan
             Dalam Proses Pembuatan</a>
-          <a href="../peristiwa-sk_domisili_lembaga" class="list-group-item">Surat Keterangan Domisili Perusahaan, Yayasan, Sekolah, Organisasi</a>
-          <a href="../peristiwa-sk_domisili_usaha" class="list-group-item">Surat Keterangan Domisili Usaha</a>
-          <a href="../peristiwa-sk_hilang" class="list-group-item">Surat Keterangan Hilang</a>
-          <a href="../peristiwa-sk_hubungan_keluarga" class="list-group-item">Surat Keterangan Hubungan Keluarga</a>
-          <a href="../peristiwa-sk_izin_keluarga" class="list-group-item">Surat Keterangan Izin Keluarga</a>
-          <a href="../peristiwa-sk_pemakaman" class="list-group-item">Surat Keterangan Pemakaman</a>
-          <a href="../peristiwa-belum-menikah" class="list-group-item">Belum Menikah</a>
-          <a href="../peristiwa-sk_telah_menikah" class="list-group-item">Surat Keterangan Telah Menikah</a>
-          <a href="../peristiwa-sk_penghasilan" class="list-group-item">Surat Keterangan Penghasilan</a>
-          <a href="../peristiwa-sk_tidak_memiliki_hubungan_keluarga" class="list-group-item">Surat Keterangan Tidak Memiliki Hubungan Keluarga</a>
-          <a href="../peristiwa-sk_penghasilan_orangtua" class="list-group-item">Surat Keterangan Penghasilan Orang Tua</a>
-          <a href="../peristiwa-surat_kuasa" class="list-group-item">Surat Kuasa</a>
-          <a href="../peristiwa-surat_pengantar_izin_keramaian" class="list-group-item">Surat Pengantar Izin Keramaian</a>
-          <a href="../peristiwa-surat_keterangan_izin_tebang" class="list-group-item">Surat Keterangan Izin Tebang</a>
-          <a href="../peristiwa_sk_datang_wni" class="list-group-item">Surat Keterangan Datang WNI</a>
-          <a href="../peristiwa_sk_pindah_wni" class="list-group-item">Surat Keterangan Pindah WNI</a>
-          <a href="../peristiwa_sk_identitas_sama" class="list-group-item">Surat Pernyataan Identitas Sama</a>
+          <a href="../peristiwa-sk_domisili_lembaga" class="list-group-item <?php is_active('peristiwa-sk_domisili_lembaga'); ?>">Surat Keterangan Domisili Perusahaan, Yayasan, Sekolah, Organisasi</a>
+          <a href="../peristiwa-sk_domisili_usaha" class="list-group-item <?php is_active('peristiwa-sk_domisili_usaha'); ?>">Surat Keterangan Domisili Usaha</a>
+          <a href="../peristiwa-sk_hilang" class="list-group-item <?php is_active('peristiwa-sk_hilang'); ?>">Surat Keterangan Hilang</a>
+          <a href="../peristiwa-sk_hubungan_keluarga" class="list-group-item <?php is_active('peristiwa-sk_hubungan_keluarga'); ?>">Surat Keterangan Hubungan Keluarga</a>
+          <a href="../peristiwa-sk_izin_keluarga" class="list-group-item <?php is_active('peristiwa-sk_izin_keluarga'); ?>">Surat Keterangan Izin Keluarga</a>
+          <a href="../peristiwa-sk_pemakaman" class="list-group-item <?php is_active('peristiwa-sk_pemakaman'); ?>">Surat Keterangan Pemakaman</a>
+          <a href="../peristiwa-belum-menikah" class="list-group-item <?php is_active('peristiwa-belum-menikah'); ?>">Belum Menikah</a>
+          <a href="../peristiwa-sk_telah_menikah" class="list-group-item <?php is_active('peristiwa-sk_telah_menikah'); ?>">Surat Keterangan Telah Menikah</a>
+          <a href="../peristiwa-sk_penghasilan" class="list-group-item <?php is_active('peristiwa-sk_penghasilan'); ?>">Surat Keterangan Penghasilan</a>
+          <a href="../peristiwa-sk_tidak_memiliki_hubungan_keluarga" class="list-group-item <?php is_active('peristiwa-sk_tidak_memiliki_hubungan_keluarga'); ?>">Surat Keterangan Tidak Memiliki Hubungan Keluarga</a>
+          <a href="../peristiwa-sk_penghasilan_orangtua" class="list-group-item <?php is_active('peristiwa-sk_penghasilan_orangtua'); ?>">Surat Keterangan Penghasilan Orang Tua</a>
+          <a href="../peristiwa-surat_kuasa" class="list-group-item <?php is_active('peristiwa-surat_kuasa'); ?>">Surat Kuasa</a>
+          <a href="../peristiwa-surat_pengantar_izin_keramaian" class="list-group-item <?php is_active('peristiwa-surat_pengantar_izin_keramaian'); ?>">Surat Pengantar Izin Keramaian</a>
+          <a href="../peristiwa-surat_keterangan_izin_tebang" class="list-group-item <?php is_active('peristiwa-surat_keterangan_izin_tebang'); ?>">Surat Keterangan Izin Tebang</a>
+          <a href="../peristiwa_sk_datang_wni" class="list-group-item <?php is_active('peristiwa_sk_datang_wni'); ?>">Surat Keterangan Datang WNI</a>
+          <a href="../peristiwa_sk_pindah_wni" class="list-group-item <?php is_active('peristiwa_sk_pindah_wni'); ?>">Surat Keterangan Pindah WNI</a>
+          <a href="../peristiwa_sk_identitas_sama" class="list-group-item <?php is_active('peristiwa_sk_identitas_sama'); ?>">Surat Pernyataan Identitas Sama</a>
         </div>
       </div>
 

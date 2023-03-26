@@ -1,6 +1,7 @@
 <?php
 include('../../config/koneksi.php');
 require '../constant.php';
+require '../../f_logs.php';
 
 $no_kk                     = $_POST['no_kk'];
 $nama_kepala_keluarga      = $_POST['nama_kepala_keluarga'];
@@ -144,6 +145,8 @@ if ($query) {
     $code = 200;
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
+
+    logs($warga_id, "Surat Keterangan Datang WNI", $nomor_surat, 'sk_datang_wni', $id);
 
     foreach ($arr_pendatang as $key) {
         $sqlnya = "

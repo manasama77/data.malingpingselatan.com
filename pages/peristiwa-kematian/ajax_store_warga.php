@@ -57,7 +57,7 @@ if ($query) {
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
 
-    logs($warga_id, "KEMATIAN", $nomor_surat, 'kematian', $id);
+    logs($warga_id, "Kematian", $nomor_surat, 'kematian', $id);
 
     $sql_warga = "UPDATE warga SET status_warga = 'Meninggal' WHERE id_warga = '$warga_id'";
     mysqli_query($db, $sql_warga);
