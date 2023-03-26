@@ -13,16 +13,14 @@ function is_active($page)
     echo '';
   }
 }
-$uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri_segments = explode('/', $uri_path);
-echo '<pre>' . print_r($uri_segments[2], 1) . '</pre>';
-exit;
+
+
 function contain_peristiwa($type)
 {
   $uri_path     = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   $uri_segments = explode('/', $uri_path);
 
-  $arr_explode = explode('-', $uri_segments[3]);
+  $arr_explode = explode('-', $uri_segments[2]);
   if ($arr_explode[0] == "peristiwa") {
     return $type;
   }
