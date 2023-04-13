@@ -201,7 +201,7 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
                             <td></td>
                             <td>Pekerjaan</td>
                             <td>:</td>
-                            <td><?= $row_warga['nomor_keluarga']; ?></td>
+                            <td><?= $row_warga['pekerjaan_ibu']; ?></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -239,7 +239,7 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
                             <td></td>
                             <td>Pekerjaan</td>
                             <td>:</td>
-                            <td><?= $row_warga['nomor_keluarga']; ?></td>
+                            <td><?= $row_warga['pekerjaan_ayah']; ?></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -283,7 +283,7 @@ $interval_pelapor = $now->diff($tanggal_lahir_pelapor_obj);
                             <td></td>
                             <td>Pekerjaan</td>
                             <td>:</td>
-                            <td><?= $row_warga['nomor_keluarga']; ?></td>
+                            <td><?= $row_warga['pekerjaan_pelapor']; ?></td>
                         </tr>
                         <tr>
                             <td></td>

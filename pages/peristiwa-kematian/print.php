@@ -257,8 +257,10 @@ if (mysqli_num_rows($query_warga) == 0) {
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3" style="text-align: center;">
-                                Hubungan Pelapor dengan Almarhum/Almarhumah : <?= $row_warga['hubungan_pelapor']; ?>
+                            <td style="width: 425px;">Hubungan Pelapor dengan Almarhum/Almarhumah</td>
+                            <td>:</td>
+                            <td>
+                                <?= $row_warga['hubungan_pelapor']; ?>
                             </td>
                         </tr>
                         <tr>

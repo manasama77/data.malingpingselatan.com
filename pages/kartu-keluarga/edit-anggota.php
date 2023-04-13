@@ -115,6 +115,11 @@
                   <span class="glyphicon glyphicon-sunglasses"></span> Detail
                 </a>
               </li>
+              <li>
+                <a href="../warga/edit.php?id_warga=<?php echo $anggota_keluarga['id_warga'] ?>">
+                  <span class="glyphicon glyphicon-pencil"></span> Edit
+                </a>
+              </li>
               <li class="divider"></li>
               <li>
                 <a href="../kartu-keluarga/delete-anggota.php?id_warga=<?php echo $anggota_keluarga['id_warga'] ?>&id_keluarga=<?php echo $data_keluarga[0]['id_keluarga'] ?>" onclick="return confirm('Yakin hapus dari anggota?')">
