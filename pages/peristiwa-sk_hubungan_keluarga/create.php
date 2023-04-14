@@ -38,6 +38,8 @@ $query = mysqli_query($db, $sql);
                 <select class="form-control" id="jenis_relasi" name="jenis_relasi" required>
                     <option value=""></option>
                     <option value="Orang Tua Kandung">Orang Tua Kandung</option>
+                    <option value="Suami">Suami</option>
+                    <option value="Istri">Istri</option>
                     <option value="Kakek">Kakek</option>
                     <option value="Nenek">Nenek</option>
                     <option value="Saudara">Saudara</option>

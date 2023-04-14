@@ -71,7 +71,9 @@ if (mysqli_num_rows($query_warga) == 0) {
                 <table class="table table-borderless table-condensed table-sm w-100 p-0">
                     <tbody>
                         <tr>
-                            <th colspan="3" class="h5 text-center">SURAT PENGANTAR CATATAN KEPOLISIAN</th>
+                            <th colspan="3" class="h5 text-center">SURAT KETERANGAN DOKUMEN KEPENDUDUKAN
+                                DALAM PROSES PEMBUATAN
+                            </th>
                         </tr>
                         <tr>
                             <th colspan="3" class="h6 text-center">Nomor : <?= $row_warga['nomor_surat']; ?></th>

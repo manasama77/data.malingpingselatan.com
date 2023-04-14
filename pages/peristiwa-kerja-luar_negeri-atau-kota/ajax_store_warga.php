@@ -15,7 +15,7 @@ $nama_ttd          = $_POST['nama_ttd'];
 $jabatan_ttd       = $_POST['jabatan_ttd'];
 $nomor_induk_ttd   = $_POST['nomor_induk_ttd'];
 
-$ // PART NOMOR SURAT
+// PART NOMOR SURAT
 $sql   = "SELECT `surat_sequences`.`sequence` FROM `surat_sequences` WHERE `surat_sequences`.`tanggal` = '" . date('Y-m-d') . "' ORDER BY `sequence` DESC LIMIT 1";
 $query = mysqli_query($db, $sql);
 $sequence = 1;
