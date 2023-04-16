@@ -62,7 +62,7 @@ $query = mysqli_query($db, $sql);
                                         <a href="print.php?id=<?= $row['id']; ?>" target="_blank" class="btn btn-success" title="Print Data">
                                             <i class="fa fa-print fa-fw"></i>
                                         </a>
-                                        <button type="button" class="btn btn-danger" title="Delete Data" onclick="deleteData(<?= $row['id']; ?>, '<?= $row['nama_warga']; ?>')">
+                                        <button type="button" class="btn btn-danger" title="Delete Data" onclick="deleteData(<?= $row['id']; ?>, '<?= $row['nama']; ?>')">
                                             <i class="fa fa-trash fa-fw"></i>
                                         </button>
                                     </div>
