@@ -218,12 +218,7 @@
       <td>
         <div class="row">
           <div class="col-sm-3">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <span class="fa fa-table"></span>
-              </span>
-              <input type="text" class="form-control datepicker input-md" name="tanggal_perkawinan" readonly="readonly" value="<?= $data_warga[0]['tanggal_perkawinan']; ?>" />
-            </div>
+            <input type="date" class="form-control input-md" name="tanggal_perkawinan" value="<?= $data_warga[0]['tanggal_perkawinan']; ?>" />
           </div>
         </div>
       </td>
