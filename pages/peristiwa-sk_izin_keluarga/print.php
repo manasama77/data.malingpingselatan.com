@@ -226,6 +226,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                         </tr>
                         <tr>
                             <td colspan="4">
+                                <br />
                                 Keterangan ini dibuat berdasarkan surat pernyataan Pemohon dan segala akibat yang timbul dikemudian hari dari pembuatan dan penggunaan surat keterangan ini, sepenuhnya menjadi tanggung jawab Pemohon, baik secara hukum ataupun secara moril dan materil tanpa melibatkan pihak lainnya.
                             </td>
                         </tr>
