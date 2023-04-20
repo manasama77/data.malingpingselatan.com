@@ -91,6 +91,10 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
             font-size: 0.8rem;
             font-weight: normal;
         }
+
+        .table-x tr td {
+            line-height: 14px;
+        }
     </style>
 </head>
 
@@ -300,7 +304,7 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                             <td style="width: 5px;">:</td>
                             <td><?= $row_warga['jenis_kepindahan']; ?></td>
                             <td colspan="4" style="width: 200px;">
-                                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.7rem; line-height: 0.8;">
+                                <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
                                             <td style="width: 100px;">1. Kepala Keluarga</td>
@@ -323,7 +327,7 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                             <td style="width: 5px;">:</td>
                             <td><?= $row_warga['status_no_kk_tidak_pindah']; ?></td>
                             <td colspan="4" style="width: 200px;">
-                                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.7rem; line-height: 0.8;">
+                                <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
                                             <td style="width: 100px;">1. Numpang Kartu Keluarga</td>
@@ -346,7 +350,7 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                             <td style="width: 5px;">:</td>
                             <td><?= $row_warga['status_no_kk_pindah']; ?></td>
                             <td colspan="4" style="width: 200px;">
-                                <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.7rem; line-height: 0.8;">
+                                <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
                                             <td style="width: 100px;">1. Numpang Kartu Keluarga</td>
