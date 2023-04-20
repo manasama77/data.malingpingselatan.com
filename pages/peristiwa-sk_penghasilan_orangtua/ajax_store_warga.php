@@ -70,7 +70,7 @@ if ($query) {
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
 
-    logs($warga_id, "Surat Keterangan Penghasilan Orang Tua", $nomor_surat, 'sk_penghasilan_orangtua', $id);
+    logs($orangtua_id, "Surat Keterangan Penghasilan Orang Tua", $nomor_surat, 'sk_penghasilan_orangtua', $id);
 }
 
 echo json_encode([
