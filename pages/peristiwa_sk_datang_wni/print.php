@@ -85,6 +85,10 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
             footer {
                 page-break-after: always;
             }
+
+            table.table-bordered tr td {
+                border: 1px solid black !important;
+            }
         }
 
         .h7 {
@@ -455,14 +459,14 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
 
                         <tr>
                             <td colspan="8">
-                                <table class="table table-bordered table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 0.8;">
-                                    <thead>
+                                <table class="table table-bordered table-condensed table-sm w-100 p-0" style="font-size: 0.9rem; line-height: 0.8; border: 1px solid black;">
+                                    <thead style="border: 1px solid black;">
                                         <tr>
-                                            <td class="font-weight-bold text-center">NO.</td>
-                                            <td class="font-weight-bold text-center">NIK</td>
-                                            <td class="font-weight-bold text-center">NAMA</td>
-                                            <td class="font-weight-bold text-center">TEMPAT, TGL. LAHIR</td>
-                                            <td class="font-weight-bold text-center">SHDK</td>
+                                            <td class="font-weight-bold text-center" style="border: 1px solid black;">NO.</td>
+                                            <td class="font-weight-bold text-center" style="border: 1px solid black;">NIK</td>
+                                            <td class="font-weight-bold text-center" style="border: 1px solid black;">NAMA</td>
+                                            <td class="font-weight-bold text-center" style="border: 1px solid black;">TEMPAT, TGL. LAHIR</td>
+                                            <td class="font-weight-bold text-center" style="border: 1px solid black;">SHDK</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -473,11 +477,21 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                                         while ($row_sub = mysqli_fetch_assoc($query_sub)) {
                                         ?>
                                             <tr>
-                                                <td class="text-center"><?= $no_sub++; ?></td>
-                                                <td class="text-center"><?= $row_sub['nik']; ?></td>
-                                                <td><?= $row_sub['nama']; ?></td>
-                                                <td class="text-center"><?= $row_sub['tempat_lahir']; ?>, <?= tanggal_indo_no_dash($row_sub['tanggal_lahir']); ?></td>
-                                                <td class="text-center"><?= $row_sub['shdk']; ?></td>
+                                                <td class="text-center" style="border: 1px solid black;">
+                                                    <?= $no_sub++; ?>
+                                                </td>
+                                                <td class="text-center" style="border: 1px solid black;">
+                                                    <?= $row_sub['nik']; ?>
+                                                </td>
+                                                <td class="text-center" style="border: 1px solid black;">
+                                                    <?= $row_sub['nama']; ?>
+                                                </td>
+                                                <td class="text-center" style="border: 1px solid black;">
+                                                    <?= $row_sub['tempat_lahir']; ?>, <?= tanggal_indo_no_dash($row_sub['tanggal_lahir']); ?>
+                                                </td>
+                                                <td class="text-center" style="border: 1px solid black;">
+                                                    <?= $row_sub['shdk']; ?>
+                                                </td>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
