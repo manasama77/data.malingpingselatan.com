@@ -70,6 +70,10 @@ if (mysqli_num_rows($query_warga) == 0) {
         * {
             font-family: bookman, sans-serif;
         }
+
+        td {
+            line-height: 22px;
+        }
     </style>
 </head>
 
@@ -215,9 +219,10 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <td><?= $row_warga['alamat_ktp_keluarga']; ?></td>
                         </tr>
                         <tr>
-                            <td colspan="4">
-                                Untuk : <?= $row_warga['keperluan']; ?>.
-                            </td>
+                            <td></td>
+                            <td>Untuk</td>
+                            <td>:</td>
+                            <td><?= $row_warga['keperluan']; ?></td>
                         </tr>
                         <tr>
                             <td colspan="4">
