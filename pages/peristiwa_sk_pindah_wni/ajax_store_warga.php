@@ -146,7 +146,7 @@ if ($query) {
     $msg  = "Proses Simpan Data Berhasil, Proses Print Dapat Dilakukan";
     $id   = mysqli_insert_id($db);
 
-    logs($warga_id, "Surat Keterangan Pergi WNI", $nomor_surat, 'sk_pergi_wni', $id);
+    // logs($warga_id, "Surat Keterangan Pergi WNI", $nomor_surat, 'sk_pergi_wni', $id);
 
     foreach ($arr_pendatang as $key) {
         $sqlnya = "
