@@ -95,6 +95,10 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
         .table-x tr td {
             line-height: 14px;
         }
+
+        ol {
+            margin-bottom: 0px;
+        }
     </style>
 </head>
 
@@ -279,19 +283,39 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                                 <table class="table table-borderless table-condensed table-sm w-100 p-0" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 100px;">1. Dalam Satu Desa/Kelurahan</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">4. Antar Kabupaten/Kota</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="1" style="padding-inline-start: 0px;">
+                                                    <li>Dalam Satu Desa/Kelurahan</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="4" style="padding-inline-start: 0px;">
+                                                    <li>Antar Kabupaten/Kota</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100px;">2. Antar Desa/Kelurahan</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">5. Antar Provinsi</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="2" style="padding-inline-start: 0px;">
+                                                    <li>Antar Desa/Kelurahan</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="5" style="padding-inline-start: 0px;">
+                                                    <li>Antar Provinsi</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100px;">3. Antar Kecamatan </td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;"></td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="3" style="padding-inline-start: 0px;">
+                                                    <li>Antar Kecamatan</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -307,14 +331,30 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                                 <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 100px;">1. Kepala Keluarga</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">3. Kepala Keluarga sebagai Anggota Keluarga</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="1" style="padding-inline-start: 0px;">
+                                                    <li>Kepala Keluarga</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="3" style="padding-inline-start: 0px;">
+                                                    <li>Kepala Keluarga sebagai Anggota Keluarga</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100px;">2. Kepala Keluarga dan Seluruh Anggota Keluarga</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">4. Anggota Kelurga</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="2" style="padding-inline-start: 0px;">
+                                                    <li>Kepala Keluarga dan Seluruh Anggota Keluarga</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="4" style="padding-inline-start: 0px;">
+                                                    <li>Anggota Keluarga</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -330,14 +370,30 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                                 <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 100px;">1. Numpang Kartu Keluarga</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">3. Tidak Ada Anggota Keluarga yang Ditinggal</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="1" style="padding-inline-start: 0px;">
+                                                    <li>Numpang Kartu Keluarga</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 20px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="3" style="padding-inline-start: 0px;">
+                                                    <li>Tidak Ada Anggota Keluarga yang Ditinggal</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100px;">2. Membuat Kartu Keluarga Baru</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">4. Nomor Kartu Keluarga Tetap</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="2" style="padding-inline-start: 0px;">
+                                                    <li>Membuat Kartu Keluarga Baru</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="4" style="padding-inline-start: 0px;">
+                                                    <li>Nomor Kartu Keluarga Tetap</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -353,14 +409,26 @@ $sql_kayu   = "SELECT * FROM sk_datang_wni_warga WHERE sk_datang_wni_id = '" . $
                                 <table class="table table-borderless table-condensed table-sm w-100 p-0 table-x" style="font-size: 0.7rem; line-height: 0.8;">
                                     <tbody>
                                         <tr>
-                                            <td style="width: 100px;">1. Numpang Kartu Keluarga</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;">3. Nama Kepala Keluarga dan Nomor Kartu Keluarga Tetap</td>
+                                            <td style="width: 100px;">
+                                                <ol start="1" style="padding-inline-start: 0px;">
+                                                    <li>Numpang Kartu Keluarga</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px;">&nbsp;</td>
+                                            <td style="width: 100px;">
+                                                <ol start="3" style="padding-inline-start: 0px;">
+                                                    <li>Nama Kepala Keluarga dan Nomor Kartu Keluarga Tetap</li>
+                                                </ol>
+                                            </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 100px;">2. Membuat Kartu Keluarga Baru</td>
-                                            <td style="width: 20px;">&nbsp;</td>
-                                            <td style="width: 100px;"></td>
+                                            <td style="width: 100px; padding-bottom: 0px;">
+                                                <ol start="2" style="padding-inline-start: 0px;">
+                                                    <li>Membuat Kartu Keluarga Baru</li>
+                                                </ol>
+                                            </td>
+                                            <td style="width: 10px; padding-bottom: 0px;">&nbsp;</td>
+                                            <td style="width: 100px; padding-bottom: 0px;"></td>
                                         </tr>
                                     </tbody>
                                 </table>
