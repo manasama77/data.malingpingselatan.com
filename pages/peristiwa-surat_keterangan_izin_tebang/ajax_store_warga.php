@@ -12,7 +12,7 @@ $lokasi_blok       = $_POST['lokasi_blok'];
 $nama_kepala_desa  = $_POST['nama_kepala_desa'];
 $no_rt             = $_POST['no_rt'];
 $nama_rt           = $_POST['nama_rt'];
-$arr_pohon         = json_decode($_POST['arr_lingkungan']);
+$arr_pohon         = json_decode($_POST['arr_pohon']);
 
 // PART NOMOR SURAT
 $sql   = "SELECT `surat_sequences`.`sequence` FROM `surat_sequences` WHERE `surat_sequences`.`tanggal` = '" . date('Y-m-d') . "' ORDER BY `sequence` DESC LIMIT 1";
