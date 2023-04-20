@@ -126,8 +126,7 @@ $sql_kayu   = "SELECT * FROM sk_izin_tebang_item WHERE sk_izin_tebang_id = '" . 
                             <td></td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <ol>
                                     <?php
                                     $query_kayu = mysqli_query($db, $sql_kayu);

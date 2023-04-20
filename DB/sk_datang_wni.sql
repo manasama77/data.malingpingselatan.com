@@ -11,7 +11,7 @@
  Target Server Version : 100425 (10.4.25-MariaDB)
  File Encoding         : 65001
 
- Date: 16/01/2023 23:27:18
+ Date: 20/04/2023 21:16:25
 */
 
 SET NAMES utf8mb4;
@@ -61,25 +61,6 @@ CREATE TABLE `sk_datang_wni`  (
 
 -- ----------------------------
 -- Records of sk_datang_wni
--- ----------------------------
-
--- ----------------------------
--- Table structure for sk_datang_wni_warga
--- ----------------------------
-DROP TABLE IF EXISTS `sk_datang_wni_warga`;
-CREATE TABLE `sk_datang_wni_warga`  (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `sk_datang_wni_id` int NOT NULL,
-  `nik` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tempat_lahir` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `tanggal_lahir` date NULL DEFAULT NULL,
-  `shdk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sk_datang_wni_warga
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
