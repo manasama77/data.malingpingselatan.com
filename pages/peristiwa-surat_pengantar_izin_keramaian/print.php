@@ -286,7 +286,7 @@ if (mysqli_num_rows($query_warga) == 0) {
                             <tbody>
                                 <tr>
                                     <td colspan="3">
-                                        Pertimbangan Kapolsek Malingping :
+                                        Pertimbangan Kapolsek <?= DESA; ?> :
                                     </td>
                                 </tr>
                                 <tr>
