@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '../../_partials/top.php';
 include('../../config/koneksi.php');
-include('../constant.php');
+// include('../constant.php');
 
 $sql = "
 SELECT
