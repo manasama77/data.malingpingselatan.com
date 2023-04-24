@@ -75,7 +75,7 @@ WHERE
 $query = mysqli_query($db, $sql);
 $row = mysqli_fetch_assoc($query);
 
-echo '<pre>' . print_r($row, 1) . '</pre>';
+// echo '<pre>' . print_r($row, 1) . '</pre>';
 
 if (mysqli_num_rows($query) == 0) {
     die("ID tidak ditemukan");
