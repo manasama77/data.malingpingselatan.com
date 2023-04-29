@@ -11,7 +11,7 @@ if (!$id) {
     exit;
 }
 
-$sql   = "SELECT * FROM `surat_pengantar_izin_keramaian` WHERE `surat_pengantar_izin_keramaian`.`id` = " . $id;
+$sql   = "SELECT * FROM `sk_izin_tebang` WHERE `sk_izin_tebang`.`id` = " . $id;
 $query = mysqli_query($db, $sql);
 $total = mysqli_num_rows($query);
 
@@ -23,8 +23,14 @@ if ($total == 0) {
     exit;
 }
 
-$sql = "DELETE FROM `surat_pengantar_izin_keramaian` WHERE id = " . $id . "";
+$sql = "DELETE FROM `sk_izin_tebang` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
+
+// delete log
+require '../../f_logs.php';
+$table_name = "sk_izin_tebang";
+$table_id = $id;
+delete_logs($table_name, $table_id);
 
 $code = 500;
 $msg  = "Proses Delete Gagal";

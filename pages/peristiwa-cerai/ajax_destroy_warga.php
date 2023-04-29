@@ -26,6 +26,12 @@ if ($total == 0) {
 $sql = "DELETE FROM `bekerja_luar_negeri_kota` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "bekerja_luar_negeri_kota";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

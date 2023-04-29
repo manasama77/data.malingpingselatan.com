@@ -15,6 +15,12 @@ $sql   = "SELECT * FROM `surat_pengantar` WHERE `surat_pengantar`.`id` = " . $id
 $query = mysqli_query($db, $sql);
 $total = mysqli_num_rows($query);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "surat_pengantar";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 if ($total == 0) {
     echo json_encode([
         'code' => 404,

@@ -29,6 +29,12 @@ $query = mysqli_query($db, $sql);
 $sql2 = "DELETE FROM `sk_pergi_wni_warga` WHERE sk_pergi_wni_id = " . $id . "";
 $query2 = mysqli_query($db, $sql2);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "sk_pergi_wni_warga";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

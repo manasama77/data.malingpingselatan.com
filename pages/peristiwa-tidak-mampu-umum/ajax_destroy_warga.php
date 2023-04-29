@@ -26,6 +26,12 @@ if ($total == 0) {
 $sql = "DELETE FROM `tidak_mampu_umum` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "tidak_mampu_umum";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

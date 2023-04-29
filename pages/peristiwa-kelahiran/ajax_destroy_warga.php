@@ -1,6 +1,5 @@
 <?php
 include('../../config/koneksi.php');
-require '../../f_logs.php';
 
 $id = $_POST['id'];
 
@@ -58,6 +57,7 @@ if ($query) {
 }
 
 // delete log
+require '../../f_logs.php';
 $table_name = "kelahiran";
 $table_id = $id;
 delete_logs($table_name, $table_id);

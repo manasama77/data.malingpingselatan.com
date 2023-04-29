@@ -26,6 +26,12 @@ if ($total == 0) {
 $sql = "DELETE FROM `sk_identitas_sama` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "sk_identitas_sama";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

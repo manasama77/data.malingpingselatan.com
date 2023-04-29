@@ -26,6 +26,12 @@ if ($total == 0) {
 $sql = "DELETE FROM `surat_pengantar_izin_keramaian` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "surat_pengantar_izin_keramaian";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

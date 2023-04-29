@@ -26,6 +26,12 @@ if ($total == 0) {
 $sql = "DELETE FROM `sk_dokumen_kependudukan_dalam_proses_pembuatan` WHERE id = " . $id . "";
 $query = mysqli_query($db, $sql);
 
+// delete log
+require '../../f_logs.php';
+$table_name = "sk_dokumen_kependudukan_dalam_proses_pembuatan";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 $code = 500;
 $msg  = "Proses Delete Gagal";
 if ($query) {

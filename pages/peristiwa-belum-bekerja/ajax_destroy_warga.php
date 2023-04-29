@@ -33,6 +33,12 @@ if ($query) {
     $msg  = "Proses Delete Berhasil";
 }
 
+// delete log
+require '../../f_logs.php';
+$table_name = "belum_bekerja";
+$table_id = $id;
+delete_logs($table_name, $table_id);
+
 echo json_encode([
     'code' => 200,
     'msg'  => 'OK',
