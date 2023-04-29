@@ -43,3 +43,15 @@ function logs($warga_id, $jenis_permohonan, $no_surat, $table_name, $table_id)
         mysqli_query($db, $sql_insert);
     }
 }
+
+function delete_logs($table_name, $table_id)
+{
+    require 'config/koneksi.php';
+
+    $obj_dt = new DateTime('now');
+
+    $current_dt = $obj_dt->format('Y-m-d H:i:s');
+
+    $sql = "UPDATE `logs` SET deleted_at = '$current_dt' WHERE `table_name` = '$table_name' and `table_id` = '$table_id' ";
+    mysqli_query($db, $sql);
+}

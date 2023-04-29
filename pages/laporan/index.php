@@ -13,6 +13,8 @@ SELECT
 FROM
 	`logs`
 	LEFT JOIN warga ON warga.id_warga = `logs`.warga_id
+WHERE deleted_at is null
+ORDER BY `logs`.`created_at` DESC
 ";
 $query = mysqli_query($db, $sql);
 ?>
